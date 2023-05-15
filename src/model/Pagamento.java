@@ -9,5 +9,5 @@ public class Pagamento {
     private LocalDateTime dataHora;
     private Double valorTotal;
     private Double descontos;
-//    private Hospedagem hospedagem;
+     private Hospedagem hospedagem;
 }
