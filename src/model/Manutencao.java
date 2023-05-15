@@ -5,8 +5,8 @@ import model.Funcionario;
 import java.time.LocalDate;
 
 public class Manutencao {
-    private Integer id;
+    private Integer ID;
     private Funcionario funcionario;
     private LocalDate data;
-    private char tipoDeManutenção;
+    private OrdemDeServico OS;
 }
