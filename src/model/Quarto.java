@@ -1,3 +1,5 @@
+package model;
+
 public class Quarto {
     private Integer id;
     private String tipo;

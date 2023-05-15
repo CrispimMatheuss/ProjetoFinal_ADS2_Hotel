@@ -1,3 +1,7 @@
+package model;
+
+import model.Consumo;
+
 import java.time.LocalDate;
 
 public class Hospedagem {

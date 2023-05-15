@@ -1,3 +1,7 @@
+package model;
+
+import model.Funcionario;
+
 import java.time.LocalDate;
 
 public class Manutencao {
