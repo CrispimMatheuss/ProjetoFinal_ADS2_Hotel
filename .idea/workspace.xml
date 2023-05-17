@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="Criação do QuartoDAO">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Funcionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Funcionario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Hospede.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Hospede.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Manutencao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Manutencao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Pessoa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repository/PessoaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/PessoaDAO.java" afterDir="false" />
-    </list>
+    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="Criação do QuartoDAO" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +18,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GithubPullRequestsUISettings">
