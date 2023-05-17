@@ -19,6 +19,21 @@ public class Pessoa {
         this.email = email;
     }
 
+    public Pessoa(Integer i, String nome, String cpf, String celular, String email) {
+        I = i;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.celular = celular;
+        this.email = email;
+    }
+
+    public Pessoa(String nome, String cpf, String celular, String email) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.celular = celular;
+        this.email = email;
+    }
+
     public Integer getI() {
         return I;
     }

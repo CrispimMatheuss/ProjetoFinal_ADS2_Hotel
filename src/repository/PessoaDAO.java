@@ -1,4 +1,5 @@
 package repository;
+import model.Funcionario;
 import model.Hospede;
 import model.Pessoa;
 import java.util.ArrayList;
@@ -12,8 +13,18 @@ import java.util.List;
             hospedes.add(hospede);
         }
 
-        public static List<Hospede> buscaTodos() {
+        public static List<Hospede> buscaTodosh() {
             return hospedes;
         }
 
+
+        static List<Funcionario> funcionarios = new ArrayList<>();
+
+        public static void salvar(Funcionario funcionario) {
+            funcionarios.add(funcionario);
+        }
+
+        public static List<Funcionario> buscaTodosf() {
+            return funcionarios;
+        }
     }
