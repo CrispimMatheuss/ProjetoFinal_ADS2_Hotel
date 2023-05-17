@@ -45,5 +45,23 @@ public class Hospede extends Pessoa {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    public void fazerCheckIn() {
+        // Lógica para realizar o check-in do hóspede
+    }
+
+    public void fazerCheckOut() {
+        // Lógica para realizar o check-out do hóspede
+    }
+
+    public void solicitarServico(String servico) {
+        // Lógica para registrar o pedido de um serviço pelo hóspede
+    }
+
+    public void registrarPagamento(double valor) {
+        // Lógica para registrar um pagamento realizado pelo hóspede
+    }
+
+
 }
 
