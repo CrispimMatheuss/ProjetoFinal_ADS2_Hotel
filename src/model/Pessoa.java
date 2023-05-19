@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 
 public class Pessoa {
-    private Integer ID;
+    private Integer id;
     private String nome;
     private LocalDate dataNascimento;
     private String cpf;
@@ -11,7 +11,7 @@ public class Pessoa {
     private String email;
 
     public Pessoa(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {
-        I = i;
+        id = i;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
@@ -20,7 +20,7 @@ public class Pessoa {
     }
 
     public Pessoa(Integer i, String nome, String cpf, String celular, String email) {
-        I = i;
+        id = i;
         this.nome = nome;
         this.cpf = cpf;
         this.celular = celular;
@@ -35,7 +35,7 @@ public class Pessoa {
     }
 
     public Integer getI() {
-        return I;
+        return id;
     }
 
     public String getNome() {
@@ -61,7 +61,7 @@ public class Pessoa {
     @Override
     public String toString() {
         return "Pessoa{" +
-                "I=" + I +
+                "I=" + id +
                 ", nome='" + nome + '\'' +
                 ", dataNascimento=" + dataNascimento +
                 ", cpf='" + cpf + '\'' +
