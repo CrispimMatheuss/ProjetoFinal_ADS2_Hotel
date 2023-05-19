@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Hospede.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Hospede.java" afterDir="false" />
     </list>
+    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="Criação do QuartoDAO" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +46,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2PiHVd2Tcezdtd915IXDmMbPOD7" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -57,6 +60,20 @@
     &quot;last_opened_file_path&quot;: &quot;/home/ramonzinho31/ProjetoFinal_ADS2_Hotel&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ProjetoFinal_ADS2_Hotel" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -73,6 +90,7 @@
       <option name="project" value="LOCAL" />
       <updated>1683933030027</updated>
     </task>
+
     <task id="LOCAL-00002" summary="Criei Construtor e Getters e Setters!">
       <created>1684279562711</created>
       <option name="number" value="00002" />
@@ -109,6 +127,22 @@
       <updated>1684280589165</updated>
     </task>
     <option name="localTasksCounter" value="7" />
+
+    <task id="LOCAL-00002" summary="Criação do arquivo PessoaDAO e adicionados exemplos do professor no main.">
+      <created>1684195290984</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1684195290984</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Criação do QuartoDAO">
+      <created>1684196472253</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1684196472253</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -129,6 +163,7 @@
                 </map>
               </option>
             </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -138,5 +173,12 @@
     <MESSAGE value="Branch Inicial" />
     <MESSAGE value="Criei Construtor e Getters e Setters!" />
     <option name="LAST_COMMIT_MESSAGE" value="Criei Construtor e Getters e Setters!" />
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Branch Inicial" />
+    <MESSAGE value="Criação do arquivo PessoaDAO e adicionados exemplos do professor no main." />
+    <MESSAGE value="Criação do QuartoDAO" />
+    <option name="LAST_COMMIT_MESSAGE" value="Criação do QuartoDAO" />
   </component>
 </project>
