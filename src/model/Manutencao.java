@@ -1,12 +1,12 @@
-package model;
+//package model;
 
-import model.Funcionario;
+//import model.Funcionario;
 
-import java.time.LocalDate;
+//import java.time.LocalDate;
 
-public class Manutencao {
-    private Integer id;
-    private Funcionario funcionario;
-    private LocalDate data;
-    private char tipoDeManutenção;
-}
+//public class Manutencao {
+   // private Integer id;
+  //  private Funcionario funcionario;
+   // private LocalDate data;
+   // private char tipoDeManutenção;
+//}
