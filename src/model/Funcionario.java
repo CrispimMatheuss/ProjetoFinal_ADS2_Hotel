@@ -9,13 +9,6 @@ public class Funcionario extends Pessoa {
     private String cargo;
     private double salario;
 
-    public Funcionario(String nome, String cpf, String cargo, double salario) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.cargo = cargo;
-        this.salario = salario;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -44,10 +37,10 @@ public class Funcionario extends Pessoa {
         return salario;
     }
 
-    public void setSalario(double salario) {
+    public void setSalario(Double salario) {
         this.salario = salario;
     }
-  
+
     public Funcionario(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {
         super(i, nome, dataNascimento, cpf, celular, email);
     }
