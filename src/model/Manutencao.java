@@ -1,5 +1,8 @@
 package model;
 
+import model.Funcionario;
+import model.OrdemDeServico;
+
 import java.time.LocalDate;
 
 public class Manutencao {
