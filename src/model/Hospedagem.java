@@ -1,5 +1,7 @@
 package model;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hospedagem {
     private Integer codigo;
@@ -80,7 +82,4 @@ public class Hospedagem {
         return quarto;
     }
 
-    public void setQuarto(Quarto quarto) {
-        this.quarto = quarto;
-    }
 }
