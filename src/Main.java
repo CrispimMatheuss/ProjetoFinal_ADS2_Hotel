@@ -43,7 +43,7 @@ public class Main {
     }
 
     private static void chamaMenuCadastros() {
-        String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Pagamento", "Voltar"};
+        String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Cadastros",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuCadastro, opcoesMenuCadastro[0]);
@@ -55,10 +55,7 @@ public class Main {
             case 1: //Funcionario
                 cadastroDeFuncionario();
                 break;
-            case 2: //Pagamento
-
-                break;
-            case 3: //Voltar
+            case 2: //Voltar
                 chamaMenuPrincipal();
                 break;
         }
@@ -132,6 +129,20 @@ public class Main {
                 break;
         }
     }
+
+    public void chamaCheckin(){
+        LocalDate dataEntrada = LocalDate.now();
+        String inputData = JOptionPane.showInputDialog(null, "Data de entrada (formato: dd/MM/yyyy): ");
+
+        try {
+            dataEntrada = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        }
+        catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+        }
+    }
+
+
 
     public void cadastroPagamento() {
 
