@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="Exclusão de ConsumoDAO">
+    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="Criada opção de consumos no menu, para Maria incluir lista de serviços">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684796295241</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Criada opção de consumos no menu, para Maria incluir lista de serviços">
+      <created>1684797113343</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1684797113343</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,7 +147,8 @@
     <MESSAGE value="Ajuste &quot;id&quot; e alteração da pasta do QuartoDAO" />
     <MESSAGE value="Alterei tudo" />
     <MESSAGE value="Exclusão de ConsumoDAO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Exclusão de ConsumoDAO" />
+    <MESSAGE value="Criada opção de consumos no menu, para Maria incluir lista de serviços" />
+    <option name="LAST_COMMIT_MESSAGE" value="Criada opção de consumos no menu, para Maria incluir lista de serviços" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
