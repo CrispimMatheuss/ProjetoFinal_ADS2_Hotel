@@ -16,31 +16,24 @@ public class Quarto {
         this.disponibilidade = disponibilidade;
         this.limitePessoas = limitePessoas;
     }
-
     public Integer getId() {
         return id;
     }
-
     public String getTipo() {
         return tipo;
     }
-
     public Integer getQuantidadeCamas() {
         return quantidadeCamas;
     }
-
     public Double getValor() {
         return valor;
     }
-
     public boolean isDisponibilidade() {
         return disponibilidade;
     }
-
     public Integer getLimitePessoas() {
         return limitePessoas;
     }
-
     @Override
     public String toString() {
         return "Quarto{" +

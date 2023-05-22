@@ -11,7 +11,7 @@ public class Pessoa {
     private String email;
 
     public Pessoa(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {
-        I = i;
+        ID = i;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
@@ -20,7 +20,7 @@ public class Pessoa {
     }
 
     public Pessoa(Integer i, String nome, String cpf, String celular, String email) {
-        I = i;
+        ID = i;
         this.nome = nome;
         this.cpf = cpf;
         this.celular = celular;
@@ -34,8 +34,8 @@ public class Pessoa {
         this.email = email;
     }
 
-    public Integer getI() {
-        return I;
+    public Integer getID() {
+        return ID;
     }
 
     public String getNome() {
@@ -61,7 +61,7 @@ public class Pessoa {
     @Override
     public String toString() {
         return "Pessoa{" +
-                "I=" + I +
+                "I=" + ID +
                 ", nome='" + nome + '\'' +
                 ", dataNascimento=" + dataNascimento +
                 ", cpf='" + cpf + '\'' +

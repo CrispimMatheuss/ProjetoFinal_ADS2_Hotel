@@ -1,21 +1,28 @@
 package model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Funcionario extends Pessoa {
-
     private String nome;
     private String cpf;
     private String cargo;
-    private double salario;
+    private BigDecimal salario;
 
-    public Funcionario(String nome, String cpf, String cargo, double salario) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.cargo = cargo;
-        this.salario = salario;
+    public Funcionario(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {
+        super(i, nome, dataNascimento, cpf, celular, email);
     }
 
+    public Funcionario(Integer i, String nome, String cpf, String celular, String email) {
+        super(i, nome, cpf, celular, email);
+    }
+
+    public Funcionario(String nome, String cpf, String celular, String email) {
+        super(nome, cpf, celular, email);
+    }
+
+
+    @Override
     public String getNome() {
         return nome;
     }
@@ -24,6 +31,7 @@ public class Funcionario extends Pessoa {
         this.nome = nome;
     }
 
+    @Override
     public String getCpf() {
         return cpf;
     }
@@ -40,24 +48,12 @@ public class Funcionario extends Pessoa {
         this.cargo = cargo;
     }
 
-    public double getSalario() {
+    public BigDecimal getSalario() {
         return salario;
     }
 
-    public void setSalario(double salario) {
+    public void setSalario(BigDecimal salario) {
         this.salario = salario;
-    }
-  
-    public Funcionario(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {
-        super(i, nome, dataNascimento, cpf, celular, email);
-    }
-
-    public Funcionario(Integer i, String nome, String cpf, String celular, String email) {
-        super(i, nome, cpf, celular, email);
-    }
-
-    public Funcionario(String nome, String cpf, String celular, String email) {
-        super(nome, cpf, celular, email);
     }
 }
 
