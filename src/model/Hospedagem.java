@@ -1,7 +1,4 @@
 package model;
-
-import model.Consumo;
-
 import java.time.LocalDate;
 
 public class Hospedagem {
@@ -10,7 +7,6 @@ public class Hospedagem {
     private LocalDate checkout;
     private Hospede hospede;
     private Integer quantidadeDiarias;
-    private Consumo consumo;
     private Double valorTotal;
     private Double valorDiaria;
     private Pagamento pagamento;
@@ -54,14 +50,6 @@ public class Hospedagem {
 
     public void setQuantidadeDiarias(Integer quantidadeDiarias) {
         this.quantidadeDiarias = quantidadeDiarias;
-    }
-
-    public Consumo getConsumo() {
-        return consumo;
-    }
-
-    public void setConsumo(Consumo consumo) {
-        this.consumo = consumo;
     }
 
     public Double getValorTotal() {
