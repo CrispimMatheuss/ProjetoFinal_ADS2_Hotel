@@ -43,7 +43,7 @@ public class Main {
     }
 
     private static void chamaMenuCadastros() {
-        String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Pagamento", "Voltar"};
+        String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Cadastros",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuCadastro, opcoesMenuCadastro[0]);
@@ -55,10 +55,7 @@ public class Main {
             case 1: //Funcionario
                 cadastroDeFuncionario();
                 break;
-            case 2: //Pagamento
-
-                break;
-            case 3: //Voltar
+            case 2: //Voltar
                 chamaMenuPrincipal();
                 break;
         }
@@ -112,19 +109,19 @@ public class Main {
 
 
     public static void chamaMenuProcessos() {
-        String[] opcoesMenuProcessos = {"Check-in", "Check-out", "Pagamentos", "Voltar"};
+        String[] opcoesMenuProcessos = {"Check-in", "Check-out", "Consumos", "Voltar"};
         int menuProcessos = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Processos",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuProcessos, opcoesMenuProcessos[0]);
 
         switch (menuProcessos) {
             case 0: //Checkin
-
+            chamaCheckin();
                 break;
             case 1: //Checkout
-
+            chamaCheckOut();
                 break;
-            case 2: //Pagamentos
+            case 2: //Consumos
 
                 break;
             case 3: //Voltar
@@ -133,38 +130,57 @@ public class Main {
         }
     }
 
-    public void cadastroPagamento() {
-
-        Object[] selectionFormaPagto = {FormaPagamento.DINHEIRO.getDescricao(), FormaPagamento.CHEQUE.getDescricao(), FormaPagamento.CARTAO_CREDITO.getDescricao(), FormaPagamento.CARTAO_DEBITO.getDescricao()};// String da SELEÇÃO
-        String initialSelectionForma = (String) selectionFormaPagto[0]; // valor inicial, o primeiro selecionado
-        Object selectionForma = JOptionPane.showInputDialog(null, "Selecione o cliente da venda?",
-                "Hotel", JOptionPane.QUESTION_MESSAGE, null, selectionFormaPagto, initialSelectionForma);
-        FormaPagamento formaPagamento = FormaPagamento.valueOf((String) selectionForma);
-
-        LocalDate dataPagamento = LocalDate.now();
-        String inputData = JOptionPane.showInputDialog(null, "Digite uma data (formato: dd/MM/yyyy):");
+    public static void chamaCheckin(){
+        LocalDate dataEntrada = LocalDate.now();
+        String inputData = JOptionPane.showInputDialog(null, "Data de entrada (formato: dd/MM/yyyy): ");
 
         try {
-            dataPagamento = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (DateTimeParseException e) {
+            dataEntrada = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        }
+        catch (DateTimeParseException e) {
             JOptionPane.showMessageDialog(null, "Formato de data inválido!");
         }
-
-        String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário");
-        if (cpf == null) {
-            chamaMenuCadastros();
-        }
-
-        //valorTotal; //PRECISA INFORMAR DIRETO
-        //descontos;
-
-        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
-        String initialSelectionHospedagem = (String) selectionValuesHospedagem[0];
-        Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
-                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
-        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
     }
 
+    public static void chamaCheckOut() {
+        LocalDate dataSaida = LocalDate.now();
+        String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dd/MM/yyyy): ");
+
+        try {
+            dataSaida = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+
+            Object[] selectionFormaPagto = {FormaPagamento.DINHEIRO.getDescricao(), FormaPagamento.CHEQUE.getDescricao(), FormaPagamento.CARTAO_CREDITO.getDescricao(), FormaPagamento.CARTAO_DEBITO.getDescricao()};// String da SELEÇÃO
+            String initialSelectionForma = (String) selectionFormaPagto[0]; // valor inicial, o primeiro selecionado
+            Object selectionForma = JOptionPane.showInputDialog(null, "Selecione o cliente da venda?",
+                    "Hotel", JOptionPane.QUESTION_MESSAGE, null, selectionFormaPagto, initialSelectionForma);
+            FormaPagamento formaPagamento = FormaPagamento.valueOf((String) selectionForma);
+
+            LocalDate dataPagamento = LocalDate.now();
+            String inputData1 = JOptionPane.showInputDialog(null, "Digite uma data (formato: dd/MM/yyyy):");
+
+            try {
+                dataPagamento = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (DateTimeParseException o) {
+                JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+            }
+
+            String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário");
+            if (cpf == null) {
+                chamaMenuCadastros();
+            }
+
+            //valorTotal; //PRECISA INFORMAR DIRETO
+            //descontos;
+
+            Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
+            String initialSelectionHospedagem = (String) selectionValuesHospedagem[0];
+            Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
+                    "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
+            List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
+        }
+    }
 
     /////////////////RELATÓRIOS////////////////////
     private static void listaCadastros() {
