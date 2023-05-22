@@ -11,13 +11,6 @@ public class Hospede extends Pessoa {
     private String email;
     private String telefone;
 
-    public Hospede(String nome, String cpf, String email, String telefone) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.telefone = telefone;
-    }
-
     public String getNome() {
         return nome;
     }

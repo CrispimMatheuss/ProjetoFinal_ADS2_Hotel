@@ -27,4 +27,5 @@ import java.util.List;
         public static List<Funcionario> buscaTodosf() {
             return funcionarios;
         }
+
     }

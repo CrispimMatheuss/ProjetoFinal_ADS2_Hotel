@@ -15,5 +15,6 @@ public class ServicoDAO {
         public static List<Servico> buscaTodos() {
             return servicos;
         }
+
     }
 
