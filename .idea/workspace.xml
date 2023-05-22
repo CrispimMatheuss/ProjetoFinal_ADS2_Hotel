@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/FormaPagamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/repository/ConsumoDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/repository/HospedagemDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/repository/PagamentoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Funcionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Funcionario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Hospedagem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Hospedagem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Hospede.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Hospede.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Manutencao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Manutencao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Pagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Pagamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Pessoa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Quarto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Quarto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/QuartoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/QuartoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Servico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Servico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repository/PessoaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/PessoaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repository/ServicoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/ServicoDAO.java" afterDir="false" />
-    </list>
+    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="Atualizei o projeto, e arrumei codigos que estava dando erro" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +59,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/home/ramonzinho31/ProjetoFinal_ADS2_Hotel/src/repository"
+    "last_opened_file_path": "/home/ramonzinho31/ProjetoFinal_ADS2_Hotel/src/repository",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -120,12 +101,12 @@
       <option name="project" value="LOCAL" />
       <updated>1684196472253</updated>
     </task>
-    <task id="LOCAL-00004" summary="Criei Construtor e Getters e Setters!">
-      <created>1684279815461</created>
+    <task id="LOCAL-00004" summary="Atualizei o projeto, e arrumei codigos que estava dando erro">
+      <created>1684794757622</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1684279815461</updated>
+      <updated>1684794757623</updated>
     </task>
     <task id="LOCAL-00005" summary="Criei Construtor e Getters e Setters!">
       <created>1684279962310</created>
@@ -155,7 +136,7 @@
       <option name="project" value="LOCAL" />
       <updated>1684293425777</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,6 +168,7 @@
     <MESSAGE value="Branch Inicial" />
     <MESSAGE value="Criei Construtor e Getters e Setters!" />
     <MESSAGE value="Criei atributos, Construtor e Getters/Setters na classe hospede e funcionario" />
-    <option name="LAST_COMMIT_MESSAGE" value="Criei atributos, Construtor e Getters/Setters na classe hospede e funcionario" />
+    <MESSAGE value="Atualizei o projeto, e arrumei codigos que estava dando erro" />
+    <option name="LAST_COMMIT_MESSAGE" value="Atualizei o projeto, e arrumei codigos que estava dando erro" />
   </component>
 </project>
