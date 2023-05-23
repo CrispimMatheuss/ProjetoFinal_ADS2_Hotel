@@ -1,0 +1,606 @@
+Index: src/model/Hospedagem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport model.Consumo;\r\n\r\nimport java.time.LocalDate;\r\n\r\npublic class Hospedagem {\r\n    private Integer codigo;\r\n    private LocalDate checkin;\r\n    private LocalDate checkout;\r\n    private Hospede hospede;\r\n    private Integer quantidadeDiarias;\r\n    private Consumo consumo;\r\n    private Double valorTotal;\r\n    private Double valorDiaria;\r\n    private Pagamento pagamento;\r\n    private Quarto quarto;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/model/Hospedagem.java b/src/model/Hospedagem.java
+--- a/src/model/Hospedagem.java	(revision 8174152e1ebd4f43f47e2b873531af08d7e2f499)
++++ b/src/model/Hospedagem.java	(date 1684796049282)
+@@ -1,7 +1,5 @@
+ package model;
+ 
+-import model.Consumo;
+-
+ import java.time.LocalDate;
+ 
+ public class Hospedagem {
+Index: src/model/Pagamento.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport java.time.LocalDateTime;\r\n\r\npublic class Pagamento {\r\n    private Integer id;\r\n    private char formasDePagamento;\r\n    private LocalDateTime dataHora;\r\n    private Double valorTotal;\r\n    private Double descontos;\r\n     private Hospedagem hospedagem;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/model/Pagamento.java b/src/model/Pagamento.java
+--- a/src/model/Pagamento.java	(revision 8174152e1ebd4f43f47e2b873531af08d7e2f499)
++++ b/src/model/Pagamento.java	(date 1684796049283)
+@@ -1,12 +1,75 @@
+ package model;
+ 
++import java.math.BigDecimal;
+ import java.time.LocalDateTime;
+ 
+ public class Pagamento {
+     private Integer id;
+     private char formasDePagamento;
+     private LocalDateTime dataHora;
+-    private Double valorTotal;
+-    private Double descontos;
+-     private Hospedagem hospedagem;
++    private BigDecimal valorTotal;
++    private BigDecimal descontos;
++    private Hospedagem hospedagem;
++
++    public Pagamento(Integer id, char formasDePagamento, LocalDateTime dataHora, BigDecimal valorTotal, BigDecimal descontos, Hospedagem hospedagem) {
++        this.id = id;
++        this.formasDePagamento = formasDePagamento;
++        this.dataHora = dataHora;
++        this.valorTotal = valorTotal;
++        this.descontos = descontos;
++        this.hospedagem = hospedagem;
++    }
++
++    public Pagamento(BigDecimal valorPagamento, FormaPagamento formaPagamento) {
++    }
++    public Integer getId() {
++        return id;
++    }
++    public void setId(Integer id) {
++        this.id = id;
++    }
++    public char getFormasDePagamento() {
++        return formasDePagamento;
++    }
++    public void setFormasDePagamento(char formasDePagamento) {
++        this.formasDePagamento = formasDePagamento;
++    }
++    public LocalDateTime getDataHora() {
++        return dataHora;
++    }
++    public void setDataHora(LocalDateTime dataHora) {
++        this.dataHora = dataHora;
++    }
++    public BigDecimal getValorTotal() {
++        return valorTotal;
++    }
++    public void setValorTotal(BigDecimal valorTotal) {
++        this.valorTotal = valorTotal;
++    }
++    public BigDecimal getDescontos() {
++        return descontos;
++    }
++    public void setDescontos(BigDecimal descontos) {
++        this.descontos = descontos;
++    }
++    public Hospedagem getHospedagem() {
++        return hospedagem;
++    }
++    public void setHospedagem(Hospedagem hospedagem) {
++        this.hospedagem = hospedagem;
++    }
++
++    public enum FormaPagamento {
++        CARTAO_CREDITO("Cartão de Crédito"),
++        CARTAO_DEBITO("Cartão de Débito"),
++        DINHEIRO("Dinheiro"),
++        CHEQUE("Cheque");
++        private String descricao;
++        FormaPagamento(String descricao) {
++            this.descricao = descricao;
++        }
++        public String getDescricao() {
++            return descricao;
++        }
++    }
+ }
+Index: src/model/Pessoa.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport java.time.LocalDate;\r\n\r\npublic class Pessoa {\r\n    private Integer ID;\r\n    private String nome;\r\n    private LocalDate dataNascimento;\r\n    private String cpf;\r\n    private String celular;\r\n    private String email;\r\n\r\n    public Pessoa(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {\r\n        I = i;\r\n        this.nome = nome;\r\n        this.dataNascimento = dataNascimento;\r\n        this.cpf = cpf;\r\n        this.celular = celular;\r\n        this.email = email;\r\n    }\r\n\r\n    public Pessoa(Integer i, String nome, String cpf, String celular, String email) {\r\n        I = i;\r\n        this.nome = nome;\r\n        this.cpf = cpf;\r\n        this.celular = celular;\r\n        this.email = email;\r\n    }\r\n\r\n    public Pessoa(String nome, String cpf, String celular, String email) {\r\n        this.nome = nome;\r\n        this.cpf = cpf;\r\n        this.celular = celular;\r\n        this.email = email;\r\n    }\r\n\r\n    public Integer getI() {\r\n        return I;\r\n    }\r\n\r\n    public String getNome() {\r\n        return nome;\r\n    }\r\n\r\n    public LocalDate getDataNascimento() {\r\n        return dataNascimento;\r\n    }\r\n\r\n    public String getCpf() {\r\n        return cpf;\r\n    }\r\n\r\n    public String getCelular() {\r\n        return celular;\r\n    }\r\n\r\n    public String getEmail() {\r\n        return email;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Pessoa{\" +\r\n                \"I=\" + I +\r\n                \", nome='\" + nome + '\\'' +\r\n                \", dataNascimento=\" + dataNascimento +\r\n                \", cpf='\" + cpf + '\\'' +\r\n                \", celular='\" + celular + '\\'' +\r\n                \", email='\" + email + '\\'' +\r\n                '}';\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/model/Pessoa.java b/src/model/Pessoa.java
+--- a/src/model/Pessoa.java	(revision 8174152e1ebd4f43f47e2b873531af08d7e2f499)
++++ b/src/model/Pessoa.java	(date 1684796049284)
+@@ -3,7 +3,7 @@
+ import java.time.LocalDate;
+ 
+ public class Pessoa {
+-    private Integer ID;
++    private Integer id;
+     private String nome;
+     private LocalDate dataNascimento;
+     private String cpf;
+@@ -11,7 +11,7 @@
+     private String email;
+ 
+     public Pessoa(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {
+-        I = i;
++        id = i;
+         this.nome = nome;
+         this.dataNascimento = dataNascimento;
+         this.cpf = cpf;
+@@ -20,7 +20,7 @@
+     }
+ 
+     public Pessoa(Integer i, String nome, String cpf, String celular, String email) {
+-        I = i;
++        id = i;
+         this.nome = nome;
+         this.cpf = cpf;
+         this.celular = celular;
+@@ -35,7 +35,7 @@
+     }
+ 
+     public Integer getI() {
+-        return I;
++        return id;
+     }
+ 
+     public String getNome() {
+@@ -61,7 +61,7 @@
+     @Override
+     public String toString() {
+         return "Pessoa{" +
+-                "I=" + I +
++                "I=" + id +
+                 ", nome='" + nome + '\'' +
+                 ", dataNascimento=" + dataNascimento +
+                 ", cpf='" + cpf + '\'' +
+Index: src/model/Servico.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class Servico {\r\n    private Integer codigo;\r\n    private String tipo;\r\n    private Boolean disponibilidade;\r\n    private Double valor;\r\n//    private List<Servico> servicos = new ArrayList<>();\r\n\r\n    public Servico(Integer codigo, String tipo, Boolean disponibilidade, Double valor) {\r\n        this.codigo = codigo;\r\n        this.tipo = tipo;\r\n        this.disponibilidade = disponibilidade;\r\n        this.valor = valor;\r\n    }\r\n\r\n    public Integer getCodigo() {\r\n        return codigo;\r\n    }\r\n\r\n\r\n    public String getTipo() {\r\n        return tipo;\r\n    }\r\n\r\n\r\n    public Boolean getDisponibilidade() {\r\n        return disponibilidade;\r\n    }\r\n\r\n\r\n    public Double getValor() {\r\n        return valor;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Servico{\" +\r\n                \"codigo=\" + codigo +\r\n                \", tipo='\" + tipo + '\\'' +\r\n                \", disponibilidade=\" + disponibilidade +\r\n                \", valor=\" + valor +\r\n                '}';\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/model/Servico.java b/src/model/Servico.java
+--- a/src/model/Servico.java	(revision 8174152e1ebd4f43f47e2b873531af08d7e2f499)
++++ b/src/model/Servico.java	(date 1684796049284)
+@@ -1,8 +1,5 @@
+ package model;
+ 
+-import java.util.ArrayList;
+-import java.util.List;
+-
+ public class Servico {
+     private Integer codigo;
+     private String tipo;
+@@ -36,6 +33,23 @@
+         return valor;
+     }
+ 
++    public double calcularCustoServicos() {
++        switch (tipo) {
++            case "cafe_da_manha simples":
++                return 30.0;
++            case "cafe_da_manha premium":
++                return 50.0;
++            case "almoço":
++                return 70.0;
++            case "janta":
++                return 80.0;
++            case "serviço de quarto":
++
++                return 60.0;
++            default:
++                return 0.0;
++        }}
++
+     @Override
+     public String toString() {
+         return "Servico{" +
+Index: src/model/Manutencao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//package model;\r\n\r\nimport java.time.LocalDate;\r\n\r\npublic class Manutencao {\r\n    private Integer ID;\r\n    private Funcionario funcionario;\r\n    private LocalDate data;\r\n    private String descricao;\r\n    private OrdemDeServico OS;\r\n\r\n    public Manutencao(Integer ID, Funcionario funcionario, LocalDate data, String descricao, OrdemDeServico OS) {\r\n        this.ID = ID;\r\n        this.funcionario = funcionario;\r\n        this.data = data;\r\n        this.descricao = descricao;\r\n        this.OS = OS;\r\n    }\r\n\r\n    public Integer getID() {\r\n        return ID;\r\n    }\r\n\r\n    public void setID(Integer ID) {\r\n        this.ID = ID;\r\n    }\r\n\r\n    public Funcionario getFuncionario() {\r\n        return funcionario;\r\n    }\r\n\r\n    public void setFuncionario(Funcionario funcionario) {\r\n        this.funcionario = funcionario;\r\n    }\r\n\r\n    public LocalDate getData() {\r\n        return data;\r\n    }\r\n\r\n    public void setData(LocalDate data) {\r\n        this.data = data;\r\n    }\r\n\r\n    public String getDescricao() {\r\n        return descricao;\r\n    }\r\n\r\n    public void setDescricao(String descricao) {\r\n        this.descricao = descricao;\r\n    }\r\n\r\n    public OrdemDeServico getOS() {\r\n        return OS;\r\n    }\r\n\r\n    public void setOS(OrdemDeServico OS) {\r\n        this.OS = OS;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Manutencao{\" +\r\n                \"ID=\" + ID +\r\n                \", funcionario=\" + funcionario +\r\n                \", data=\" + data +\r\n                \", descricao='\" + descricao + '\\'' +\r\n                \", OS=\" + OS +\r\n                '}';\r\n    }\r\n}\r\n\r\n//import model.Funcionario;\r\n\r\n//import java.time.LocalDate;\r\n\r\n//public class Manutencao {\r\n   // private Integer id;\r\n  //  private Funcionario funcionario;\r\n   // private LocalDate data;\r\n   // private char tipoDeManutenção;\r\n//}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/model/Manutencao.java b/src/model/Manutencao.java
+--- a/src/model/Manutencao.java	(revision 8174152e1ebd4f43f47e2b873531af08d7e2f499)
++++ b/src/model/Manutencao.java	(date 1684796049283)
+@@ -1,4 +1,7 @@
+-//package model;
++package model;//package model;
++
++import repository.StatusManutencao;
++import repository.TipoManutencao;
+ 
+ import java.time.LocalDate;
+ 
+@@ -6,15 +9,27 @@
+     private Integer ID;
+     private Funcionario funcionario;
+     private LocalDate data;
+-    private String descricao;
++    private String relatorio;
+     private OrdemDeServico OS;
++    private TipoManutencao tipoManutencao;
++    private StatusManutencao status;
+ 
+-    public Manutencao(Integer ID, Funcionario funcionario, LocalDate data, String descricao, OrdemDeServico OS) {
++    public Manutencao(Integer ID, Funcionario funcionario, LocalDate data, String descricao, OrdemDeServico OS, TipoManutencao tipoManutencao, StatusManutencao status) {
+         this.ID = ID;
+         this.funcionario = funcionario;
+         this.data = data;
+-        this.descricao = descricao;
++        this.relatorio = descricao;
+         this.OS = OS;
++        this.tipoManutencao = tipoManutencao;
++        this.status = status;
++    }
++
++    public Manutencao(Integer ID, Funcionario funcionario, LocalDate data, String descricao, OrdemDeServico OS, TipoManutencao tipoManutencao) {
++        new Manutencao( ID,  funcionario,  data,  descricao,  OS,  tipoManutencao);
++    }
++
++    public Manutencao(Integer ID, Funcionario funcionario, LocalDate data, String descricao, OrdemDeServico OS) {
++      new Manutencao(ID,  funcionario,  data,  descricao,  OS);
+     }
+ 
+     public Integer getID() {
+@@ -41,12 +56,12 @@
+         this.data = data;
+     }
+ 
+-    public String getDescricao() {
+-        return descricao;
++    public String getRelatorio() {
++        return relatorio;
+     }
+ 
+-    public void setDescricao(String descricao) {
+-        this.descricao = descricao;
++    public void setRelatorio(String relatorio) {
++        this.relatorio = relatorio;
+     }
+ 
+     public OrdemDeServico getOS() {
+@@ -57,25 +72,35 @@
+         this.OS = OS;
+     }
+ 
++    public TipoManutencao getTipoManutencao() {
++        return tipoManutencao;
++    }
++    public void setTipoManutencao(TipoManutencao tipoManutencao) {
++        this.tipoManutencao = tipoManutencao;
++
++    }
++
++    public StatusManutencao getStatus() {
++        return status;
++    }
++
++    public void setStatus(StatusManutencao status) {
++        this.status = status;
++    }
++
++
+     @Override
+     public String toString() {
+         return "Manutencao{" +
+                 "ID=" + ID +
+                 ", funcionario=" + funcionario +
+                 ", data=" + data +
+-                ", descricao='" + descricao + '\'' +
++                ", relatório='" + relatorio + '\'' +
+                 ", OS=" + OS +
++                ", tipoManutencao=" + tipoManutencao +
++                ", status=" + status +
+                 '}';
+     }
+ }
+ 
+-//import model.Funcionario;
+ 
+-//import java.time.LocalDate;
+-
+-//public class Manutencao {
+-   // private Integer id;
+-  //  private Funcionario funcionario;
+-   // private LocalDate data;
+-   // private char tipoDeManutenção;
+-//}
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import model.Funcionario;\r\nimport model.Hospede;\r\nimport repository.PessoaDAO;\r\n\r\nimport javax.swing.*;\r\nimport java.time.LocalDate;\r\n\r\npublic class Main {\r\n\r\n    public static void main(String[] args) {\r\n        chamaMenuPrincipal();\r\n    }\r\n\r\n    private static void chamaMenuPrincipal() {\r\n        String[] opcoesMenu = {\"Cadastros\", \"Processos\", \"Relatorios\", \"Sair\"};\r\n        int opcao = JOptionPane.showOptionDialog(null, \"Escolha uma opção:\",\r\n                \"Menu Principal\",\r\n                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenu, opcoesMenu[0]);\r\n\r\n        switch (opcao) {\r\n            case 0: //Cadastros\r\n                chamaMenuCadastros();\r\n                break;\r\n\r\n            case 1: //Processos\r\n\r\n                break;\r\n\r\n            case 2: //Relatorios\r\n                listaCadastros();\r\n                break;\r\n\r\n            case 3: //SAIR\r\n\r\n                break;\r\n        }\r\n    }\r\n\r\n    private static void chamaMenuCadastros() {\r\n        String[] opcoesMenuCadastro = {\"Hóspede\", \"Funcionário\", \"Consumo\", \"Pagamento\", \"Voltar\"};\r\n        int menuCadastro = JOptionPane.showOptionDialog(null, \"Escolha uma opção:\",\r\n                \"Menu Cadastros\",\r\n                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuCadastro, opcoesMenuCadastro[0]);\r\n\r\n        switch (menuCadastro) {\r\n            case 0: //Hospede\r\n             cadastroDeCliente();\r\n                break;\r\n            case 1: //Funcionario\r\n                cadastroDeFuncionario();\r\n                break;\r\n            case 2: //Consumo\r\n                break;\r\n            case 3: //Pagamento\r\n                break;\r\n            case 4: //Voltar\r\n                chamaMenuPrincipal();\r\n                break;\r\n        }\r\n    }\r\n\r\n    private static void cadastroDeCliente() {\r\n        String nome = JOptionPane.showInputDialog(null, \"Digite o nome do cliente\");\r\n        String cpf = JOptionPane.showInputDialog(null, \"Digite o cpf do cliente\");\r\n        String celular = JOptionPane.showInputDialog(null, \"Digite o celular do cliente\");\r\n        String email = JOptionPane.showInputDialog(null, \"Digite o email do cliente\");\r\n\r\n        Hospede hospede = new Hospede(nome, cpf, celular, email);\r\n\r\n        PessoaDAO.salvar(hospede);\r\n        chamaMenuPrincipal();\r\n    }\r\n\r\n    private static void cadastroDeFuncionario() {\r\n        String nome = JOptionPane.showInputDialog(null, \"Digite o nome do funcionário\");\r\n        String cpf = JOptionPane.showInputDialog(null, \"Digite o cpf do funcionário\");\r\n        String celular = JOptionPane.showInputDialog(null, \"Digite o celular do funcionário\");\r\n        String email = JOptionPane.showInputDialog(null, \"Digite o email do funcionário\");\r\n\r\n        Funcionario funcionario = new Funcionario(nome, cpf, celular, email);\r\n\r\n        PessoaDAO.salvar(funcionario);\r\n        chamaMenuPrincipal();\r\n    }\r\n\r\n    private static void listaCadastros(){\r\n        String[] opcoesMenuRelatorios = {\"Hóspedes\", \"Funcionários\", \"Voltar\"};\r\n        int menuRelatorios = JOptionPane.showOptionDialog(null, \"Escolha uma opção:\",\r\n                \"Menu Relatórios\",\r\n                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuRelatorios, opcoesMenuRelatorios[0]);\r\n\r\n        switch (menuRelatorios) {\r\n            case 0: //Hospedes\r\n                JOptionPane.showMessageDialog(null, PessoaDAO.buscaTodosh());\r\n                chamaMenuPrincipal();\r\n                break;\r\n            case 1: //Funcionarios\r\n                JOptionPane.showMessageDialog(null, PessoaDAO.buscaTodosf());\r\n                chamaMenuPrincipal();\r\n                break;\r\n            case 4: //Voltar\r\n                chamaMenuPrincipal();\r\n                break;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 8174152e1ebd4f43f47e2b873531af08d7e2f499)
++++ b/src/Main.java	(date 1684796049281)
+@@ -3,7 +3,6 @@
+ import repository.PessoaDAO;
+ 
+ import javax.swing.*;
+-import java.time.LocalDate;
+ 
+ public class Main {
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"025ba4ae-ba13-434d-8f80-4c41c55e2a92\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/runConfigurations.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/model/Manutencao.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/model/Manutencao.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/model/OrdemDeServico.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/model/OrdemDeServico.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/model/Pessoa.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/model/Pessoa.java\" afterDir=\"false\" />\r\n    </list>\r\n    <list default=\"true\" id=\"025ba4ae-ba13-434d-8f80-4c41c55e2a92\" name=\"Changes\" comment=\"Criei Construtor e Getters e Setters!\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/model/Hospede.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/model/Hospede.java\" afterDir=\"false\" />\r\n    </list>\r\n    <list default=\"true\" id=\"025ba4ae-ba13-434d-8f80-4c41c55e2a92\" name=\"Changes\" comment=\"Criação do QuartoDAO\" />\r\n\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"CodeInsightWorkspaceSettings\">\r\n    <option name=\"optimizeImportsOnTheFly\" value=\"true\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"ee21ec3c-7008-4d76-b888-82acded3646c\" />\r\n        <option name=\"url\" value=\"https://github.com/CrispimMatheuss/ProjetoFinal_ADS2_Hotel.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2PiHVd2Tcezdtd915IXDmMbPOD7\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"last_opened_file_path\": \"C:/ProjetoFinal/ProjetoFinal_ADS2_Hotel\",\r\n    \"settings.editor.selected.configurable\": \"configurable.group.tools\"\r\n  }\r\n}]]></component>\r\n\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;/home/ramonzinho31/ProjetoFinal_ADS2_Hotel&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"ProjetoFinal_ADS2_Hotel\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"025ba4ae-ba13-434d-8f80-4c41c55e2a92\" name=\"Changes\" comment=\"\" />\r\n      <created>1683933006580</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1683933006580</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Branch Inicial\">\r\n      <created>1683933030027</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683933030027</updated>\r\n    </task>\r\n\r\n    <task id=\"LOCAL-00002\" summary=\"Criei Construtor e Getters e Setters!\">\r\n      <created>1684279562711</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684279562711</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Criei Construtor e Getters e Setters!\">\r\n      <created>1684279799864</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684279799864</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Criei Construtor e Getters e Setters!\">\r\n      <created>1684279815461</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684279815461</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Criei Construtor e Getters e Setters!\">\r\n      <created>1684279962310</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684279962310</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Criei Construtor e Getters e Setters!\">\r\n      <created>1684280589165</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684280589165</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"7\" />\r\n\r\n    <task id=\"LOCAL-00002\" summary=\"Criação do arquivo PessoaDAO e adicionados exemplos do professor no main.\">\r\n      <created>1684195290984</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684195290984</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Criação do QuartoDAO\">\r\n      <created>1684196472253</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684196472253</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"4\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"origin/alteração_ramon\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Branch Inicial\" />\r\n    <MESSAGE value=\"Criei Construtor e Getters e Setters!\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Criei Construtor e Getters e Setters!\" />\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Branch Inicial\" />\r\n    <MESSAGE value=\"Criação do arquivo PessoaDAO e adicionados exemplos do professor no main.\" />\r\n    <MESSAGE value=\"Criação do QuartoDAO\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Criação do QuartoDAO\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 8174152e1ebd4f43f47e2b873531af08d7e2f499)
++++ b/.idea/workspace.xml	(date 1684796049280)
+@@ -4,19 +4,18 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
++    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="commit das alteraçoes do dino ordemdeserviço e Manutencao">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/model/Funcionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Funcionario.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/model/Hospedagem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Hospedagem.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/model/Hospede.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Hospede.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/model/Manutencao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Manutencao.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/model/OrdemDeServico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/OrdemDeServico.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/model/Pagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Pagamento.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/model/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Pessoa.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/model/QuartoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/QuartoDAO.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/model/Servico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Servico.java" afterDir="false" />
+     </list>
+-    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="Criei Construtor e Getters e Setters!">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/model/Hospede.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Hospede.java" afterDir="false" />
+-    </list>
+-    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="Criação do QuartoDAO" />
+-
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -29,13 +28,14 @@
+     <option name="RECENT_TEMPLATES">
+       <list>
+         <option value="Class" />
++        <option value="Enum" />
+       </list>
+     </option>
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="master" />
++        <entry key="$PROJECT_DIR$" value="alteracao_dino" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -57,23 +57,11 @@
+     <option name="stateVersion" value="1" />
+   </component>
+   <component name="ProjectId" id="2PiHVd2Tcezdtd915IXDmMbPOD7" />
+-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+-    <ConfirmationsSetting value="2" id="Add" />
+-  </component>
++  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "last_opened_file_path": "C:/ProjetoFinal/ProjetoFinal_ADS2_Hotel",
+-    "settings.editor.selected.configurable": "configurable.group.tools"
+-  }
+-}]]></component>
+-
+   <component name="PropertiesComponent">{
+   &quot;keyToString&quot;: {
+     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+@@ -81,21 +69,6 @@
+     &quot;last_opened_file_path&quot;: &quot;/home/ramonzinho31/ProjetoFinal_ADS2_Hotel&quot;
+   }
+ }</component>
+-  <component name="RunManager">
+-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="Main" />
+-      <module name="ProjetoFinal_ADS2_Hotel" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <recent_temporary>
+-      <list>
+-        <item itemvalue="Application.Main" />
+-      </list>
+-    </recent_temporary>
+-  </component>
+-
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -112,27 +85,26 @@
+       <option name="project" value="LOCAL" />
+       <updated>1683933030027</updated>
+     </task>
+-
+-    <task id="LOCAL-00002" summary="Criei Construtor e Getters e Setters!">
+-      <created>1684279562711</created>
++    <task id="LOCAL-00002" summary="Criação do arquivo PessoaDAO e adicionados exemplos do professor no main.">
++      <created>1684195290984</created>
+       <option name="number" value="00002" />
+       <option name="presentableId" value="LOCAL-00002" />
+       <option name="project" value="LOCAL" />
+-      <updated>1684279562711</updated>
++      <updated>1684195290984</updated>
+     </task>
+-    <task id="LOCAL-00003" summary="Criei Construtor e Getters e Setters!">
+-      <created>1684279799864</created>
++    <task id="LOCAL-00003" summary="Criação do QuartoDAO">
++      <created>1684196472253</created>
+       <option name="number" value="00003" />
+       <option name="presentableId" value="LOCAL-00003" />
+       <option name="project" value="LOCAL" />
+-      <updated>1684279799864</updated>
++      <updated>1684196472253</updated>
+     </task>
+-    <task id="LOCAL-00004" summary="Criei Construtor e Getters e Setters!">
+-      <created>1684279815461</created>
++    <task id="LOCAL-00004" summary="commit das alteraçoes do dino ordemdeserviço e Manutencao">
++      <created>1684794400717</created>
+       <option name="number" value="00004" />
+       <option name="presentableId" value="LOCAL-00004" />
+       <option name="project" value="LOCAL" />
+-      <updated>1684279815461</updated>
++      <updated>1684794400717</updated>
+     </task>
+     <task id="LOCAL-00005" summary="Criei Construtor e Getters e Setters!">
+       <created>1684279962310</created>
+@@ -148,23 +120,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1684280589165</updated>
+     </task>
+-    <option name="localTasksCounter" value="7" />
+-
+-    <task id="LOCAL-00002" summary="Criação do arquivo PessoaDAO e adicionados exemplos do professor no main.">
+-      <created>1684195290984</created>
+-      <option name="number" value="00002" />
+-      <option name="presentableId" value="LOCAL-00002" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1684195290984</updated>
+-    </task>
+-    <task id="LOCAL-00003" summary="Criação do QuartoDAO">
+-      <created>1684196472253</created>
+-      <option name="number" value="00003" />
+-      <option name="presentableId" value="LOCAL-00003" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1684196472253</updated>
+-    </task>
+-    <option name="localTasksCounter" value="4" />
++    <option name="localTasksCounter" value="5" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -172,19 +128,6 @@
+       <map>
+         <entry key="MAIN">
+           <value>
+-            <State>
+-              <option name="FILTERS">
+-                <map>
+-                  <entry key="branch">
+-                    <value>
+-                      <list>
+-                        <option value="origin/alteração_ramon" />
+-                      </list>
+-                    </value>
+-                  </entry>
+-                </map>
+-              </option>
+-            </State>
+             <State />
+           </value>
+         </entry>
+@@ -193,14 +136,7 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Branch Inicial" />
+-    <MESSAGE value="Criei Construtor e Getters e Setters!" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Criei Construtor e Getters e Setters!" />
+-    <option name="oldMeFiltersMigrated" value="true" />
+-  </component>
+-  <component name="VcsManagerConfiguration">
+-    <MESSAGE value="Branch Inicial" />
+-    <MESSAGE value="Criação do arquivo PessoaDAO e adicionados exemplos do professor no main." />
+-    <MESSAGE value="Criação do QuartoDAO" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Criação do QuartoDAO" />
++    <MESSAGE value="commit das alteraçoes do dino ordemdeserviço e Manutencao" />
++    <option name="LAST_COMMIT_MESSAGE" value="commit das alteraçoes do dino ordemdeserviço e Manutencao" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/model/Hospede.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport model.Pessoa;\r\n\r\nimport java.time.LocalDate;\r\n\r\npublic class Hospede extends Pessoa {\r\n\r\n    private String nome;\r\n    private String cpf;\r\n    private String email;\r\n    private String telefone;\r\n\r\n    public Hospede(String nome, String cpf, String email, String telefone) {\r\n        this.nome = nome;\r\n        this.cpf = cpf;\r\n        this.email = email;\r\n        this.telefone = telefone;\r\n    }\r\n\r\n    public String getNome() {\r\n        return nome;\r\n    }\r\n\r\n    public void setNome(String nome) {\r\n        this.nome = nome;\r\n    }\r\n\r\n    public String getCpf() {\r\n        return cpf;\r\n    }\r\n\r\n    public void setCpf(String cpf) {\r\n        this.cpf = cpf;\r\n    }\r\n    public String getEmail() {\r\n        return email;\r\n    }\r\n\r\n    public void setEmail(String email) {\r\n        this.email = email;\r\n    }\r\n\r\n    public String getTelefone() {\r\n        return telefone;\r\n    }\r\n\r\n    public void setTelefone(String telefone) {\r\n        this.telefone = telefone;\r\n    }\r\n\r\n    public void fazerCheckIn() {\r\n        // Lógica para realizar o check-in do hóspede\r\n    }\r\n\r\n    public void fazerCheckOut() {\r\n        // Lógica para realizar o check-out do hóspede\r\n    }\r\n\r\n    public void solicitarServico(String servico) {\r\n        // Lógica para registrar o pedido de um serviço pelo hóspede\r\n    }\r\n\r\n    public void registrarPagamento(double valor) {\r\n        // Lógica para registrar um pagamento realizado pelo hóspede\r\n    }\r\n\r\n    public Hospede(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {\r\n        super(i, nome, dataNascimento, cpf, celular, email);\r\n    }\r\n\r\n    public Hospede(Integer i, String nome, String cpf, String celular, String email) {\r\n        super(i, nome, cpf, celular, email);\r\n    }\r\n\r\n    public Hospede(String nome, String cpf, String celular, String email) {\r\n        super(nome, cpf, celular, email);\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/model/Hospede.java b/src/model/Hospede.java
+--- a/src/model/Hospede.java	(revision 8174152e1ebd4f43f47e2b873531af08d7e2f499)
++++ b/src/model/Hospede.java	(date 1684796049282)
+@@ -1,7 +1,5 @@
+ package model;
+ 
+-import model.Pessoa;
+-
+ import java.time.LocalDate;
+ 
+ public class Hospede extends Pessoa {
+@@ -11,13 +9,6 @@
+     private String email;
+     private String telefone;
+ 
+-    public Hospede(String nome, String cpf, String email, String telefone) {
+-        this.nome = nome;
+-        this.cpf = cpf;
+-        this.email = email;
+-        this.telefone = telefone;
+-    }
+-
+     public String getNome() {
+         return nome;
+     }
+Index: src/model/Funcionario.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport java.time.LocalDate;\r\n\r\npublic class Funcionario extends Pessoa {\r\n\r\n    private String nome;\r\n    private String cpf;\r\n    private String cargo;\r\n    private double salario;\r\n\r\n    public Funcionario(String nome, String cpf, String cargo, double salario) {\r\n        this.nome = nome;\r\n        this.cpf = cpf;\r\n        this.cargo = cargo;\r\n        this.salario = salario;\r\n    }\r\n\r\n    public String getNome() {\r\n        return nome;\r\n    }\r\n\r\n    public void setNome(String nome) {\r\n        this.nome = nome;\r\n    }\r\n\r\n    public String getCpf() {\r\n        return cpf;\r\n    }\r\n\r\n    public void setCpf(String cpf) {\r\n        this.cpf = cpf;\r\n    }\r\n\r\n    public String getCargo() {\r\n        return cargo;\r\n    }\r\n\r\n    public void setCargo(String cargo) {\r\n        this.cargo = cargo;\r\n    }\r\n\r\n    public double getSalario() {\r\n        return salario;\r\n    }\r\n\r\n    public void setSalario(double salario) {\r\n        this.salario = salario;\r\n    }\r\n  \r\n    public Funcionario(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {\r\n        super(i, nome, dataNascimento, cpf, celular, email);\r\n    }\r\n\r\n    public Funcionario(Integer i, String nome, String cpf, String celular, String email) {\r\n        super(i, nome, cpf, celular, email);\r\n    }\r\n\r\n    public Funcionario(String nome, String cpf, String celular, String email) {\r\n        super(nome, cpf, celular, email);\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/model/Funcionario.java b/src/model/Funcionario.java
+--- a/src/model/Funcionario.java	(revision 8174152e1ebd4f43f47e2b873531af08d7e2f499)
++++ b/src/model/Funcionario.java	(date 1684796049281)
+@@ -9,13 +9,6 @@
+     private String cargo;
+     private double salario;
+ 
+-    public Funcionario(String nome, String cpf, String cargo, double salario) {
+-        this.nome = nome;
+-        this.cpf = cpf;
+-        this.cargo = cargo;
+-        this.salario = salario;
+-    }
+-
+     public String getNome() {
+         return nome;
+     }
+@@ -44,10 +37,10 @@
+         return salario;
+     }
+ 
+-    public void setSalario(double salario) {
++    public void setSalario(Double salario) {
+         this.salario = salario;
+     }
+-  
++
+     public Funcionario(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {
+         super(i, nome, dataNascimento, cpf, celular, email);
+     }
