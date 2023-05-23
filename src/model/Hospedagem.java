@@ -1,4 +1,5 @@
 package model;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Hospedagem {
     private Double valorDiaria;
     private Pagamento pagamento;
     private Quarto quarto;
+    private List<Servico> servicos = new ArrayList<>();
 
     public Integer getCodigo() {
         return codigo;
@@ -82,4 +84,4 @@ public class Hospedagem {
         return quarto;
     }
 
-}
+
