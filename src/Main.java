@@ -37,7 +37,7 @@ public class Main {
     }
 
     private static void chamaMenuCadastros() {
-        String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Pagamento", "Voltar"};
+        String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Cadastros",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuCadastro, opcoesMenuCadastro[0]);
@@ -49,10 +49,7 @@ public class Main {
             case 1: //Funcionario
                 cadastroDeFuncionario();
                 break;
-            case 2: //Pagamento
-
-                break;
-            case 3: //Voltar
+            case 2: //Voltar
                 chamaMenuPrincipal();
                 break;
         }
@@ -103,13 +100,21 @@ public class Main {
         chamaMenuPrincipal();
     }
 
+            String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário");
+            if (cpf == null) {
+                chamaMenuCadastros();
+            }
 
+            //valorTotal; //PRECISA INFORMAR DIRETO
+            //descontos;
 
-
-
-
-
-
+            Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
+            String initialSelectionHospedagem = (String) selectionValuesHospedagem[0];
+            Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
+                    "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
+            List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
+        }
+    }
 
     /////////////////RELATÓRIOS////////////////////
     private static void listaCadastros(){

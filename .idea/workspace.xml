@@ -4,7 +4,6 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="Atualizei o projeto, e arrumei codigos que estava dando erro" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -108,35 +107,20 @@
       <option name="project" value="LOCAL" />
       <updated>1684794757623</updated>
     </task>
-    <task id="LOCAL-00005" summary="Criei Construtor e Getters e Setters!">
-      <created>1684279962310</created>
+    <task id="LOCAL-00005" summary="Alterei tudo">
+      <created>1684543565912</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1684279962310</updated>
+      <updated>1684543565912</updated>
     </task>
-    <task id="LOCAL-00006" summary="Criei Construtor e Getters e Setters!">
-      <created>1684280589165</created>
+    <task id="LOCAL-00006" summary="Exclusão de ConsumoDAO">
+      <created>1684796295241</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1684280589165</updated>
+      <updated>1684796295241</updated>
     </task>
-    <task id="LOCAL-00007" summary="Criei Construtor e Getters e Setters!">
-      <created>1684293041807</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1684293041807</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Criei atributos, Construtor e Getters/Setters na classe hospede e funcionario">
-      <created>1684293425777</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1684293425777</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,9 +150,5 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Branch Inicial" />
-    <MESSAGE value="Criei Construtor e Getters e Setters!" />
-    <MESSAGE value="Criei atributos, Construtor e Getters/Setters na classe hospede e funcionario" />
-    <MESSAGE value="Atualizei o projeto, e arrumei codigos que estava dando erro" />
-    <option name="LAST_COMMIT_MESSAGE" value="Atualizei o projeto, e arrumei codigos que estava dando erro" />
   </component>
 </project>
