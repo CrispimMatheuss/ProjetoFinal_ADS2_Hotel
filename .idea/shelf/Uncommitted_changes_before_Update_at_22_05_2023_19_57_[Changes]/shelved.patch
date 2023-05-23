@@ -1,0 +1,24 @@
+Index: src/model/Quarto.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\n\npublic class Quarto {\n    private Integer id;\n    private String tipo;\n    private Integer quantidadeCamas;\n    private Double valor;\n    private boolean disponibilidade;\n    private Integer limitePessoas;\n\n    public Quarto(Integer id, String tipo, Integer quantidadeCamas, Double valor, boolean disponibilidade, Integer limitePessoas) {\n        this.id = id;\n        this.tipo = tipo;\n        this.quantidadeCamas = quantidadeCamas;\n        this.valor = valor;\n        this.disponibilidade = disponibilidade;\n        this.limitePessoas = limitePessoas;\n    }\n    public Integer getId() {\n        return id;\n    }\n    public String getTipo() {\n        return tipo;\n    }\n    public Integer getQuantidadeCamas() {\n        return quantidadeCamas;\n    }\n    public Double getValor() {\n        return valor;\n    }\n    public boolean isDisponibilidade() {\n        return disponibilidade;\n    }\n    public Integer getLimitePessoas() {\n        return limitePessoas;\n    }\n    @Override\n    public String toString() {\n        return \"Quarto{\" +\n                \"id=\" + id +\n                \", tipo='\" + tipo + '\\'' +\n                \", quantidadeCamas=\" + quantidadeCamas +\n                \", valor=\" + valor +\n                \", disponibilidade=\" + disponibilidade +\n                \", limitePessoas=\" + limitePessoas +\n                '}';\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/model/Quarto.java b/src/model/Quarto.java
+--- a/src/model/Quarto.java	(revision 8e41361c10adf6c96fbf874e73013c2f9cadba92)
++++ b/src/model/Quarto.java	(date 1684796172555)
+@@ -1,5 +1,4 @@
+ package model;
+-
+ public class Quarto {
+     private Integer id;
+     private String tipo;
+@@ -7,7 +6,6 @@
+     private Double valor;
+     private boolean disponibilidade;
+     private Integer limitePessoas;
+-
+     public Quarto(Integer id, String tipo, Integer quantidadeCamas, Double valor, boolean disponibilidade, Integer limitePessoas) {
+         this.id = id;
+         this.tipo = tipo;

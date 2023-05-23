@@ -1,6 +1,8 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hospedagem {
     private Integer codigo;
@@ -8,11 +10,11 @@ public class Hospedagem {
     private LocalDate checkout;
     private Hospede hospede;
     private Integer quantidadeDiarias;
-    //private Consumo consumo;
     private Double valorTotal;
     private Double valorDiaria;
     private Pagamento pagamento;
     private Quarto quarto;
+    private List<Servico> servicos = new ArrayList<>();
 
     public Integer getCodigo() {
         return codigo;
@@ -54,14 +56,6 @@ public class Hospedagem {
         this.quantidadeDiarias = quantidadeDiarias;
     }
 
-    //public Consumo getConsumo() {
-     //   return consumo;
-    //}
-
-    //public void setConsumo(Consumo consumo) {
-    //    this.consumo = consumo;
-    //}
-
     public Double getValorTotal() {
         return valorTotal;
     }
@@ -88,9 +82,6 @@ public class Hospedagem {
 
     public Quarto getQuarto() {
         return quarto;
-    }
+    }}
 
-    public void setQuarto(Quarto quarto) {
-        this.quarto = quarto;
-    }
-}
+

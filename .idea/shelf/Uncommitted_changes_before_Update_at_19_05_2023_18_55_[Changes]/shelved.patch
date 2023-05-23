@@ -1,0 +1,103 @@
+Index: src/model/Hospede.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\n\nimport model.Pessoa;\n\npublic class Hospede extends Pessoa {\n    private String nome;\n    private String cpf;\n    private String email;\n    private String telefone;\n\n    public Hospede(String nome, String cpf, String email, String telefone) {\n        this.nome = nome;\n        this.cpf = cpf;\n        this.email = email;\n        this.telefone = telefone;\n    }\n\n    public String getNome() {\n        return nome;\n    }\n\n    public void setNome(String nome) {\n        this.nome = nome;\n    }\n\n    public String getCpf() {\n        return cpf;\n    }\n\n    public void setCpf(String cpf) {\n        this.cpf = cpf;\n    }\n    public String getEmail() {\n        return email;\n    }\n\n    public void setEmail(String email) {\n        this.email = email;\n    }\n\n    public String getTelefone() {\n        return telefone;\n    }\n\n    public void setTelefone(String telefone) {\n        this.telefone = telefone;\n    }\n\n    public void fazerCheckIn() {\n        // Lógica para realizar o check-in do hóspede\n    }\n\n    public void fazerCheckOut() {\n        // Lógica para realizar o check-out do hóspede\n    }\n\n    public void solicitarServico(String servico) {\n        // Lógica para registrar o pedido de um serviço pelo hóspede\n    }\n\n    public void registrarPagamento(double valor) {\n        // Lógica para registrar um pagamento realizado pelo hóspede\n    }\n\n\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/model/Hospede.java b/src/model/Hospede.java
+--- a/src/model/Hospede.java	(revision d3d1ed569395f409ee7578c804951fa5c9089789)
++++ b/src/model/Hospede.java	(date 1684368592983)
+@@ -61,7 +61,14 @@
+     public void registrarPagamento(double valor) {
+         // Lógica para registrar um pagamento realizado pelo hóspede
+     }
+-
+-
++    @Override
++    public String toString() {
++        return "Hospede{" +
++                "nome='" + nome + '\'' +
++                ", cpf='" + cpf + '\'' +
++                ", email='" + email + '\'' +
++                ", telefone='" + telefone + '\'' +
++                '}';
++    }
+ }
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"025ba4ae-ba13-434d-8f80-4c41c55e2a92\" name=\"Changes\" comment=\"Criei Construtor e Getters e Setters!\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/model/Hospede.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/model/Hospede.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">\n    <option name=\"selectedUrlAndAccountId\">\n      <UrlAndAccount>\n        <option name=\"accountId\" value=\"ee21ec3c-7008-4d76-b888-82acded3646c\" />\n        <option name=\"url\" value=\"https://github.com/CrispimMatheuss/ProjetoFinal_ADS2_Hotel.git\" />\n      </UrlAndAccount>\n    </option>\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2PiHVd2Tcezdtd915IXDmMbPOD7\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;last_opened_file_path&quot;: &quot;/home/ramonzinho31/ProjetoFinal_ADS2_Hotel&quot;\n  }\n}</component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"025ba4ae-ba13-434d-8f80-4c41c55e2a92\" name=\"Changes\" comment=\"\" />\n      <created>1683933006580</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1683933006580</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Branch Inicial\">\n      <created>1683933030027</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683933030027</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Criei Construtor e Getters e Setters!\">\n      <created>1684279562711</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684279562711</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Criei Construtor e Getters e Setters!\">\n      <created>1684279799864</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684279799864</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Criei Construtor e Getters e Setters!\">\n      <created>1684279815461</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684279815461</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"Criei Construtor e Getters e Setters!\">\n      <created>1684279962310</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684279962310</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"Criei Construtor e Getters e Setters!\">\n      <created>1684280589165</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684280589165</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"7\" />\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"origin/alteração_ramon\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Branch Inicial\" />\n    <MESSAGE value=\"Criei Construtor e Getters e Setters!\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Criei Construtor e Getters e Setters!\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d3d1ed569395f409ee7578c804951fa5c9089789)
++++ b/.idea/workspace.xml	(date 1684531702300)
+@@ -4,7 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="Criei Construtor e Getters e Setters!">
++    <list default="true" id="025ba4ae-ba13-434d-8f80-4c41c55e2a92" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/model/Hospede.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Hospede.java" afterDir="false" />
+     </list>
+@@ -50,13 +50,13 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;/home/ramonzinho31/ProjetoFinal_ADS2_Hotel&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "last_opened_file_path": "/home/ramonzinho31/EspJavaPromocaoAritmetica"
+   }
+-}</component>
++}]]></component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -108,7 +108,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1684280589165</updated>
+     </task>
+-    <option name="localTasksCounter" value="7" />
++    <task id="LOCAL-00007" summary="Criei Construtor e Getters e Setters!">
++      <created>1684293041807</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1684293041807</updated>
++    </task>
++    <task id="LOCAL-00008" summary="Criei atributos, Construtor e Getters/Setters na classe hospede e funcionario">
++      <created>1684293425777</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1684293425777</updated>
++    </task>
++    <option name="localTasksCounter" value="9" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -135,8 +149,11 @@
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
++    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
++    <option name="CHECK_NEW_TODO" value="false" />
+     <MESSAGE value="Branch Inicial" />
+     <MESSAGE value="Criei Construtor e Getters e Setters!" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Criei Construtor e Getters e Setters!" />
++    <MESSAGE value="Criei atributos, Construtor e Getters/Setters na classe hospede e funcionario" />
++    <option name="LAST_COMMIT_MESSAGE" value="Criei atributos, Construtor e Getters/Setters na classe hospede e funcionario" />
+   </component>
+ </project>
+\ No newline at end of file

@@ -42,7 +42,6 @@ public class Quarto {
             return descricao;
         }
     }
-
     public enum tipo {
         PadraoClassico("Quarto 101"),
         Vip("Quarto 102"),
@@ -106,3 +105,5 @@ public class Quarto {
         this.limitePessoas = limitePessoas;
     }
 }
+
+
