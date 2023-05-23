@@ -10,11 +10,11 @@ public class ServicoDAO {
     public ServicoDAO() {
 
         if(servicos.isEmpty()){
-            servicos.add(new Servico(1,"Cafe da manhã",true,20.00));
-            servicos.add(new Servico(1,"Cafe da manhã",true,20.00));
-            servicos.add(new Servico(1,"Cafe da manhã",true,20.00));
-            servicos.add(new Servico(1,"Cafe da manhã",true,20.00));
-            servicos.add(new Servico(1,"Cafe da manhã",true,20.00));
+            servicos.add(new Servico(1,"Cafe da manhã simples",20.00));
+            servicos.add(new Servico(2,"Cafe da manhã premium",40.00));
+            servicos.add(new Servico(3,"Almoço",60.00));
+            servicos.add(new Servico(4,"Janta",70.00));
+            servicos.add(new Servico(5,"Serviço de quarto",50.00));
         }
 
     }
