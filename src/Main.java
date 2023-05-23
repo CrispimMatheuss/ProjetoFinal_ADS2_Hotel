@@ -58,7 +58,30 @@ public class Main {
             case 2: //Voltar
                 chamaMenuPrincipal();
                 break;
+            case 3: //Funcionario
+                cadastroDeServico();
+                break;
         }
+    }
+
+    private static void cadastroDeServico() {
+        Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do Serviço"));
+        if (codigo == 0) {
+            chamaMenuCadastros();
+        }
+        String tipo = JOptionPane.showInputDialog(null, "Digite o tipo de Serviço");
+        if (tipo == null) {
+            chamaMenuCadastros();
+        }
+        Boolean disponibilidade = Boolean.valueOf(JOptionPane.showInputDialog(null, "Digite a disponibilidade"));
+        if (disponibilidade == null) {
+            chamaMenuCadastros();
+        }
+        Double valor = Double.valueOf(JOptionPane.showInputDialog(null, "Digite o valor do Serviço"));
+        if (valor == null) {
+            chamaMenuCadastros();
+        }
+
     }
 
     private static void cadastroDeCliente() {
@@ -128,6 +151,9 @@ public class Main {
                 chamaMenuPrincipal();
                 break;
         }
+    }
+    public void opcoesDeServico(){
+
     }
 
     public static void chamaCheckin(){

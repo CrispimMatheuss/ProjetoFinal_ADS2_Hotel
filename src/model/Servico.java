@@ -36,22 +36,7 @@ public class Servico {
         return valor;
     }
 
-    public double calcularCustoServicos() {
-        switch (tipo) {
-            case "cafe_da_manha simples":
-                return 30.0;
-            case "cafe_da_manha premium":
-                return 50.0;
-            case "almoço":
-                return 70.0;
-            case "janta":
-                return 80.0;
-            case "serviço de quarto":
 
-                return 60.0;
-            default:
-                return 0.0;
-        }}
 
     @Override
     public String toString() {

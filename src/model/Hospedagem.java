@@ -1,5 +1,8 @@
 package model;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hospedagem {
     private Integer codigo;
@@ -11,6 +14,7 @@ public class Hospedagem {
     private Double valorDiaria;
     private Pagamento pagamento;
     private Quarto quarto;
+    private List<Servico> servicos = new ArrayList<>();
 
     public Integer getCodigo() {
         return codigo;
@@ -82,5 +86,25 @@ public class Hospedagem {
 
     public void setQuarto(Quarto quarto) {
         this.quarto = quarto;
+    }
+
+    public void addServico(Servico servico) {
+        this.servicos.add(servico);
+    }
+
+    private void removeServico(Servico servico) {
+        this.servicos.remove(servico);
+    }
+
+    public List<Servico> getServicos() {
+        return servicos;
+    }
+
+    public double calcularCustoTotal() {
+        double custoTotal = 0.0;
+        for (Servico servico : servicos) {
+            custoTotal += servico.getValor();
+        }
+        return custoTotal;
     }
 }
