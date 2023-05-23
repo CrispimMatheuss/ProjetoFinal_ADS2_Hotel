@@ -84,27 +84,4 @@ public class Hospedagem {
         return quarto;
     }
 
-    public void setQuarto(Quarto quarto) {
-        this.quarto = quarto;
-    }
 
-    public void addServico(Servico servico) {
-        this.servicos.add(servico);
-    }
-
-    private void removeServico(Servico servico) {
-        this.servicos.remove(servico);
-    }
-
-    public List<Servico> getServicos() {
-        return servicos;
-    }
-
-    public double calcularCustoTotal() {
-        double custoTotal = 0.0;
-        for (Servico servico : servicos) {
-            custoTotal += servico.getValor();
-        }
-        return custoTotal;
-    }
-}
