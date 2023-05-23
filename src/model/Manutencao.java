@@ -1,7 +1,4 @@
-//package model;
-
-import model.Funcionario;
-import model.OrdemDeServico;
+package model;
 
 import java.time.LocalDate;
 
