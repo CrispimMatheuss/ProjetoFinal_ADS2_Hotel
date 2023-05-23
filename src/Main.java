@@ -2,6 +2,7 @@ import model.*;
 import repository.HospedagemDAO;
 import repository.PagamentoDAO;
 import repository.PessoaDAO;
+import repository.ServicoDAO;
 
 import javax.swing.*;
 import java.math.BigDecimal;
@@ -43,7 +44,7 @@ public class Main {
     }
 
     private static void chamaMenuCadastros() {
-        String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Voltar"};
+        String[] opcoesMenuCadastro = {"Hóspede", "Funcionário","Serviço", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Cadastros",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuCadastro, opcoesMenuCadastro[0]);
@@ -55,33 +56,31 @@ public class Main {
             case 1: //Funcionario
                 cadastroDeFuncionario();
                 break;
-            case 2: //Voltar
-                chamaMenuPrincipal();
+            case 2: //Serviço
+                cadastroDeServico();
                 break;
             case 3: //Funcionario
-                cadastroDeServico();
+                chamaMenuPrincipal();
                 break;
         }
     }
 
     private static void cadastroDeServico() {
+
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do Serviço"));
         if (codigo == 0) {
-            chamaMenuCadastros();
+            cadastroDeServico();
         }
         String tipo = JOptionPane.showInputDialog(null, "Digite o tipo de Serviço");
         if (tipo == null) {
-            chamaMenuCadastros();
-        }
-        Boolean disponibilidade = Boolean.valueOf(JOptionPane.showInputDialog(null, "Digite a disponibilidade"));
-        if (disponibilidade == null) {
-            chamaMenuCadastros();
+            cadastroDeServico();
         }
         Double valor = Double.valueOf(JOptionPane.showInputDialog(null, "Digite o valor do Serviço"));
         if (valor == null) {
-            chamaMenuCadastros();
+            cadastroDeServico();
         }
-
+        Servico servico = new Servico(codigo,tipo,valor);
+        ServicoDAO.adicionarServico(servico);
     }
 
     private static void cadastroDeCliente() {
@@ -144,7 +143,9 @@ public class Main {
             case 1: //Checkout
             chamaCheckOut();
                 break;
-            case 2: //Consumos
+            case 2: //Tipos de Serviços
+//                chamaTipoDeServico();
+
 
                 break;
             case 3: //Voltar
@@ -167,6 +168,13 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Formato de data inválido!");
         }
     }
+
+
+//    Object[] selectionFormaPagto = {FormaPagamento.DINHEIRO.getDescricao(), FormaPagamento.CHEQUE.getDescricao(), FormaPagamento.CARTAO_CREDITO.getDescricao(), FormaPagamento.CARTAO_DEBITO.getDescricao()};// String da SELEÇÃO
+//    String initialSelectionForma = (String) selectionFormaPagto[0]; // valor inicial, o primeiro selecionado
+//    Object selectionForma = JOptionPane.showInputDialog(null, "Selecione o cliente da venda?",
+//            "Hotel", JOptionPane.QUESTION_MESSAGE, null, selectionFormaPagto, initialSelectionForma);
+//    FormaPagamento formaPagamento = FormaPagamento.valueOf((String) selectionForma);
 
     public static void chamaCheckOut() {
         LocalDate dataSaida = LocalDate.now();
@@ -210,7 +218,7 @@ public class Main {
 
     /////////////////RELATÓRIOS////////////////////
     private static void listaCadastros() {
-        String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Voltar"};
+        String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários","Serviços","Manutenção","Voltar"};
         int menuRelatorios = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Relatórios",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuRelatorios, opcoesMenuRelatorios[0]);
@@ -224,9 +232,21 @@ public class Main {
                 JOptionPane.showMessageDialog(null, PessoaDAO.buscaTodosf());
                 chamaMenuPrincipal();
                 break;
+            case 2: //Serviços
+                JOptionPane.showMessageDialog(null, ServicoDAO.buscaTodos());
+//                chamaServicos();
+                break;
+//            case 3: //Manutenção
+//                JOptionPane.showMessageDialog(null, Man.buscaTodos());
+//                chamaServicos();
+//                break;
             case 4: //Voltar
                 chamaMenuPrincipal();
                 break;
         }
+    }
+
+    public void chamaServicos(){
+
     }
 }

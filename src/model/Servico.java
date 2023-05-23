@@ -10,10 +10,10 @@ public class Servico {
     private Double valor;
 //    private List<Servico> servicos = new ArrayList<>();
 
-    public Servico(Integer codigo, String tipo, Boolean disponibilidade, Double valor) {
+    public Servico(Integer codigo, String tipo, Double valor) {
         this.codigo = codigo;
         this.tipo = tipo;
-        this.disponibilidade = disponibilidade;
+        this.disponibilidade = true;
         this.valor = valor;
     }
 
