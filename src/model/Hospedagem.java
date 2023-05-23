@@ -82,6 +82,6 @@ public class Hospedagem {
 
     public Quarto getQuarto() {
         return quarto;
-    }
+    }}
 
 
