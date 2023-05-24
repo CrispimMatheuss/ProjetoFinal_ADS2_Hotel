@@ -51,4 +51,53 @@ public class Quarto {
         }
         public String getDescricao() {
             return descricao;
-        }}}
+        }}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public TipoQuarto getTipoQuarto() {
+        return tipoQuarto;
+    }
+
+    public void setTipoQuarto(TipoQuarto tipoQuarto) {
+        this.tipoQuarto = tipoQuarto;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    public NumQuarto getNumQuarto() {
+        return numQuarto;
+    }
+
+    public void setNumQuarto(NumQuarto numQuarto) {
+        this.numQuarto = numQuarto;
+    }
+
+    public boolean isDisponibilidade() {
+        return disponibilidade;
+    }
+
+    public void setDisponibilidade(boolean disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
+
+    public Integer getLimitePessoas() {
+        return limitePessoas;
+    }
+
+    public void setLimitePessoas(Integer limitePessoas) {
+        this.limitePessoas = limitePessoas;
+    }
+}
