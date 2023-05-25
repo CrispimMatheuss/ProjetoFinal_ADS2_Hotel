@@ -1,4 +1,5 @@
 package repository;
+import model.EscolheServico;
 import model.Servico;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,16 @@ public class ServicoDAO {
 
     }
 
-    public static void adicionarServico(Servico servico) {
+//    public static void adicionarServico(EscolheServico escolheServico) {
+//        EscolheServico.add(escolheServico);
+//    }
+
+    public static void setarCodigo(Servico servico) {
+        servico.setCodigo(servicos.size() + 1);
+        servicos.add(servico);
+    }
+
+    public static void salvar(Servico servico) {
         servicos.add(servico);
     }
 

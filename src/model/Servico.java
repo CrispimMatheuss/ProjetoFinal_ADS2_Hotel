@@ -17,6 +17,11 @@ public class Servico {
         this.valor = valor;
     }
 
+    public Servico(String tipo, Double valor) {
+        this.tipo = tipo;
+        this.valor = valor;
+    }
+
     public Integer getCodigo() {
         return codigo;
     }
@@ -36,7 +41,9 @@ public class Servico {
         return valor;
     }
 
-
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
 
     @Override
     public String toString() {

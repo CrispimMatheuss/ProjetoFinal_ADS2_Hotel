@@ -1,4 +1,5 @@
 import model.*;
+import model.EscolheServico;
 import repository.HospedagemDAO;
 import repository.PagamentoDAO;
 import repository.PessoaDAO;
@@ -67,10 +68,6 @@ public class Main {
 
     private static void cadastroDeServico() {
 
-        Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do Serviço"));
-        if (codigo == 0) {
-            cadastroDeServico();
-        }
         String tipo = JOptionPane.showInputDialog(null, "Digite o tipo de Serviço");
         if (tipo == null) {
             cadastroDeServico();
@@ -79,8 +76,9 @@ public class Main {
         if (valor == null) {
             cadastroDeServico();
         }
-        Servico servico = new Servico(codigo,tipo,valor);
-        ServicoDAO.adicionarServico(servico);
+        Servico servico = new Servico(tipo,valor);
+        ServicoDAO.salvar(servico);
+        chamaMenuPrincipal();
     }
 
     private static void cadastroDeCliente() {
@@ -247,7 +245,8 @@ public class Main {
                 break;
             case 2: //Serviços
                 JOptionPane.showMessageDialog(null, ServicoDAO.buscaTodos());
-//                chamaServicos();
+                chamaMenuProcessos();
+//                chamaMenuPrincipal();
                 break;
 //            case 3: //Manutenção
 //                JOptionPane.showMessageDialog(null, Man.buscaTodos());
@@ -258,5 +257,23 @@ public class Main {
                 break;
         }
     }
+    public static void chamaServicos(){
+    Object[] selectionEscolheServico = {
+            EscolheServico.CAFE_MANHA_SIMPLES.getDescricao(),
+            EscolheServico.CAFE_MANHA_PREMIUM.getDescricao(),
+            EscolheServico.ALMOCO.getDescricao(),
+            EscolheServico.JANTA.getDescricao()
+    };
+    String initialselectionEscolheServico = (String) selectionEscolheServico[0]; // valor inicial, o primeiro selecionado
+    Object selectionServico = JOptionPane.showInputDialog(null, "Selecione o serviço",
+            "Hotel", JOptionPane.QUESTION_MESSAGE, null, selectionEscolheServico, initialselectionEscolheServico);
 
-}
+//        if(selectionServico == null) {
+//        JOptionPane.showMessageDialog(null, "Seleção de forma de pagamento cancelada!");
+//        return; // Retorna ou executa outra ação de tratamento de erro
+//    }
+
+//        Servico
+//        ServicoDAO.adicionarServico(escolheServico);
+//        chamaMenuPrincipal();
+}}
