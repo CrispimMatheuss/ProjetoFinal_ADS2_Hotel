@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Pessoa {
+public abstract class Pessoa {
     private Integer id;
     private String nome;
     private LocalDate dataNascimento;
@@ -18,7 +18,7 @@ public class Pessoa {
         this.celular = celular;
         this.email = email;
     }
-
+    public abstract void exibirInformacoes();
     public Pessoa(Integer i, String nome, String cpf, String celular, String email) {
         id = i;
         this.nome = nome;
