@@ -142,9 +142,7 @@ public class Main {
             chamaCheckOut();
                 break;
             case 2: //Tipos de Serviços
-//                chamaTipoDeServico();
-
-
+                 chamaServicos();
                 break;
             case 3: //Voltar
                 chamaMenuPrincipal();
@@ -246,7 +244,7 @@ public class Main {
             case 2: //Serviços
                 JOptionPane.showMessageDialog(null, ServicoDAO.buscaTodos());
                 chamaMenuProcessos();
-//                chamaMenuPrincipal();
+
                 break;
 //            case 3: //Manutenção
 //                JOptionPane.showMessageDialog(null, Man.buscaTodos());
@@ -268,12 +266,14 @@ public class Main {
     Object selectionServico = JOptionPane.showInputDialog(null, "Selecione o serviço",
             "Hotel", JOptionPane.QUESTION_MESSAGE, null, selectionEscolheServico, initialselectionEscolheServico);
 
-//        if(selectionServico == null) {
-//        JOptionPane.showMessageDialog(null, "Seleção de forma de pagamento cancelada!");
-//        return; // Retorna ou executa outra ação de tratamento de erro
-//    }
 
-//        Servico
-//        ServicoDAO.adicionarServico(escolheServico);
-//        chamaMenuPrincipal();
+
+        if(selectionServico == null) {
+        JOptionPane.showMessageDialog(null, "Seleção de forma de pagamento cancelada!");
+        return; // Retorna ou executa outra ação de tratamento de erro
+    }
+        String enumName = EscolheServico.getEnumByString((String)selectionServico);
+        EscolheServico escolheServico = EscolheServico.valueOf(enumName);
+        ServicoDAO.adicionarServico(escolheServico);
+        chamaMenuPrincipal();
 }}

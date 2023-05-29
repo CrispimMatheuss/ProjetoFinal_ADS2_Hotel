@@ -20,9 +20,10 @@ public class ServicoDAO {
 
     }
 
-//    public static void adicionarServico(EscolheServico escolheServico) {
-//        EscolheServico.add(escolheServico);
-//    }
+    public static void adicionarServico(EscolheServico escolheServico) {
+//        EscolheServico tipo = EscolheServico.valueOf(Servico);
+//        servicos.add(tipo);
+    }
 
     public static void setarCodigo(Servico servico) {
         servico.setCodigo(servicos.size() + 1);
