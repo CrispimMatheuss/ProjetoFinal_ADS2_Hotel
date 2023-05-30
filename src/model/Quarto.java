@@ -7,9 +7,11 @@ public class Quarto {
     private TipoQuarto tipoQuarto;
     private BigDecimal valor;
     private NumQuarto numQuarto;
-    private boolean disponibilidade;
+    private DisponibilidadeQuarto disponibilidade;
     private Integer limitePessoas;
-    public Quarto(Integer id, TipoQuarto tipo, BigDecimal valor, NumQuarto numQuarto, boolean disponibilidade, Integer limitePessoas) {
+
+    public Quarto(Integer id, TipoQuarto tipoQuarto, BigDecimal valor, NumQuarto numQuarto,
+                  DisponibilidadeQuarto disponibilidade, Integer limitePessoas) {
         this.id = id;
         this.tipoQuarto = tipoQuarto;
         this.valor = valor;
@@ -17,6 +19,7 @@ public class Quarto {
         this.disponibilidade = disponibilidade;
         this.limitePessoas = limitePessoas;
     }
+
     //logica do exibir informacoes
 //    public void exibirInformacoes() {
 //        System.out.println("Informações detalhadas do quarto:");
@@ -26,6 +29,30 @@ public class Quarto {
 //        System.out.println("Disponibilidade: " + (isDisponibilidade() ? "Disponível" : "Indisponível"));
 //        System.out.println("Limite de pessoas: " + getLimitePessoas());
 //    }
+
+    public enum DisponibilidadeQuarto {
+        DISPONIVEL("Disponível"),
+        INDISPONIVEL("Indisponível");
+
+        private String descricao;
+
+        DisponibilidadeQuarto(String descricao) {
+            this.descricao = descricao;
+        }
+
+        public String getDescricao() {
+            return descricao;
+        }
+    }
+
+    public DisponibilidadeQuarto getDisponibilidade() {
+        return disponibilidade;
+    }
+
+    public void setDisponibilidade(DisponibilidadeQuarto disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
+
     public enum TipoQuarto {
         PADRAO_CLASSICO("Padrão Clássico"),
         VIP("VIP"),
@@ -84,15 +111,6 @@ public class Quarto {
     public void setNumQuarto(NumQuarto numQuarto) {
         this.numQuarto = numQuarto;
     }
-
-    public boolean isDisponibilidade() {
-        return disponibilidade;
-    }
-
-    public void setDisponibilidade(boolean disponibilidade) {
-        this.disponibilidade = disponibilidade;
-    }
-
     public Integer getLimitePessoas() {
         return limitePessoas;
     }
