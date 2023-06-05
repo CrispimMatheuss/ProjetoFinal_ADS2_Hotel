@@ -26,6 +26,11 @@ public class Hospede extends Pessoa {
         return email;
     }
 
+    @Override
+    public void setId(int i) {
+
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
