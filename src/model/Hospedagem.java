@@ -82,6 +82,24 @@ public class Hospedagem {
 
     public Quarto getQuarto() {
         return quarto;
-    }}
+    }
+
+    public void setQuarto(Quarto quarto) {
+        this.quarto = quarto;
+    }
+
+    public List<Servico> getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(List<Servico> servicos) {
+        this.servicos = servicos;
+    }
+
+    public void addServico(Servico servico){
+        this.servicos.add(servico);
+    }
+
+}
 
 

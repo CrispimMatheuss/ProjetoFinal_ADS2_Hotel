@@ -8,6 +8,7 @@ import java.util.List;
 
 public class HospedagemDAO {
 
+
     static List<Hospedagem> hospedagens = new ArrayList<>();
 
     public static void salvar(Hospedagem hospedagem) {
@@ -15,6 +16,7 @@ public class HospedagemDAO {
     }
 
     public static List<Hospedagem> buscaTodos() {
+
         return hospedagens;
     }
 
@@ -28,6 +30,7 @@ public class HospedagemDAO {
 
         return hospedagemCodigo.toArray();
     }
+
 
     public static List<Hospedagem> buscarPorCodigo(Integer codigo) {
         List<Hospedagem> hospedagemFiltradas = new ArrayList<>();
