@@ -69,4 +69,6 @@ public abstract class Pessoa {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+    public abstract void setId(int i);
 }

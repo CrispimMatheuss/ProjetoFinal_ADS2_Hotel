@@ -8,6 +8,11 @@ public class Funcionario extends Pessoa {
         return cpf;
     }
 
+    @Override
+    public void setId(int i) {
+
+    }
+
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }

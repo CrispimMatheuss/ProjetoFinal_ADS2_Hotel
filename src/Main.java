@@ -159,10 +159,25 @@ public class Main {
             dataEntrada = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (DateTimeParseException e) {
             JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+            chamaCheckin();
         }
 
+        Object[] selectionQuarto = {
+                Quarto.TipoQuarto.PADRAO_CLASSICO.getDescricao(),
+                Quarto.TipoQuarto.MASTER_VIP.getDescricao(),
+                Quarto.TipoQuarto.VIP.getDescricao(),
+                Quarto.TipoQuarto.STAR_VIP.getDescricao(),
+                Quarto.TipoQuarto.BLACK_VIP.getDescricao(),
+        };
 
-        //quarto, disponibilidade do quarto, cod hospede
+        String initialSelectionQuarto = (String) selectionQuarto[0];
+        Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o quarto escolhido",
+                "Quartos", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
+
+        chamaMenuProcessos();
+
+
+        //disponibilidade do quarto, cod hospede
     }
 
 
@@ -252,7 +267,7 @@ public class Main {
     }
 
 
-   /* public static void chamaServicos() {
+    public static void chamaServicos() {
 
         Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
         Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
@@ -271,6 +286,6 @@ public class Main {
         HospedagemDAO.salvar(hospedagem);
         System.out.println(hospedagem);
         chamaMenuPrincipal();
-    }*/
+    }
 }
 
