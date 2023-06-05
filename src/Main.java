@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-
+import repository.OrdemDeServicoDAO;
 public class Main {
 
     private static Object PessoaDAODAO;
@@ -139,10 +139,10 @@ public class Main {
 
         switch (menuProcessos) {
             case 0: //Checkin
-            chamaCheckin();
+                chamaCheckin();
                 break;
             case 1: //Checkout
-            chamaCheckOut();
+                chamaCheckOut();
                 break;
             case 2: //Consumos
 
@@ -152,21 +152,20 @@ public class Main {
                 break;
         }
     }
-    public void opcoesDeServico(){
+
+    public void opcoesDeServico() {
 
     }
 
-    public static void chamaCheckin(){
+    public static void chamaCheckin() {
         LocalDate dataEntrada = LocalDate.now();
         String inputData = JOptionPane.showInputDialog(null, "Data de entrada (formato: dd/MM/yyyy): ");
 
         try {
             dataEntrada = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             JOptionPane.showMessageDialog(null, "Formato de data inválido!");
         }
-
 
 
         //quarto, disponibilidade do quarto, cod hospede
@@ -198,28 +197,28 @@ public class Main {
             return; // Retorna ou executa outra ação de tratamento de erro
         }
 
-            FormaPagamento formaPagamento = FormaPagamento.valueOf((String) selectionForma);
+        FormaPagamento formaPagamento = FormaPagamento.valueOf((String) selectionForma);
 
-            LocalDate dataPagamento = LocalDate.now();
-            String inputData1 = JOptionPane.showInputDialog(null, "Digite uma data (formato: dd/MM/yyyy):");
+        LocalDate dataPagamento = LocalDate.now();
+        String inputData1 = JOptionPane.showInputDialog(null, "Digite uma data (formato: dd/MM/yyyy):");
 
-            try {
-                dataPagamento = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            } catch (DateTimeParseException o) {
-                JOptionPane.showMessageDialog(null, "Formato de data inválido!");
-            }
-
-            String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário");
-            if (cpf == null) {
-                chamaMenuCadastros();
-            }
-            
-            Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
-            String initialSelectionHospedagem = (String) selectionValuesHospedagem[0];
-            Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
-                    "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
-            List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
+        try {
+            dataPagamento = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (DateTimeParseException o) {
+            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
         }
+
+        String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário");
+        if (cpf == null) {
+            chamaMenuCadastros();
+        }
+
+        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
+        String initialSelectionHospedagem = (String) selectionValuesHospedagem[0];
+        Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
+                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
+        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
+    }
 
     /////////////////RELATÓRIOS////////////////////
     private static void listaCadastros() {
@@ -243,4 +242,12 @@ public class Main {
         }
     }
 
+
+
+
+
 }
+
+
+
+
