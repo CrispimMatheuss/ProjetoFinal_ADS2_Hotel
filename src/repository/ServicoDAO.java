@@ -1,4 +1,5 @@
 package repository;
+import model.EscolheServico;
 import model.Servico;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +11,26 @@ public class ServicoDAO {
     public ServicoDAO() {
 
         if(servicos.isEmpty()){
-            servicos.add(new Servico(1,"Cafe da manhã",true,20.00));
-            servicos.add(new Servico(1,"Cafe da manhã",true,20.00));
-            servicos.add(new Servico(1,"Cafe da manhã",true,20.00));
-            servicos.add(new Servico(1,"Cafe da manhã",true,20.00));
-            servicos.add(new Servico(1,"Cafe da manhã",true,20.00));
+            servicos.add(new Servico(1,"Cafe da manhã simples",20.00));
+            servicos.add(new Servico(2,"Cafe da manhã premium",40.00));
+            servicos.add(new Servico(3,"Almoço",60.00));
+            servicos.add(new Servico(4,"Janta",70.00));
+            servicos.add(new Servico(5,"Serviço de quarto",50.00));
         }
 
     }
 
-    public static void adicionarServico(Servico servico) {
+    public static void adicionarServico(EscolheServico escolheServico) {
+//        EscolheServico tipo = EscolheServico.valueOf(Servico);
+//        servicos.add(tipo);
+    }
+
+    public static void setarCodigo(Servico servico) {
+        servico.setCodigo(servicos.size() + 1);
+        servicos.add(servico);
+    }
+
+    public static void salvar(Servico servico) {
         servicos.add(servico);
     }
 

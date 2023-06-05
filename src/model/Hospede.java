@@ -1,22 +1,18 @@
 package model;
-
 import model.Pessoa;
-
 import java.time.LocalDate;
-
 public class Hospede extends Pessoa {
-
-    private String nome;
+    private String classificacao;
     private String cpf;
     private String email;
     private String telefone;
 
-    public String getNome() {
-        return nome;
+    public String getClassificacao() {
+        return classificacao;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setClassificacao(String classificacao) {
+        this.classificacao = classificacao;
     }
 
     public String getCpf() {
@@ -58,16 +54,22 @@ public class Hospede extends Pessoa {
         // Lógica para registrar um pagamento realizado pelo hóspede
     }
 
-    public Hospede(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {
-        super(i, nome, dataNascimento, cpf, celular, email);
+    public Hospede(Integer i, String classificacao, LocalDate dataNascimento, String cpf, String celular, String email) {
+        super(i, classificacao, dataNascimento, cpf, celular, email);
     }
-
-    public Hospede(Integer i, String nome, String cpf, String celular, String email) {
-        super(i, nome, cpf, celular, email);
+    @Override
+    public void exibirInformacoes() {
+        System.out.println("Informações do Hóspede:");
+        System.out.println("Nome: " + getNome());
+        System.out.println("CPF: " + getCpf());
+        System.out.println("Data de Nascimento: " + getDataNascimento());
+        System.out.println("Telefone: " + getTelefone());
+        System.out.println("Email: " + getEmail());
     }
-
-    public Hospede(String nome, String cpf, String celular, String email) {
-        super(nome, cpf, celular, email);
+    public Hospede(Integer i, String classificacao, String cpf, String celular, String email) {
+        super(i, classificacao, cpf, celular, email);
+    }
+    public Hospede(String classificacao, String cpf, String celular, String email) {
+        super(classificacao, cpf, celular, email);
     }
 }
-
