@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-
+import repository.OrdemDeServicoDAO;
 public class Main {
 
     private static Object PessoaDAODAO;
@@ -251,7 +251,8 @@ public class Main {
         }
     }
 
-    public static void chamaServicos() {
+
+   /* public static void chamaServicos() {
 
         Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
         Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
@@ -270,5 +271,6 @@ public class Main {
         HospedagemDAO.salvar(hospedagem);
         System.out.println(hospedagem);
         chamaMenuPrincipal();
-    }
+    }*/
 }
+

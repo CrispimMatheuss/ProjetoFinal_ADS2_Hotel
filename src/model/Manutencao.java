@@ -1,5 +1,9 @@
 package model;
 
+
+import repository.StatusManutencao;
+import repository.TipoManutencao;
+
 import java.time.LocalDate;
 
 public class Manutencao {
@@ -8,13 +12,18 @@ public class Manutencao {
     private LocalDate data;
     private String descricao;
     private OrdemDeServico OS;
+    private TipoManutencao tipoManutencao;
+    private StatusManutencao status;
 
-    public Manutencao(Integer ID, Funcionario funcionario, LocalDate data, String descricao, OrdemDeServico OS) {
+    public Manutencao(Integer ID, Funcionario funcionario, LocalDate data, String descricao,
+                      OrdemDeServico OS, TipoManutencao tipoManutencao, StatusManutencao status) {
         this.ID = ID;
         this.funcionario = funcionario;
         this.data = data;
         this.descricao = descricao;
         this.OS = OS;
+        this.tipoManutencao = tipoManutencao;
+        this.status = status;
     }
 
     public Integer getID() {
@@ -57,6 +66,22 @@ public class Manutencao {
         this.OS = OS;
     }
 
+    public TipoManutencao getTipoManutencao() {
+        return tipoManutencao;
+    }
+
+    public void setTipoManutencao(TipoManutencao tipoManutencao) {
+        this.tipoManutencao = tipoManutencao;
+    }
+
+    public StatusManutencao getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusManutencao status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Manutencao{" +
@@ -65,17 +90,10 @@ public class Manutencao {
                 ", data=" + data +
                 ", descricao='" + descricao + '\'' +
                 ", OS=" + OS +
+                ", tipoManutencao=" + tipoManutencao +
+                ", status=" + status +
                 '}';
     }
 }
 
-//import model.Funcionario;
 
-//import java.time.LocalDate;
-
-//public class Manutencao {
-   // private Integer id;
-  //  private Funcionario funcionario;
-   // private LocalDate data;
-   // private char tipoDeManutenção;
-//}
