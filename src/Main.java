@@ -1,9 +1,6 @@
 import model.*;
 import model.EscolheServico;
-import repository.HospedagemDAO;
-import repository.PagamentoDAO;
-import repository.PessoaDAO;
-import repository.ServicoDAO;
+import repository.*;
 
 import javax.swing.*;
 import java.math.BigDecimal;
@@ -45,7 +42,7 @@ public class Main {
     }
 
     private static void chamaMenuCadastros() {
-        String[] opcoesMenuCadastro = {"Hóspede", "Funcionário","Serviço", "Voltar"};
+        String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Serviço", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Cadastros",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuCadastro, opcoesMenuCadastro[0]);
@@ -76,7 +73,7 @@ public class Main {
         if (valor == null) {
             cadastroDeServico();
         }
-        Servico servico = new Servico(tipo,valor);
+        Servico servico = new Servico(tipo, valor);
         ServicoDAO.salvar(servico);
         chamaMenuPrincipal();
     }
@@ -142,7 +139,7 @@ public class Main {
                 chamaCheckOut();
                 break;
             case 2: //Tipos de Serviços
-                 chamaServicos();
+                chamaServicos();
                 break;
             case 3: //Voltar
                 chamaMenuPrincipal();
@@ -188,7 +185,7 @@ public class Main {
 
         Object[] selectionFormaPagto = {
                 FormaPagamento.DINHEIRO.getDescricao(),
-                FormaPagamento.CHEQUE.getDescricao(),
+                FormaPagamento.PIX.getDescricao(),
                 FormaPagamento.CARTAO_CREDITO.getDescricao(),
                 FormaPagamento.CARTAO_DEBITO.getDescricao()
         };
@@ -226,7 +223,7 @@ public class Main {
 
     /////////////////RELATÓRIOS////////////////////
     private static void listaCadastros() {
-        String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários","Serviços","Manutenção","Voltar"};
+        String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Serviços", "Manutenção", "Voltar"};
         int menuRelatorios = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Relatórios",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuRelatorios, opcoesMenuRelatorios[0]);
@@ -243,14 +240,37 @@ public class Main {
             case 2: //Serviços
                 JOptionPane.showMessageDialog(null, ServicoDAO.buscaTodos());
                 chamaMenuProcessos();
-
                 break;
-//            case 3: //Manutenção
-//                JOptionPane.showMessageDialog(null, Man.buscaTodos());
-//                chamaServicos();
-//                break;
+            case 3: //Manutenção
+                JOptionPane.showMessageDialog(null, ManutencaoDAO.buscaTodos());
+                chamaServicos();
+                break;
             case 4: //Voltar
                 chamaMenuPrincipal();
                 break;
         }
     }
+
+
+   /* public static void chamaServicos() {
+
+        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
+        Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
+        Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
+                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
+        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
+
+        Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
+        String initialSelectionServico = (String) selectionValuesServico[0];
+        Object selectionServico = JOptionPane.showInputDialog(null, "Selecione a descricao da Serviço?",
+                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesServico, initialSelectionServico);
+        List<Servico> servicos = ServicoDAO.buscarPorTipo((String) selectionServico);
+
+        Hospedagem hospedagem = hospedagens.get(0);
+        hospedagem.addServico(servicos.get(0));
+        HospedagemDAO.salvar(hospedagem);
+        System.out.println(hospedagem);
+        chamaMenuPrincipal();
+    }*/
+}
+
