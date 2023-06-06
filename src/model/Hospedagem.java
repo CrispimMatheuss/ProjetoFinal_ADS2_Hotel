@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +11,31 @@ public class Hospedagem {
     private LocalDate checkout;
     private Hospede hospede;
     private Integer quantidadeDiarias;
-    private Double valorTotal;
-    private Double valorDiaria;
-    private Pagamento pagamento;
     private Quarto quarto;
-    private List<Servico> servicos = new ArrayList<>();
+    private Servico consumo;
+    private BigDecimal valorConsumo;
+    private BigDecimal valorTotalHospedagem;
+
+    public Hospedagem(Integer codigo, LocalDate checkin, LocalDate checkout, Hospede hospede, Integer quantidadeDiarias, Quarto quarto) {
+        this.codigo = codigo;
+        this.checkin = checkin;
+        this.checkout = checkout;
+        this.hospede = hospede;
+        this.quantidadeDiarias = quantidadeDiarias;
+        this.quarto = quarto;
+    }
+    public BigDecimal calculaValorTotalHospedagem(BigDecimal valorConsumo,Integer quantidadeDiarias,Quarto quarto){
+        BigDecimal consumoLocal = valorConsumo;
+        BigDecimal valorDiaria = quarto.getValor();
+
+        BigDecimal valorTot = consumoLocal.add(valorDiaria.multiply(BigDecimal.valueOf(quantidadeDiarias)));
+
+        return valorTot;
+    }
+
+    public void addServico(Servico servico){
+
+    }
 
     public Integer getCodigo() {
         return codigo;
@@ -56,30 +77,6 @@ public class Hospedagem {
         this.quantidadeDiarias = quantidadeDiarias;
     }
 
-    public Double getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public Double getValorDiaria() {
-        return valorDiaria;
-    }
-
-    public void setValorDiaria(Double valorDiaria) {
-        this.valorDiaria = valorDiaria;
-    }
-
-    public Pagamento getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
-    }
-
     public Quarto getQuarto() {
         return quarto;
     }
@@ -88,18 +85,35 @@ public class Hospedagem {
         this.quarto = quarto;
     }
 
-    public List<Servico> getServicos() {
-        return servicos;
+    public Servico getConsumo() {
+        return consumo;
     }
 
-    public void setServicos(List<Servico> servicos) {
-        this.servicos = servicos;
+    public void setConsumo(Servico consumo) {
+        this.consumo = consumo;
     }
 
-    public void addServico(Servico servico){
-        this.servicos.add(servico);
+    public BigDecimal getValorTotalHospedagem() {
+        return valorTotalHospedagem;
     }
 
+    public void setValorTotalHospedagem(BigDecimal valorTot) {
+        this.valorTotalHospedagem = valorTot;
+    }
+
+    @Override
+    public String toString() {
+        return "Hospedagem{" +
+                "codigo=" + codigo +
+                ", checkin=" + checkin +
+                ", checkout=" + checkout +
+                ", hospede=" + hospede +
+                ", quantidadeDiarias=" + quantidadeDiarias +
+                ", quarto=" + quarto +
+                ", consumo=" + consumo +
+                ", valorTotalHospedagem=" + valorTotalHospedagem +
+                '}';
+    }
 }
 
 
