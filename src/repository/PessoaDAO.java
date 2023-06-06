@@ -2,6 +2,7 @@ package repository;
 
 import model.Funcionario;
 import model.Hospede;
+import model.Servico;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,6 @@ public class PessoaDAO {
         return hospedes;
     }
 
-
     static List<Funcionario> funcionarios = new ArrayList<>();
 
     public static void salvar(Funcionario funcionario) {
@@ -30,4 +30,14 @@ public class PessoaDAO {
         return funcionarios;
     }
 
+    public static Object[] findHospedeInArray() {
+        List<Hospede> hospedes = buscaTodosh();
+        List<String> hospedeDesc = new ArrayList<>();
+
+        for (Hospede hospede : hospedes) {
+            hospedeDesc.add(hospede.getNome());
+        }
+
+        return hospedeDesc.toArray();
+    }
 }
