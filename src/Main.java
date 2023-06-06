@@ -147,10 +147,6 @@ public class Main {
         }
     }
 
-    public void opcoesDeServico() {
-
-    }
-
     public static void chamaCheckin() {
         LocalDate dataEntrada = LocalDate.now();
         String inputData = JOptionPane.showInputDialog(null, "Data de entrada (formato: dd/MM/yyyy): ");
@@ -169,23 +165,26 @@ public class Main {
                 Quarto.TipoQuarto.STAR_VIP.getDescricao(),
                 Quarto.TipoQuarto.BLACK_VIP.getDescricao(),
         };
-
         String initialSelectionQuarto = (String) selectionQuarto[0];
         Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o quarto escolhido",
                 "Quartos", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
 
-        chamaMenuProcessos();
+        Object[] selectionHospede = PessoaDAO.findHospedeInArray();
+        String initialSelectionHospede = (String) selectionHospede[0];
+        Object selecHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede",
+                "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionHospede, initialSelectionHospede);
+        String selectedHospede = (String) selecHospede;
+        List<Hospede> hospedes = PessoaDAO.buscaTodosh();
 
 
-        //disponibilidade do quarto, cod hospede
+        Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
+        String initialSelectionServico = (String) selectionValuesServico[0];
+        Object selectionServico = JOptionPane.showInputDialog(null, "Selecione a descrição do Serviço",
+                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesServico, initialSelectionServico);
+        String selectedServico = (String) selectionServico;
+
+        List<Servico> servicos = ServicoDAO.buscarPorTipo(selectedServico);
     }
-
-
-//    Object[] selectionFormaPagto = {FormaPagamento.DINHEIRO.getDescricao(), FormaPagamento.CHEQUE.getDescricao(), FormaPagamento.CARTAO_CREDITO.getDescricao(), FormaPagamento.CARTAO_DEBITO.getDescricao()};// String da SELEÇÃO
-//    String initialSelectionForma = (String) selectionFormaPagto[0]; // valor inicial, o primeiro selecionado
-//    Object selectionForma = JOptionPane.showInputDialog(null, "Selecione o cliente da venda?",
-//            "Hotel", JOptionPane.QUESTION_MESSAGE, null, selectionFormaPagto, initialSelectionForma);
-//    FormaPagamento formaPagamento = FormaPagamento.valueOf((String) selectionForma);
 
     public static void chamaCheckOut() {
         LocalDate dataSaida = LocalDate.now();
