@@ -57,7 +57,7 @@ public class Main {
             case 2: //Serviço
                 cadastroDeServico();
                 break;
-            case 3: //Funcionario
+            case 3: //Voltar
                 chamaMenuPrincipal();
                 break;
         }
@@ -124,9 +124,8 @@ public class Main {
         chamaMenuPrincipal();
     }
 
-
     public static void chamaMenuProcessos() {
-        String[] opcoesMenuProcessos = {"Check-in", "Check-out", "Consumos", "Voltar"};
+        String[] opcoesMenuProcessos = {"Check-in", "Check-out", "Consumos", "Manutenções", "Voltar"};
         int menuProcessos = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Processos",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuProcessos, opcoesMenuProcessos[0]);
@@ -141,7 +140,10 @@ public class Main {
             case 2: //Tipos de Serviços
                 chamaServicos();
                 break;
-            case 3: //Voltar
+            case 3: //Manutenções
+                chamaManut();
+                break;
+            case 4: //Voltar
                 chamaMenuPrincipal();
                 break;
         }
@@ -235,7 +237,18 @@ public class Main {
         List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
     }
 
-    /////////////////RELATÓRIOS////////////////////
+    public static void chamaManut() {
+        Object[] selectManutencoes = {
+                TipoManutencao.ELETRICA.getDescricao(),
+                TipoManutencao.ESTRUTURAL.getDescricao(),
+                TipoManutencao.LIMPEZA.getDescricao()};
+
+        String initialSelectionManut = (String) selectManutencoes[0];
+        Object selecManut = JOptionPane.showInputDialog(null, "Selecione o tipo de manutenção realizada",
+                "Manutenções", JOptionPane.QUESTION_MESSAGE, null, selectManutencoes, initialSelectionManut);
+    }
+
+        /////////////////RELATÓRIOS////////////////////
     private static void listaCadastros() {
         String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Serviços", "Manutenção", "Voltar"};
         int menuRelatorios = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
@@ -264,7 +277,6 @@ public class Main {
                 break;
         }
     }
-
 
     public static void chamaServicos() {
 

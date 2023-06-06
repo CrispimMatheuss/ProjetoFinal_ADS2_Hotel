@@ -1,9 +1,9 @@
 package repository;
 
 public enum TipoManutencao {
-    ELETRICA(1,"manutenção da parte elétrica"),
-    ESTRUTURAL(2,"manutenção estrutural"),
-    LIMPEZA(3,"limpeza e faxinas");
+    ELETRICA(1,"Manutenção da parte elétrica"),
+    ESTRUTURAL(2,"Manutenção estrutural"),
+    LIMPEZA(3,"Dedetização");
 
     private int valor;
     private String descricao;
@@ -17,7 +17,6 @@ public enum TipoManutencao {
     public int getValor() {
         return valor;
     }
-
     public String getDescricao() {
         return descricao;
     }
