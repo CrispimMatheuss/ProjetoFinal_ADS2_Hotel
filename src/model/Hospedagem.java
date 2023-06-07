@@ -2,8 +2,6 @@ package model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Hospedagem {
     private Integer codigo;
@@ -12,7 +10,7 @@ public class Hospedagem {
     private Hospede hospede;
     private Integer quantidadeDiarias;
     private Quarto quarto;
-    private Servico consumo;
+    private Servico servico;
     private BigDecimal valorConsumo;
     private BigDecimal valorTotalHospedagem;
 
@@ -24,15 +22,21 @@ public class Hospedagem {
         this.quantidadeDiarias = quantidadeDiarias;
         this.quarto = quarto;
     }
-    public BigDecimal calculaValorTotalHospedagem(BigDecimal valorConsumo,Integer quantidadeDiarias,Quarto quarto){
-        BigDecimal consumoLocal = valorConsumo;
-        BigDecimal valorDiaria = quarto.getValor();
+    public BigDecimal calculaValorConsumo(){
+        BigDecimal valCons = BigDecimal.valueOf(this.servico.getValor());
+        this.valorConsumo = valCons;
+        return valCons;
+
+
+    }
+    public BigDecimal calculaValorTotalHospedagem(){
+        BigDecimal consumoLocal =this.valorConsumo;
+        BigDecimal valorDiaria = this.quarto.getValor();
 
         BigDecimal valorTot = consumoLocal.add(valorDiaria.multiply(BigDecimal.valueOf(quantidadeDiarias)));
-
+        this.valorTotalHospedagem = valorTot;
         return valorTot;
     }
-
     public void addServico(Servico servico){
 
     }
@@ -85,12 +89,12 @@ public class Hospedagem {
         this.quarto = quarto;
     }
 
-    public Servico getConsumo() {
-        return consumo;
+    public Servico getServico() {
+        return servico;
     }
 
-    public void setConsumo(Servico consumo) {
-        this.consumo = consumo;
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 
     public BigDecimal getValorTotalHospedagem() {
@@ -110,7 +114,7 @@ public class Hospedagem {
                 ", hospede=" + hospede +
                 ", quantidadeDiarias=" + quantidadeDiarias +
                 ", quarto=" + quarto +
-                ", consumo=" + consumo +
+                ", consumo=" + servico +
                 ", valorTotalHospedagem=" + valorTotalHospedagem +
                 '}';
     }
