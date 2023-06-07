@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,17 +8,17 @@ public class Servico {
     private Integer codigo;
     private String tipo;
     private Boolean disponibilidade;
-    private Double valor;
+    private BigDecimal valor;
 //    private List<Servico> servicos = new ArrayList<>();
 
-    public Servico(Integer codigo, String tipo, Double valor) {
+    public Servico(Integer codigo, String tipo, BigDecimal valor) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.disponibilidade = true;
         this.valor = valor;
     }
 
-    public Servico(String tipo, Double valor) {
+    public Servico(String tipo, BigDecimal valor) {
         this.tipo = tipo;
         this.valor = valor;
     }
@@ -37,7 +38,7 @@ public class Servico {
     }
 
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
