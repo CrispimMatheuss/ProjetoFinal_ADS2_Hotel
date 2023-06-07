@@ -117,5 +117,18 @@ public class Quarto {
 
     public void setLimitePessoas(Integer limitePessoas) {
         this.limitePessoas = limitePessoas;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Quarto{" +
+                "id=" + id +
+                ", tipoQuarto=" + tipoQuarto +
+                ", valor=" + valor +
+                ", numQuarto=" + numQuarto +
+                ", disponibilidade=" + disponibilidade +
+                ", limitePessoas=" + limitePessoas +
+                '}';
     }
 }
