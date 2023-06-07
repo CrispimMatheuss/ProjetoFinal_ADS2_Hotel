@@ -14,16 +14,19 @@ public class Hospedagem {
     private BigDecimal valorConsumo;
     private BigDecimal valorTotalHospedagem;
 
-    public Hospedagem(Integer codigo, LocalDate checkin, LocalDate checkout, Hospede hospede, Integer quantidadeDiarias, Quarto quarto) {
+
+    public Hospedagem(Integer codigo, LocalDate checkin, LocalDate checkout, Hospede hospede, Integer quantidadeDiarias, Quarto quarto, Servico servico) {
         this.codigo = codigo;
         this.checkin = checkin;
         this.checkout = checkout;
         this.hospede = hospede;
         this.quantidadeDiarias = quantidadeDiarias;
         this.quarto = quarto;
+        this.servico = servico;
     }
+
     public BigDecimal calculaValorConsumo(){
-        BigDecimal valCons = BigDecimal.valueOf(this.servico.getValor());
+        BigDecimal valCons = this.servico.getValor();
         this.valorConsumo = valCons;
         return valCons;
 
