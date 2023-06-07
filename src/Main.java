@@ -69,7 +69,8 @@ public class Main {
         if (tipo == null) {
             cadastroDeServico();
         }
-        Double valor = Double.valueOf(JOptionPane.showInputDialog(null, "Digite o valor do Serviço"));
+        String input = JOptionPane.showInputDialog(null, "Digite o valor do Serviço");
+        BigDecimal valor = new BigDecimal(input);
         if (valor == null) {
             cadastroDeServico();
         }

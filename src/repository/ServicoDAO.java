@@ -4,6 +4,7 @@ import model.EscolheServico;
 import model.Hospedagem;
 import model.Servico;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +13,10 @@ public class ServicoDAO {
     static List<Servico> servicos = new ArrayList<>();
 
 
-    public static void setarCodigo(Servico servico) {
-        servico.setCodigo(servicos.size() + 1);
-        servicos.add(servico);
-    }
+
 
     public static void salvar(Servico servico) {
+        servico.setCodigo(servicos.size()+1);
         servicos.add(servico);
     }
 
@@ -27,11 +26,11 @@ public class ServicoDAO {
 
     public static List<Servico> buscaTodos() {
         if (servicos.isEmpty()) {
-            servicos.add(new Servico(1, "Cafe da manhã simples", 20.00));
-            servicos.add(new Servico(2, "Cafe da manhã premium", 40.00));
-            servicos.add(new Servico(3, "Almoço", 60.00));
-            servicos.add(new Servico(4, "Janta", 70.00));
-            servicos.add(new Servico(5, "Serviço de quarto", 50.00));
+            servicos.add(new Servico(1, "Cafe da manhã simples", BigDecimal.valueOf(20.00)));
+            servicos.add(new Servico(2, "Cafe da manhã premium", BigDecimal.valueOf(40.00)));
+            servicos.add(new Servico(2, "Cafe da manhã simples + serviço de quarto", BigDecimal.valueOf(70.00)));
+            servicos.add(new Servico(3, "Almoço", BigDecimal.valueOf(60.00)));
+            servicos.add(new Servico(4, "Janta", BigDecimal.valueOf(75.00)));
         }
         return servicos;
     }
