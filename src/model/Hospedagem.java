@@ -47,6 +47,7 @@ public class Hospedagem {
     }
     public void addServico(Servico servico){
       this.servicos.add(servico);
+
     }
 
     public Integer getCodigo() {
