@@ -13,7 +13,6 @@ public class Hospedagem {
     private Integer quantidadeDiarias;
     private Quarto quarto;
     private List<Servico> servicos = new ArrayList<>();
-    private BigDecimal valorConsumo;
     private BigDecimal valorTotalHospedagem;
 
 
@@ -98,13 +97,6 @@ public class Hospedagem {
         this.quarto = quarto;
     }
 
-    public Servico getServico() {
-        return servico;
-    }
-
-    public void setServico(Servico servico) {
-        this.servico = servico;
-    }
 
     public BigDecimal getValorTotalHospedagem() {
         return valorTotalHospedagem;
@@ -123,7 +115,7 @@ public class Hospedagem {
                 ", hospede=" + hospede +
                 ", quantidadeDiarias=" + quantidadeDiarias +
                 ", quarto=" + quarto +
-                ", consumo=" + servico +
+                ", consumo=" + servicos +
                 ", valorTotalHospedagem=" + valorTotalHospedagem +
                 '}';
     }
