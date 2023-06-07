@@ -2,6 +2,8 @@ package model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hospedagem {
     private Integer codigo;
@@ -10,30 +12,33 @@ public class Hospedagem {
     private Hospede hospede;
     private Integer quantidadeDiarias;
     private Quarto quarto;
-    private Servico servico;
+    private List<Servico> servicos = new ArrayList<>();
     private BigDecimal valorConsumo;
     private BigDecimal valorTotalHospedagem;
 
 
-    public Hospedagem(Integer codigo, LocalDate checkin, LocalDate checkout, Hospede hospede, Integer quantidadeDiarias, Quarto quarto, Servico servico) {
+    public Hospedagem(Integer codigo, LocalDate checkin, LocalDate checkout, Hospede hospede, Integer quantidadeDiarias, Quarto quarto) {
         this.codigo = codigo;
         this.checkin = checkin;
         this.checkout = checkout;
         this.hospede = hospede;
         this.quantidadeDiarias = quantidadeDiarias;
         this.quarto = quarto;
-        this.servico = servico;
+
     }
 
     public BigDecimal calculaValorConsumo(){
-        BigDecimal valCons = this.servico.getValor();
-        this.valorConsumo = valCons;
+        BigDecimal valCons = BigDecimal.ZERO;
+        for(Servico servico: this.servicos){
+            valCons = valCons.add(servico.getValor());
+        }
+
         return valCons;
 
 
     }
     public BigDecimal calculaValorTotalHospedagem(){
-        BigDecimal consumoLocal =this.valorConsumo;
+        BigDecimal consumoLocal = calculaValorConsumo();
         BigDecimal valorDiaria = this.quarto.getValor();
 
         BigDecimal valorTot = consumoLocal.add(valorDiaria.multiply(BigDecimal.valueOf(quantidadeDiarias)));
@@ -41,6 +46,7 @@ public class Hospedagem {
         return valorTot;
     }
     public void addServico(Servico servico){
+      this.servicos.add(servico);
 
     }
 
