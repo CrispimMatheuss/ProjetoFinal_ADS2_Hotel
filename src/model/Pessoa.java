@@ -5,20 +5,10 @@ import java.time.LocalDate;
 public abstract class Pessoa {
     private Integer id;
     private String nome;
-    private LocalDate dataNascimento;
     private String cpf;
     private String celular;
     private String email;
 
-    public Pessoa(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {
-        id = i;
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.cpf = cpf;
-        this.celular = celular;
-        this.email = email;
-    }
-    public abstract void exibirInformacoes();
     public Pessoa(Integer i, String nome, String cpf, String celular, String email) {
         id = i;
         this.nome = nome;
@@ -42,10 +32,6 @@ public abstract class Pessoa {
         return nome;
     }
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
     public String getCpf() {
         return cpf;
     }
@@ -63,7 +49,6 @@ public abstract class Pessoa {
         return "Pessoa{" +
                 "I=" + id +
                 ", nome='" + nome + '\'' +
-                ", dataNascimento=" + dataNascimento +
                 ", cpf='" + cpf + '\'' +
                 ", celular='" + celular + '\'' +
                 ", email='" + email + '\'' +

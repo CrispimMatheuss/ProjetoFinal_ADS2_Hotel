@@ -59,20 +59,16 @@ public class Hospede extends Pessoa {
         // Lógica para registrar um pagamento realizado pelo hóspede
     }
 
-    public Hospede(Integer i, String classificacao, LocalDate dataNascimento, String cpf, String celular, String email) {
-        super(i, classificacao, dataNascimento, cpf, celular, email);
+    public Hospede(Integer i, String classificacao, String cpf, String celular, String email) {
+        super(i, classificacao, cpf, celular, email);
     }
-    @Override
+
     public void exibirInformacoes() {
         System.out.println("Informações do Hóspede:");
         System.out.println("Nome: " + getNome());
         System.out.println("CPF: " + getCpf());
-        System.out.println("Data de Nascimento: " + getDataNascimento());
         System.out.println("Telefone: " + getTelefone());
         System.out.println("Email: " + getEmail());
-    }
-    public Hospede(Integer i, String classificacao, String cpf, String celular, String email) {
-        super(i, classificacao, cpf, celular, email);
     }
     public Hospede(String classificacao, String cpf, String celular, String email) {
         super(classificacao, cpf, celular, email);
