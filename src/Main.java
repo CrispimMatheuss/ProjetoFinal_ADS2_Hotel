@@ -1,7 +1,7 @@
 import model.*;
 import model.EscolheServico;
+import relatorios.RelatorioHospede;
 import repository.*;
-
 import javax.swing.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -168,6 +168,7 @@ public class Main {
                 Quarto.TipoQuarto.STAR_VIP.getDescricao(),
                 Quarto.TipoQuarto.BLACK_VIP.getDescricao(),
         };
+
         String initialSelectionQuarto = (String) selectionQuarto[0];
         Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o quarto escolhido",
                 "Quartos", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
@@ -178,7 +179,6 @@ public class Main {
                 "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionHospede, initialSelectionHospede);
         String selectedHospede = (String) selecHospede;
         List<Hospede> hospedes = PessoaDAO.buscaTodosh();
-
 
         Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
         String initialSelectionServico = (String) selectionValuesServico[0];
@@ -258,12 +258,10 @@ public class Main {
 
         switch (menuRelatorios) {
             case 0: //Hospedes
-                JOptionPane.showMessageDialog(null, PessoaDAO.buscaTodosh());
-                chamaMenuPrincipal();
+                chamaRelatorioHospede();
                 break;
             case 1: //Funcionarios
-                JOptionPane.showMessageDialog(null, PessoaDAO.buscaTodosf());
-                chamaMenuPrincipal();
+                chamaRelatorioFuncionario();
                 break;
             case 2: //Serviços
                 JOptionPane.showMessageDialog(null, ServicoDAO.buscaTodos());
@@ -277,6 +275,18 @@ public class Main {
                 chamaMenuPrincipal();
                 break;
         }
+
+
+    }
+
+    private static void chamaRelatorioHospede(){
+        List<Hospede> hospedes = PessoaDAO.buscaTodosh();
+        RelatorioHospedeForm.emitirRelatorio(hospedes);
+    }
+
+    private static void chamaRelatorioFuncionario(){
+        List<Funcionario> funcionarios = PessoaDAO.buscaTodosf();
+        RelatorioFuncionarioForm.emitirRelatorio(funcionarios);
     }
 
     public static void chamaServicos() {
@@ -300,4 +310,3 @@ public class Main {
         chamaMenuPrincipal();
     }
 }
-

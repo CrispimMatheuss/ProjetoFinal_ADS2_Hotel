@@ -9,7 +9,7 @@ public class Servico {
     private String tipo;
     private Boolean disponibilidade;
     private BigDecimal valor;
-//    private List<Servico> servicos = new ArrayList<>();
+    private List<Servico> servicos = new ArrayList<>();
 
     public Servico(Integer codigo, String tipo, BigDecimal valor) {
         this.codigo = codigo;
