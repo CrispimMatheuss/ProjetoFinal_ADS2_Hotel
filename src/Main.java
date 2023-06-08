@@ -268,8 +268,7 @@ public class Main {
                 chamaMenuProcessos();
                 break;
             case 3: //Manutenção
-                JOptionPane.showMessageDialog(null, ManutencaoDAO.buscaTodos());
-                chamaServicos();
+                chamaRelatorioManutencao();
                 break;
             case 4: //Voltar
                 chamaMenuPrincipal();
