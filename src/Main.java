@@ -276,7 +276,6 @@ public class Main {
                 break;
         }
 
-
     }
 
     private static void chamaRelatorioHospede(){
@@ -287,6 +286,11 @@ public class Main {
     private static void chamaRelatorioFuncionario(){
         List<Funcionario> funcionarios = PessoaDAO.buscaTodosf();
         RelatorioFuncionarioForm.emitirRelatorio(funcionarios);
+    }
+
+    private static void chamaRelatorioManutencao(){
+        List<Manutencao> manutencaos = ManutencaoDAO.buscaTodos();
+        RelatorioManutencaoForm.emitirRelatorio(manutencaos);
     }
 
     public static void chamaServicos() {
