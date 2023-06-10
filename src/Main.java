@@ -268,14 +268,12 @@ public class Main {
                 chamaMenuProcessos();
                 break;
             case 3: //Manutenção
-                JOptionPane.showMessageDialog(null, ManutencaoDAO.buscaTodos());
-                chamaServicos();
+                chamaRelatorioManutencao();
                 break;
             case 4: //Voltar
                 chamaMenuPrincipal();
                 break;
         }
-
 
     }
 
@@ -287,6 +285,11 @@ public class Main {
     private static void chamaRelatorioFuncionario(){
         List<Funcionario> funcionarios = PessoaDAO.buscaTodosf();
         RelatorioFuncionarioForm.emitirRelatorio(funcionarios);
+    }
+
+    private static void chamaRelatorioManutencao(){
+        List<Manutencao> manutencaos = ManutencaoDAO.buscaTodos();
+        RelatorioManutencaoForm.emitirRelatorio(manutencaos);
     }
 
     public static void chamaServicos() {
