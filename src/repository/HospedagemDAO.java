@@ -17,6 +17,10 @@ public class HospedagemDAO {
     public static void salvar(Hospedagem hospedagem) {
         hospedagens.add(hospedagem);
     }
+    public static void excluir(Hospedagem hospedagem) {
+        hospedagens.remove(hospedagem);
+    }
+
 
     public static List<Hospedagem> buscaTodos() {
     if(hospedagens.isEmpty()){
