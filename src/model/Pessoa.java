@@ -9,8 +9,8 @@ public abstract class Pessoa {
     private String celular;
     private String email;
 
-    public Pessoa(Integer i, String nome, String cpf, String celular, String email) {
-        id = i;
+    public Pessoa(Integer id, String nome, String cpf, String celular, String email) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.celular = celular;
@@ -24,7 +24,7 @@ public abstract class Pessoa {
         this.email = email;
     }
 
-    public Integer getI() {
+    public Integer getID() {
         return id;
     }
 
@@ -47,7 +47,7 @@ public abstract class Pessoa {
     @Override
     public String toString() {
         return "Pessoa{" +
-                "I=" + id +
+                "ID=" + id +
                 ", nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", celular='" + celular + '\'' +
