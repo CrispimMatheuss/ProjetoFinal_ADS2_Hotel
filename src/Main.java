@@ -264,8 +264,7 @@ public class Main {
                 chamaRelatorioFuncionario();
                 break;
             case 2: //Serviços
-                JOptionPane.showMessageDialog(null, ServicoDAO.buscaTodos());
-                chamaMenuProcessos();
+                chamaRelatorioServico();
                 break;
             case 3: //Manutenção
                 chamaRelatorioManutencao();
@@ -291,6 +290,10 @@ public class Main {
         List<Manutencao> manutencaos = ManutencaoDAO.buscaTodos();
         RelatorioManutencaoForm.emitirRelatorio(manutencaos);
     }
+    private static void chamaRelatorioServico(){
+        List<Servico>servicos=ServicoDAO.buscaTodos();
+        RelatorioServicoForm.emitirRelatorio(servicos);
+    }
 
     public static void chamaServicos() {
 
@@ -309,7 +312,8 @@ public class Main {
         Hospedagem hospedagem = hospedagens.get(0);
         hospedagem.addServico(servicos.get(0));
         HospedagemDAO.salvar(hospedagem);
-        System.out.println(hospedagem);
+//        System.out.println(hospedagem);
+       JOptionPane.showMessageDialog(null,hospedagem);
         chamaMenuPrincipal();
     }
 }
