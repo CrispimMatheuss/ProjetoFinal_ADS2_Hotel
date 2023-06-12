@@ -26,9 +26,9 @@ public class Hospedagem {
 
     }
 
-    public BigDecimal calculaValorConsumo(){
+    public BigDecimal calculaValorConsumo() {
         BigDecimal valCons = BigDecimal.ZERO;
-        for(Servico servico: this.servicos){
+        for (Servico servico : this.servicos) {
             valCons = valCons.add(servico.getValor());
         }
 
@@ -36,7 +36,8 @@ public class Hospedagem {
 
 
     }
-    public BigDecimal calculaValorTotalHospedagem(){
+
+    public BigDecimal calculaValorTotalHospedagem() {
         BigDecimal consumoLocal = calculaValorConsumo();
         BigDecimal valorDiaria = this.quarto.getValor();
 
@@ -44,8 +45,9 @@ public class Hospedagem {
         this.valorTotalHospedagem = valorTot;
         return valorTot;
     }
-    public void addServico(Servico servico){
-      this.servicos.add(servico);
+
+    public void addServico(Servico servico) {
+        this.servicos.add(servico);
 
     }
 
