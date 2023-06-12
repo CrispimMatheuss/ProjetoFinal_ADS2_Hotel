@@ -1,29 +1,32 @@
 import model.*;
-import model.EscolheServico;
-import relatorios.RelatorioHospede;
 import repository.*;
 import javax.swing.*;
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.List;
-import repository.OrdemDeServicoDAO;
-public class Main {
+import java.util.*;
+import model.TipoQuarto;
 
+public class Main {
     private static Object PessoaDAODAO;
+    private static repository.HospedagemDAO HospedagemDAO;
 
     public static void main(String[] args) {
+        exibirMensagemBoasVindas();
         chamaMenuPrincipal();
     }
-
+    private static void exibirMensagemBoasVindas() {
+        JOptionPane.showOptionDialog(null, "Bem-vindo ao Hotel",
+                "Mensagem de Boas-vindas", JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Entrar"}, "Entrar");
+    }
     private static void chamaMenuPrincipal() {
+
         String[] opcoesMenu = {"Cadastros", "Processos", "Relatorios", "Sair"};
-        int opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+        int opcao1 = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Principal",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenu, opcoesMenu[0]);
 
-        switch (opcao) {
+        switch (opcao1) {
             case 0: //Cadastros
                 chamaMenuCadastros();
                 break;
@@ -36,11 +39,113 @@ public class Main {
                 listaCadastros();
                 break;
 
-            case 3: //SAIR
-                break;
+            case 3: //Sair
+                int opcaoSair = JOptionPane.showOptionDialog(null," Deseja realmente sair ? ",
+                        "Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
+
+                if (opcaoSair == JOptionPane.YES_NO_OPTION){
+                    System.exit(0);
+                }else {
+                    chamaMenuPrincipal();
+                }}}
+
+    public static void chamaMenuHospede(){
+        String[] opcoesMenu1 = {"Inserir", "Alterar", "Excluir", "Voltar"};
+        int opcao = 0;
+        while (opcao != 3) {
+            opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                    "Menu Secundário",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenu1, opcoesMenu1[0]
+            );
+
+            switch (opcao) {
+                case 0: // Inserir Hospede
+                    cadastroDeHospede();
+                    break;
+
+                case 1: // Alterar Hospede
+                    //alterarCadastro();
+                    break;
+
+                case 2: // Excluir Hospede
+                    removerHospede();
+                    break;
+                //hospede = selecaoDeSeguradora();
+                //getSeguradoraDAO().remover(seguradora);
+                //seguradora = null;
+
+                case 3: // Voltar
+                    chamaMenuPrincipal();
+                    break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }}}
+    public static void chamaMenuFuncionario(){
+        String[] opcoesMenu1 = {"Inserir", "Alterar", "Excluir", "Voltar"};
+        int opcao = 0;
+        while (opcao != 3) {
+            opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                    "Menu Secundário",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenu1, opcoesMenu1[0]);
+
+            switch (opcao) {
+                case 0: // Inserir Funcionario
+                    cadastroDeFuncionario();
+                    break;
+                case 1: // Alterar Funcionario
+                    //alterarCadastro();
+                    break;
+
+                case 2: // Excluir Funcionario
+                    //excluirCadastro();
+                    break;
+
+                case 3: // Voltar
+                    chamaMenuPrincipal();
+                    break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }}}
+    public static void chamaMenuServico(){
+        String[] opcoesMenu1 = {"Selecionar", "Inserir", "Alterar", "Excluir", "Voltar"};
+        int opcao = 0;
+        while (opcao != 4) {
+            opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                    "Menu Secundário",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenu1, opcoesMenu1[0]
+            );
+
+            switch (opcao) {
+                case 0: // Selecionar Serviço
+                    selecionarServico();
+                    break;
+
+                case 1: //Inserir novo serviço
+                    cadastroDeServico();
+                    break;
+
+                case 2: // Alterar Serviço
+                    //selecionarServico();
+                    break;
+
+                case 3: // Excluir Serviço
+                    //alterarCadastro();
+                    break;
+
+                case 4: // Voltar
+                    chamaMenuPrincipal();
+                    break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }
         }
     }
-
     private static void chamaMenuCadastros() {
         String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Serviço", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
@@ -49,28 +154,51 @@ public class Main {
 
         switch (menuCadastro) {
             case 0: //Hospede
-                cadastroDeCliente();
+                chamaMenuHospede();
                 break;
             case 1: //Funcionario
-                cadastroDeFuncionario();
+                chamaMenuFuncionario();
+                ///cadastroDeFuncionario();
                 break;
             case 2: //Serviço
-                cadastroDeServico();
+                chamaMenuServico();
                 break;
             case 3: //Voltar
                 chamaMenuPrincipal();
                 break;
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                break;
         }
     }
 
+    private static void selecionarServico() {
+        String[] servicos = {"Cafe da manhã simples", "Cafe da manhã premium", "Almoço" , "Janta" , "Serviço de quarto" , "Voltar"};
+        int opcao = 0;
+
+        while (opcao != 5) {
+            opcao = JOptionPane.showOptionDialog(null, "Escolha um serviço:",
+                    "Selecionar Serviço",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, servicos, servicos[0]);
+
+            if (opcao == 0) {
+            } else if (opcao == 1) {
+            } else if (opcao == 2) {
+            } else if (opcao == 3) {
+            } else if (opcao == 4) {
+            } else if (opcao == 5) {
+            } else {
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
     private static void cadastroDeServico() {
 
         String tipo = JOptionPane.showInputDialog(null, "Digite o tipo de Serviço");
         if (tipo == null) {
             cadastroDeServico();
         }
-        String input = JOptionPane.showInputDialog(null, "Digite o valor do Serviço");
-        BigDecimal valor = new BigDecimal(input);
+        Double valor = Double.valueOf(JOptionPane.showInputDialog(null, "Digite o valor do Serviço"));
         if (valor == null) {
             cadastroDeServico();
         }
@@ -79,7 +207,7 @@ public class Main {
         chamaMenuPrincipal();
     }
 
-    private static void cadastroDeCliente() {
+    private static void cadastroDeHospede() {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do cliente");
         if (nome == null) {
             chamaMenuCadastros();
@@ -93,15 +221,32 @@ public class Main {
             chamaMenuCadastros();
         }
         String email = JOptionPane.showInputDialog(null, "Digite o email do cliente");
-        if (celular == null) {
+        if (email == null) {
             chamaMenuCadastros();
         }
-
         Hospede hospede = new Hospede(nome, cpf, celular, email);
         PessoaDAO.salvar(hospede);
         chamaMenuPrincipal();
     }
 
+    private static void removerHospede() {
+        Object[] selectionValuesHospede = HospedagemDAO.findhospedagensInArray();
+        Object selectionHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede para remover:",
+                "Remover Hóspede", JOptionPane.DEFAULT_OPTION, null, selectionValuesHospede, null);
+
+        if (selectionHospede != null) {
+            Hospede hospedeSelecionado = (Hospede) selectionHospede;
+            HospedagemDAO.removerHospede(hospedeSelecionado);
+            JOptionPane.showMessageDialog(null, "Hóspede removido com sucesso!");
+        }
+
+        chamaMenuPrincipal();
+    }
+
+    public static HospedagemDAO getHospedeDAO() {
+        HospedagemDAO HospedeDAO = new HospedagemDAO();
+        return HospedagemDAO;
+    }
     private static void cadastroDeFuncionario() {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do funcionário");
         if (nome == null) {
@@ -119,7 +264,6 @@ public class Main {
         if (email == null) {
             chamaMenuCadastros();
         }
-
         Funcionario funcionario = new Funcionario(nome, cpf, celular, email);
         PessoaDAO.salvar(funcionario);
         chamaMenuPrincipal();
@@ -147,6 +291,10 @@ public class Main {
             case 4: //Voltar
                 chamaMenuPrincipal();
                 break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                break;
         }
     }
 
@@ -162,11 +310,11 @@ public class Main {
         }
 
         Object[] selectionQuarto = {
-                Quarto.TipoQuarto.PADRAO_CLASSICO.getDescricao(),
-                Quarto.TipoQuarto.MASTER_VIP.getDescricao(),
-                Quarto.TipoQuarto.VIP.getDescricao(),
-                Quarto.TipoQuarto.STAR_VIP.getDescricao(),
-                Quarto.TipoQuarto.BLACK_VIP.getDescricao(),
+                TipoQuarto.PADRAO_CLASSICO.getDescricao(),
+                TipoQuarto.MASTER_VIP.getDescricao(),
+                TipoQuarto.VIP.getDescricao(),
+                TipoQuarto.STAR_VIP.getDescricao(),
+                TipoQuarto.BLACK_VIP.getDescricao(),
         };
 
         String initialSelectionQuarto = (String) selectionQuarto[0];
@@ -179,6 +327,7 @@ public class Main {
                 "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionHospede, initialSelectionHospede);
         String selectedHospede = (String) selecHospede;
         List<Hospede> hospedes = PessoaDAO.buscaTodosh();
+
 
         Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
         String initialSelectionServico = (String) selectionValuesServico[0];
@@ -249,7 +398,6 @@ public class Main {
                 "Manutenções", JOptionPane.QUESTION_MESSAGE, null, selectManutencoes, initialSelectionManut);
     }
 
-        /////////////////RELATÓRIOS////////////////////
     private static void listaCadastros() {
         String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Serviços", "Manutenção", "Voltar"};
         int menuRelatorios = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
@@ -258,43 +406,28 @@ public class Main {
 
         switch (menuRelatorios) {
             case 0: //Hospedes
-                chamaRelatorioHospede();
+                JOptionPane.showMessageDialog(null, PessoaDAO.buscaTodosh());
+                chamaMenuPrincipal();
                 break;
             case 1: //Funcionarios
-                chamaRelatorioFuncionario();
+                JOptionPane.showMessageDialog(null, PessoaDAO.buscaTodosf());
+                chamaMenuPrincipal();
                 break;
             case 2: //Serviços
-                chamaRelatorioServico();
+                JOptionPane.showMessageDialog(null, ServicoDAO.buscaTodos());
+                chamaMenuProcessos();
                 break;
             case 3: //Manutenção
-                chamaRelatorioManutencao();
+                JOptionPane.showMessageDialog(null, ManutencaoDAO.buscaTodos());
+                chamaServicos();
                 break;
             case 4: //Voltar
                 chamaMenuPrincipal();
                 break;
-        }
-
-    }
-
-    private static void chamaRelatorioHospede(){
-        List<Hospede> hospedes = PessoaDAO.buscaTodosh();
-        RelatorioHospedeForm.emitirRelatorio(hospedes);
-    }
-
-    private static void chamaRelatorioFuncionario(){
-        List<Funcionario> funcionarios = PessoaDAO.buscaTodosf();
-        RelatorioFuncionarioForm.emitirRelatorio(funcionarios);
-    }
-
-    private static void chamaRelatorioManutencao(){
-        List<Manutencao> manutencaos = ManutencaoDAO.buscaTodos();
-        RelatorioManutencaoForm.emitirRelatorio(manutencaos);
-    }
-    private static void chamaRelatorioServico(){
-        List<Servico>servicos=ServicoDAO.buscaTodos();
-        RelatorioServicoForm.emitirRelatorio(servicos);
-    }
-
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                break;
+        }}
     public static void chamaServicos() {
 
         Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
@@ -312,8 +445,7 @@ public class Main {
         Hospedagem hospedagem = hospedagens.get(0);
         hospedagem.addServico(servicos.get(0));
         HospedagemDAO.salvar(hospedagem);
-//        System.out.println(hospedagem);
-       JOptionPane.showMessageDialog(null,hospedagem);
+        System.out.println(hospedagem);
         chamaMenuPrincipal();
-    }
-}
+
+    }}
