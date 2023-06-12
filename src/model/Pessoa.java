@@ -55,5 +55,7 @@ public abstract class Pessoa {
                 '}';
     }
 
+    public abstract void exibirInformacoes();
+
     public abstract void setId(int i);
 }

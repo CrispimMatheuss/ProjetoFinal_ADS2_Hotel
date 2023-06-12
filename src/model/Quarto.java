@@ -30,56 +30,14 @@ public class Quarto {
 //        System.out.println("Limite de pessoas: " + getLimitePessoas());
 //    }
 
-    public enum DisponibilidadeQuarto {
-        DISPONIVEL("Disponível"),
-        INDISPONIVEL("Indisponível");
-
-        private String descricao;
-
-        DisponibilidadeQuarto(String descricao) {
-            this.descricao = descricao;
-        }
-
-        public String getDescricao() {
-            return descricao;
-        }
-    }
-
     public DisponibilidadeQuarto getDisponibilidade() {
         return disponibilidade;
     }
 
     public void setDisponibilidade(DisponibilidadeQuarto disponibilidade) {
+
         this.disponibilidade = disponibilidade;
     }
-
-    public enum TipoQuarto {
-        PADRAO_CLASSICO("Padrão Clássico"),
-        VIP("VIP"),
-        MASTER_VIP("Master VIP"),
-        STAR_VIP("Star VIP"),
-        BLACK_VIP("Black VIP");
-        private String descricao;
-        TipoQuarto(String descricao) {
-            this.descricao = descricao;
-        }
-        public String getDescricao() {
-            return descricao;
-        }}
-    public enum NumQuarto {
-        QUARTO101("Quarto 101"),
-        QUARTO102("Quarto 102"),
-        QUARTO103("Quarto 103"),
-        QUARTO104("Quarto 104"),
-        QUARTO105("Quarto 105");
-        private String descricao;
-        NumQuarto(String descricao) {
-            this.descricao = descricao;
-        }
-        public String getDescricao() {
-            return descricao;
-        }}
-
     public Integer getId() {
         return id;
     }
@@ -117,9 +75,7 @@ public class Quarto {
 
     public void setLimitePessoas(Integer limitePessoas) {
         this.limitePessoas = limitePessoas;
-
     }
-
     @Override
     public String toString() {
         return "Quarto{" +

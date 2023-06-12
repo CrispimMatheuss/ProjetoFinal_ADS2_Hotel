@@ -18,9 +18,9 @@ public class Servico {
         this.valor = valor;
     }
 
-    public Servico(String tipo, BigDecimal valor) {
+    public Servico(String tipo, Double valor) {
         this.tipo = tipo;
-        this.valor = valor;
+        this.valor = BigDecimal.valueOf(valor);
     }
 
     public Integer getCodigo() {
