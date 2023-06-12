@@ -11,13 +11,18 @@ import java.util.List;
 public class ServicoDAO {
 
     static List<Servico> servicos = new ArrayList<>();
+    private static int codigoAtual = 1;
 
 
 
 
     public static void salvar(Servico servico) {
-        servico.setCodigo(servicos.size()+1);
+        servico.setCodigo(codigoAtual);
         servicos.add(servico);
+        codigoAtual++;
+//        servico.setCodigo(servicos.size() + 1);
+//        servicos.add(servico);
+//        return servicos;
     }
 
     public void excluir(Servico servico) {
@@ -34,6 +39,13 @@ public class ServicoDAO {
         }
         return servicos;
     }
+
+    public static List<Servico> findServicos() {
+        servicos.add((Servico) buscaTodos());
+        return servicos;
+    }
+
+
 
     public static Object[] findServicosInArray() {
         List<Servico> servicos = buscaTodos();
