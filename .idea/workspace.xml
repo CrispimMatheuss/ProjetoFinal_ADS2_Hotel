@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dda354c-3e1e-4d9a-9b05-6fbdb91b4ed0" name="Changes" comment="Alterações no main - Criação de relatórios">
-      <change afterPath="$PROJECT_DIR$/src/model/DisponibilidadeQuarto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/NumQuarto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/TipoQuarto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/repository/HospedeDAO.java" afterDir="false" />
+    <list default="true" id="7dda354c-3e1e-4d9a-9b05-6fbdb91b4ed0" name="Changes" comment="Feito metodos e joptions no main paara inserir, selecionar, alterar, excluir hospede, funcionarios e serviços, nos hospede e funcionario alterei double para big decimal, criei classes enum que estava no quarto para ficar separado por cada classe, retirei atributos dos hospedes e funcionarios que ja estavam herdando da classe pessoa, arrumei o hospedagemDAO para herdar os enum de nova classe">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Funcionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Funcionario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Hospede.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Hospede.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Pessoa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Quarto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Quarto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Servico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Servico.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/repository/HospedagemDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/HospedagemDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="altera7" />
+        <entry key="$PROJECT_DIR$" value="alteracao_ramon8" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -57,13 +48,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/ramonzinho31/Imagens/ProjetoFinal_ADS2_Hotel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/ramonzinho31/Vídeos/ProjetoFinal_ADS2_Hotel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -136,7 +128,14 @@
       <option name="presentableId" value="Default" />
       <updated>1686610009320</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Feito metodos e joptions no main paara inserir, selecionar, alterar, excluir hospede, funcionarios e serviços, nos hospede e funcionario alterei double para big decimal, criei classes enum que estava no quarto para ficar separado por cada classe, retirei atributos dos hospedes e funcionarios que ja estavam herdando da classe pessoa, arrumei o hospedagemDAO para herdar os enum de nova classe">
+      <created>1686612429300</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1686612429300</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,7 +153,8 @@
     <MESSAGE value="Alterações no main" />
     <MESSAGE value="Alterações no main - Seleção de hóspede e quarto" />
     <MESSAGE value="Alterações no main - Criação de relatórios" />
-    <option name="LAST_COMMIT_MESSAGE" value="Alterações no main - Criação de relatórios" />
+    <MESSAGE value="Feito metodos e joptions no main paara inserir, selecionar, alterar, excluir hospede, funcionarios e serviços, nos hospede e funcionario alterei double para big decimal, criei classes enum que estava no quarto para ficar separado por cada classe, retirei atributos dos hospedes e funcionarios que ja estavam herdando da classe pessoa, arrumei o hospedagemDAO para herdar os enum de nova classe" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feito metodos e joptions no main paara inserir, selecionar, alterar, excluir hospede, funcionarios e serviços, nos hospede e funcionario alterei double para big decimal, criei classes enum que estava no quarto para ficar separado por cada classe, retirei atributos dos hospedes e funcionarios que ja estavam herdando da classe pessoa, arrumei o hospedagemDAO para herdar os enum de nova classe" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

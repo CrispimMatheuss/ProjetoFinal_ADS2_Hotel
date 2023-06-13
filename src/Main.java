@@ -5,19 +5,47 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 import model.TipoQuarto;
-
 public class Main {
     private static Object PessoaDAODAO;
     private static repository.HospedagemDAO HospedagemDAO;
-
     public static void main(String[] args) {
         exibirMensagemBoasVindas();
+        exibirTelaLogin();
         chamaMenuPrincipal();
     }
     private static void exibirMensagemBoasVindas() {
         JOptionPane.showOptionDialog(null, "Bem-vindo ao Hotel",
                 "Mensagem de Boas-vindas", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Entrar"}, "Entrar");
+    }
+    private static void exibirTelaLogin() {
+        JTextField usernameField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
+
+        Object[] message = {
+                "Login:", usernameField,
+                "Senha:", passwordField
+        };
+
+        int option = JOptionPane.showConfirmDialog(null, message,
+                "Menu de Login", JOptionPane.OK_CANCEL_OPTION);
+
+        if (option == JOptionPane.OK_OPTION) {
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+
+            if (verificarCredenciais(username, password)) {
+                chamaMenuPrincipal();
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Credenciais inválidas. Tente novamente.", "Erro de login", JOptionPane.ERROR_MESSAGE);
+                exibirTelaLogin();
+            }
+        } else {
+            System.exit(0);
+        }}
+    private static boolean verificarCredenciais(String username, String password) {
+        return username.equals("admin") && password.equals("123456");
     }
     private static void chamaMenuPrincipal() {
 
@@ -64,15 +92,14 @@ public class Main {
                     break;
 
                 case 1: // Alterar Hospede
-                    //alterarCadastro();
+//                    alterarHospede(HospedagemDAO);
                     break;
-
                 case 2: // Excluir Hospede
                     removerHospede();
                     break;
-                //hospede = selecaoDeSeguradora();
-                //getSeguradoraDAO().remover(seguradora);
-                //seguradora = null;
+//                pessoa = selecaoDePessoa();
+//                getPessoaDAO().remover(pessoa);
+//                pessoa = null;
 
                 case 3: // Voltar
                     chamaMenuPrincipal();
@@ -229,6 +256,33 @@ public class Main {
         chamaMenuPrincipal();
     }
 
+// (op == 1) { //Edição
+//
+//        if (tipoPessoa == TipoPessoa.FISICA) {
+//
+//            String cpf;
+//            PessoaFisica pf;
+//            while (true) {
+//                cpf = JOptionPane.showInputDialog(null,
+//                        "Digite o cpf no formato ***.***.***-**");
+//
+//                 (FormatoCpf.verificarFormato(cpf)) {
+//                    pf = PessoaFisicaDAO.buscarPorCpf(cpf);
+//                    if (pf != null) {
+//                        PessoaFisicaDAO.editar(pf);
+//                        break;
+//                    }  {
+//                        JOptionPane.showMessageDialog(null,
+//                                "Erro! não existe nenhum cadastro com este Cpf, tente novamente",
+//                                "Erro", JOptionPane.ERROR_MESSAGE);
+//
+//                    JOptionPane.showMessageDialog(null,
+//                            "Erro! o cpf informado deve estar no formato ***.***.***-**",
+//                            "Erro de formato do Cpf", JOptionPane.ERROR_MESSAGE);
+//                }}}
+
+
+
     private static void removerHospede() {
         Object[] selectionValuesHospede = HospedagemDAO.findhospedagensInArray();
         Object selectionHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede para remover:",
@@ -243,10 +297,6 @@ public class Main {
         chamaMenuPrincipal();
     }
 
-    public static HospedagemDAO getHospedeDAO() {
-        HospedagemDAO HospedeDAO = new HospedagemDAO();
-        return HospedagemDAO;
-    }
     private static void cadastroDeFuncionario() {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do funcionário");
         if (nome == null) {
