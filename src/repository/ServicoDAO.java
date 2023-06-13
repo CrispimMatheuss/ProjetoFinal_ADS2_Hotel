@@ -1,6 +1,7 @@
 package repository;
 
 import model.EscolheServico;
+import model.Funcionario;
 import model.Hospedagem;
 import model.Servico;
 
@@ -25,10 +26,9 @@ public class ServicoDAO {
 //        return servicos;
     }
 
-    public void excluir(Servico servico) {
-        servicos.remove(servico);
-    }
+    public static void removerServico(Servico servicoSelecionado) {
 
+    }
     public static List<Servico> buscaTodos() {
         if (servicos.isEmpty()) {
             servicos.add(new Servico(1, "Cafe da manhã simples", BigDecimal.valueOf(20.00)));
