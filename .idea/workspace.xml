@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dda354c-3e1e-4d9a-9b05-6fbdb91b4ed0" name="Changes" comment="Feito metodos e joptions no main paara inserir, selecionar, alterar, excluir hospede, funcionarios e serviços, nos hospede e funcionario alterei double para big decimal, criei classes enum que estava no quarto para ficar separado por cada classe, retirei atributos dos hospedes e funcionarios que ja estavam herdando da classe pessoa, arrumei o hospedagemDAO para herdar os enum de nova classe">
+    <list default="true" id="7dda354c-3e1e-4d9a-9b05-6fbdb91b4ed0" name="Changes" comment="Tela de login feita no main">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/repository/HospedagemDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/HospedagemDAO.java" afterDir="false" />
@@ -135,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686612429300</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Tela de login feita no main">
+      <created>1686693899710</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1686693899710</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,7 +161,8 @@
     <MESSAGE value="Alterações no main - Seleção de hóspede e quarto" />
     <MESSAGE value="Alterações no main - Criação de relatórios" />
     <MESSAGE value="Feito metodos e joptions no main paara inserir, selecionar, alterar, excluir hospede, funcionarios e serviços, nos hospede e funcionario alterei double para big decimal, criei classes enum que estava no quarto para ficar separado por cada classe, retirei atributos dos hospedes e funcionarios que ja estavam herdando da classe pessoa, arrumei o hospedagemDAO para herdar os enum de nova classe" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feito metodos e joptions no main paara inserir, selecionar, alterar, excluir hospede, funcionarios e serviços, nos hospede e funcionario alterei double para big decimal, criei classes enum que estava no quarto para ficar separado por cada classe, retirei atributos dos hospedes e funcionarios que ja estavam herdando da classe pessoa, arrumei o hospedagemDAO para herdar os enum de nova classe" />
+    <MESSAGE value="Tela de login feita no main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tela de login feita no main" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

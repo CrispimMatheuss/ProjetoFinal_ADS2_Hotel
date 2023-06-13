@@ -28,7 +28,7 @@ public class Main {
         };
 
         int option = JOptionPane.showConfirmDialog(null, message,
-                "Menu de Login", JOptionPane.OK_CANCEL_OPTION);
+                "Tela de Login", JOptionPane.OK_CANCEL_OPTION);
 
         if (option == JOptionPane.OK_OPTION) {
             String username = usernameField.getText();
