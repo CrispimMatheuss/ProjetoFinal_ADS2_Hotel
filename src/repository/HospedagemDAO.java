@@ -73,7 +73,7 @@ public class HospedagemDAO {
         return hospedagemFiltradas;
     }
 
-    public void removerHospede(Hospede hospedeSelecionado) {
+    public static void removerHospede(Hospede hospedeSelecionado) {
 
     }
 }

@@ -40,4 +40,23 @@ public class PessoaDAO {
 
         return hospedeDesc.toArray();
     }
+
+    public static Object[] findFunciInArray() {
+        List<Funcionario> funcionarios2 = buscaTodosf();
+        List<String> funciDesc = new ArrayList<>();
+
+        for (Funcionario funcionario : funcionarios) {
+            funciDesc.add(funcionario.getNome());
+        }
+
+        return funciDesc.toArray();
+    }
+
+    public static void removerHospede(Hospede hospedeSelecionado) {
+
+    }
+
+    public static void removerFuncionario(Funcionario funcionarioSelecionado) {
+
+    }
 }
