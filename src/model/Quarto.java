@@ -6,11 +6,11 @@ public class Quarto {
     private Integer id;
     private TipoQuarto tipoQuarto;
     private BigDecimal valor;
-    private NumQuarto numQuarto;
+    private String numQuarto;
     private DisponibilidadeQuarto disponibilidade;
     private Integer limitePessoas;
 
-    public Quarto(Integer id, TipoQuarto tipoQuarto, BigDecimal valor, NumQuarto numQuarto,
+    public Quarto(Integer id, TipoQuarto tipoQuarto, BigDecimal valor, String numQuarto,
                   DisponibilidadeQuarto disponibilidade, Integer limitePessoas) {
         this.id = id;
         this.tipoQuarto = tipoQuarto;
@@ -62,11 +62,11 @@ public class Quarto {
         this.valor = valor;
     }
 
-    public NumQuarto getNumQuarto() {
+    public String getNumQuarto() {
         return numQuarto;
     }
 
-    public void setNumQuarto(NumQuarto numQuarto) {
+    public void setNumQuarto(String numQuarto) {
         this.numQuarto = numQuarto;
     }
     public Integer getLimitePessoas() {

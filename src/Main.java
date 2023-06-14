@@ -21,13 +21,13 @@ public class Main {
         chamaMenuPrincipal();
     }
 
-        private static void exibirMensagemBoasVindas() {
+    private static void exibirMensagemBoasVindas() {
         JOptionPane.showOptionDialog(null, "Bem-vindo ao Hotel",
                 "Mensagem de Boas-vindas", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Entrar"}, "Entrar");
     }
 
-        private static void chamaMenuPrincipal() {
+    private static void chamaMenuPrincipal() {
         String[] opcoesMenu = {"Cadastros", "Processos", "Relatorios", "Sair"};
         int opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Principal",
@@ -51,7 +51,7 @@ public class Main {
         }
     }
 
-        private static void chamaMenuCadastros() {
+    private static void chamaMenuCadastros() {
         String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Serviço", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Cadastros",
@@ -74,7 +74,7 @@ public class Main {
     }
 
     ////////////////////////////////HOSPEDES
-        public static void chamaMenuHospede() {
+    public static void chamaMenuHospede() {
         String[] opcoesMenuHospede = {"Inserir", "Alterar", "Excluir", "Voltar"};
         int opcao = 0;
         while (opcao != 3) {
@@ -103,7 +103,7 @@ public class Main {
         }
     }
 
-        private static void cadastroDeHospede() {
+    private static void cadastroDeHospede() {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do cliente");
         if (nome == null) {
             chamaMenuCadastros();
@@ -126,7 +126,7 @@ public class Main {
         chamaMenuPrincipal();
     }
 
-        private static void removerHospede() {
+    private static void removerHospede() {
         Object[] selectionValuesHospede = HospedagemDAO.findhospedagensInArray();
         Object selectionHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede para remover:",
                 "Remover Hóspede", JOptionPane.DEFAULT_OPTION, null, selectionValuesHospede, null);
@@ -139,72 +139,72 @@ public class Main {
     }
 
     /////////////////////////////FUNCIONARIO
-        public static void chamaMenuFuncionario () {
-            String[] opcoesMenuFuncionario = {"Inserir", "Alterar", "Excluir", "Voltar"};
-            int opcao = 0;
-            while (opcao != 3) {
-                opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
-                        "Menu de cadastros",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuFuncionario, opcoesMenuFuncionario[0]
-                );
+    public static void chamaMenuFuncionario() {
+        String[] opcoesMenuFuncionario = {"Inserir", "Alterar", "Excluir", "Voltar"};
+        int opcao = 0;
+        while (opcao != 3) {
+            opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                    "Menu de cadastros",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuFuncionario, opcoesMenuFuncionario[0]
+            );
 
-                switch (opcao) {
-                    case 0: // Inserir
-                        cadastroDeFuncionario();
-                        break;
+            switch (opcao) {
+                case 0: // Inserir
+                    cadastroDeFuncionario();
+                    break;
 
-                    //case 1: Alterar
-                    //    alterarCadastro();
-                    //    break;
+                //case 1: Alterar
+                //    alterarCadastro();
+                //    break;
 
-                    case 2: // Excluir
-                        removerFuncionario();
-                        break;
+                case 2: // Excluir
+                    removerFuncionario();
+                    break;
 
-                    case 3: // Voltar
-                        chamaMenuPrincipal();
-                        break;
-                }
-            }
-    }
-
-        private static void cadastroDeFuncionario () {
-            String nome = JOptionPane.showInputDialog(null, "Digite o nome do funcionário");
-            if (nome == null) {
-                chamaMenuCadastros();
-            }
-            String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário");
-            if (cpf == null) {
-                chamaMenuCadastros();
-            }
-            String celular = JOptionPane.showInputDialog(null, "Digite o celular do funcionário");
-            if (celular == null) {
-                chamaMenuCadastros();
-            }
-            String email = JOptionPane.showInputDialog(null, "Digite o email do funcionário");
-            if (email == null) {
-                chamaMenuCadastros();
-            }
-
-            Funcionario funcionario = new Funcionario(nome, cpf, celular, email);
-            PessoaDAO.salvar(funcionario);
-            chamaMenuPrincipal();
-    }
-
-        private static void removerFuncionario () {
-            Object[] selectionValuesFuncionario = PessoaDAO.findFunciInArray();
-            Object selectionFunci = JOptionPane.showInputDialog(null, "Selecione o funcionário para remover:",
-                    "Menu de cadastros", JOptionPane.DEFAULT_OPTION, null, selectionValuesFuncionario, null);
-
-            if (selectionFunci != null) {
-                Funcionario funcionarioSelecionado = (Funcionario) selectionFunci;
-                PessoaDAO.removerFuncionario(funcionarioSelecionado);
-                JOptionPane.showMessageDialog(null, "Funcionário removido com sucesso!");
+                case 3: // Voltar
+                    chamaMenuPrincipal();
+                    break;
             }
         }
+    }
+
+    private static void cadastroDeFuncionario() {
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome do funcionário");
+        if (nome == null) {
+            chamaMenuCadastros();
+        }
+        String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário");
+        if (cpf == null) {
+            chamaMenuCadastros();
+        }
+        String celular = JOptionPane.showInputDialog(null, "Digite o celular do funcionário");
+        if (celular == null) {
+            chamaMenuCadastros();
+        }
+        String email = JOptionPane.showInputDialog(null, "Digite o email do funcionário");
+        if (email == null) {
+            chamaMenuCadastros();
+        }
+
+        Funcionario funcionario = new Funcionario(nome, cpf, celular, email);
+        PessoaDAO.salvar(funcionario);
+        chamaMenuPrincipal();
+    }
+
+    private static void removerFuncionario() {
+        Object[] selectionValuesFuncionario = PessoaDAO.findFunciInArray();
+        Object selectionFunci = JOptionPane.showInputDialog(null, "Selecione o funcionário para remover:",
+                "Menu de cadastros", JOptionPane.DEFAULT_OPTION, null, selectionValuesFuncionario, null);
+
+        if (selectionFunci != null) {
+            Funcionario funcionarioSelecionado = (Funcionario) selectionFunci;
+            PessoaDAO.removerFuncionario(funcionarioSelecionado);
+            JOptionPane.showMessageDialog(null, "Funcionário removido com sucesso!");
+        }
+    }
 
     /////////////////////////////////SERVIÇO
-        public static void chamaMenuServico () {
+    public static void chamaMenuServico() {
         String[] opcoesMenuServico = {"Inserir", "Alterar", "Excluir", "Voltar"};
         int opcao = 0;
         while (opcao != 3) {
@@ -233,20 +233,20 @@ public class Main {
         }
     }
 
-        private static void cadastroDeServico () {
+    private static void cadastroDeServico() {
 
-            String tipo = JOptionPane.showInputDialog(null, "Digite o tipo de Serviço");
-            if (tipo == null) {
-                cadastroDeServico();
-            }
-            String input = JOptionPane.showInputDialog(null, "Digite o valor do Serviço");
-            BigDecimal valor = new BigDecimal(input);
-            if (valor == null) {
-                cadastroDeServico();
-            }
-            Servico servico = new Servico(tipo, valor);
-            ServicoDAO.salvar(servico);
-            chamaMenuPrincipal();
+        String tipo = JOptionPane.showInputDialog(null, "Digite o tipo de Serviço");
+        if (tipo == null) {
+            cadastroDeServico();
+        }
+        String input = JOptionPane.showInputDialog(null, "Digite o valor do Serviço");
+        BigDecimal valor = new BigDecimal(input);
+        if (valor == null) {
+            cadastroDeServico();
+        }
+        Servico servico = new Servico(tipo, valor);
+        ServicoDAO.salvar(servico);
+        chamaMenuPrincipal();
     }
 
     private static void removerServico() {
@@ -264,83 +264,67 @@ public class Main {
     }
 
     //////////////////////////PROCESSOS
-        public static void chamaMenuProcessos () {
-            String[] opcoesMenuProcessos = {"Check-in", "Check-out", "Consumos", "Manutenções", "Voltar"};
-            int menuProcessos = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
-                    "Menu Processos",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuProcessos, opcoesMenuProcessos[0]);
+    public static void chamaMenuProcessos() {
+        String[] opcoesMenuProcessos = {"Check-in", "Check-out", "Consumos", "Manutenções", "Voltar"};
+        int menuProcessos = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                "Menu Processos",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuProcessos, opcoesMenuProcessos[0]);
 
-            switch (menuProcessos) {
-                case 0: //Checkin
-                    chamaCheckin();
-                    break;
-                case 1: //Checkout
-                    chamaCheckOut();
-                    break;
-                case 2: //Cadastra consumos na hospedagem
-                    chamaServicos();
-                    break;
-                case 3: //Manutenções
-                    chamaManut();
-                    break;
-                case 4: //Voltar
-                    chamaMenuPrincipal();
-                    break;
-            }
-        }
-
-        public static void chamaCheckin () {
-            LocalDate dataEntrada = LocalDate.now();
-            String inputData = JOptionPane.showInputDialog(null, "Data de entrada (formato: dd/MM/yyyy): ");
-
-            try {
-                dataEntrada = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            } catch (DateTimeParseException e) {
-                JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+        switch (menuProcessos) {
+            case 0: //Checkin
                 chamaCheckin();
-            }
-
-            Object[] selectionQuarto = {
-                    TipoQuarto.PADRAO_CLASSICO.getDescricao(),
-                    TipoQuarto.MASTER_VIP.getDescricao(),
-                    TipoQuarto.VIP.getDescricao(),
-                    TipoQuarto.STAR_VIP.getDescricao(),
-                    TipoQuarto.BLACK_VIP.getDescricao(),
-            };
-
-            String initialSelectionQuarto = (String) selectionQuarto[0];
-            Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o quarto escolhido",
-                    "Quartos", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
-
-            List<Hospede> hospedes = PessoaDAO.buscaTodosh();
-
-            if (hospedes.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Nenhum hóspede cadastrado!");
+                break;
+            case 1: //Checkout
+                chamaCheckOut();
+                break;
+            case 2: //Cadastra consumos na hospedagem
+                chamaServicos();
+                break;
+            case 3: //Manutenções
+                chamaManut();
+                break;
+            case 4: //Voltar
                 chamaMenuPrincipal();
-            }
+                break;
+        }
+    }
 
-            Object[] selectionHospede = hospedes.stream().map(Hospede::getNome).toArray();
-            String initialSelectionHospede = (String) selectionHospede[0];
-            Object selecHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede",
-                    "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionHospede, initialSelectionHospede);
+    public static void chamaCheckin() {
+        LocalDate dataEntrada = LocalDate.now();
+        String inputData = JOptionPane.showInputDialog(null, "Data de entrada (formato: dd/MM/yyyy): ");
 
-            if (selecHospede == null) {
-                // Nenhum hóspede selecionado, encerrar o check-in
-                return;
-            }
-
-            String selectedHospede = (String) selecHospede;
-
-            Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
-            String initialSelectionServico = (String) selectionValuesServico[0];
-            Object selectionServico = JOptionPane.showInputDialog(null, "Selecione a descrição do Serviço",
-                    "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesServico, initialSelectionServico);
-            String selectedServico = (String) selectionServico;
-
-            List<Servico> servicos = ServicoDAO.buscarPorTipo(selectedServico);
+        try {
+            dataEntrada = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+            chamaCheckin();
         }
 
-        public static void chamaCheckOut () {
+        List<Quarto> quartos = QuartoDAO.buscaTodos();
+        Object[] selectionQuarto = quartos.stream().map(Quarto::getNumQuarto).toArray();
+        String initialSelectionQuarto = (String) selectionQuarto[0];
+        Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o hóspede",
+                "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
+        List<Quarto> quartosSelect = QuartoDAO.buscarPorNumQuarto((String) selecQuarto);
+
+        List<Hospede> hospedes = PessoaDAO.buscaTodosh();
+
+        if (hospedes.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum hóspede cadastrado!");
+            chamaMenuPrincipal();
+        }
+
+        Object[] selectionHospede = hospedes.stream().map(Hospede::getNome).toArray();
+        String initialSelectionHospede = (String) selectionHospede[0];
+        Object selecHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede",
+                "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionHospede, initialSelectionHospede);
+
+        List<Hospede> hospede = PessoaDAO.buscarPorNome((String) selecHospede);
+        Hospedagem hospedagem = new Hospedagem(60, dataEntrada, null, hospede.get(0), 0, quartosSelect.get(0));
+        HospedagemDAO.salvar(hospedagem);
+    }
+
+    public static void chamaCheckOut() {
 
 //            Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
 //            String initialSelectionHospedagem = (String) selectionValuesHospedagem[0];
@@ -349,37 +333,37 @@ public class Main {
 //            List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
 //
 
-            String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário pelo check-out");
-            if (cpf == null) {
-                chamaMenuPrincipal();
-            }//selecionar funcionario
+        String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário pelo check-out");
+        if (cpf == null) {
+            chamaMenuPrincipal();
+        }//selecionar funcionario
 
-            LocalDate dataSaida = LocalDate.now();
-            String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dd/MM/yyyy): ");
+        LocalDate dataSaida = LocalDate.now();
+        String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dd/MM/yyyy): ");
 
-            try {
-                dataSaida = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            } catch (DateTimeParseException e) {
-                JOptionPane.showMessageDialog(null, "Formato de data inválido!");
-                return; // Retorna ou executa outra ação de tratamento de erro
-            }
+        try {
+            dataSaida = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+            return; // Retorna ou executa outra ação de tratamento de erro
+        }
 
-            Object[] selectionFormaPagto = {
-                    FormaPagamento.DINHEIRO.getDescricao(),
-                    FormaPagamento.PIX.getDescricao(),
-                    FormaPagamento.CARTAO_CREDITO.getDescricao(),
-                    FormaPagamento.CARTAO_DEBITO.getDescricao()
-            };
-            String initialSelectionForma = (String) selectionFormaPagto[0]; // valor inicial, o primeiro selecionado
-            Object selectionForma = JOptionPane.showInputDialog(null, "Selecione a forma de pagamento",
-                    "Hotel", JOptionPane.QUESTION_MESSAGE, null, selectionFormaPagto, initialSelectionForma);
+        Object[] selectionFormaPagto = {
+                FormaPagamento.DINHEIRO.getDescricao(),
+                FormaPagamento.PIX.getDescricao(),
+                FormaPagamento.CARTAO_CREDITO.getDescricao(),
+                FormaPagamento.CARTAO_DEBITO.getDescricao()
+        };
+        String initialSelectionForma = (String) selectionFormaPagto[0]; // valor inicial, o primeiro selecionado
+        Object selectionForma = JOptionPane.showInputDialog(null, "Selecione a forma de pagamento",
+                "Hotel", JOptionPane.QUESTION_MESSAGE, null, selectionFormaPagto, initialSelectionForma);
 
-            if (selectionForma == null) {
-                JOptionPane.showMessageDialog(null, "Seleção de forma de pagamento cancelada!");
-                return; // Retorna ou executa outra ação de tratamento de erro
-            }
+        if (selectionForma == null) {
+            JOptionPane.showMessageDialog(null, "Seleção de forma de pagamento cancelada!");
+            return; // Retorna ou executa outra ação de tratamento de erro
+        }
 
-            FormaPagamento formaPagamento = FormaPagamento.valueOf((String) selectionForma);
+        FormaPagamento formaPagamento = FormaPagamento.valueOf((String) selectionForma);
 
 //            LocalDate dataPagamento = LocalDate.now();
 //            String inputData1 = JOptionPane.showInputDialog(null, "Digite uma data (formato: dd/MM/yyyy):");
@@ -389,9 +373,9 @@ public class Main {
 //            } catch (DateTimeParseException o) {
 //                JOptionPane.showMessageDialog(null, "Formato de data inválido!");
 //            }
-        }
+    }
 
-        public static void chamaServicos () {
+    public static void chamaServicos() {
 
         Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
         Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
@@ -412,69 +396,69 @@ public class Main {
         chamaMenuPrincipal();
     }
 
-        public static void chamaManut () {
-            Object[] selectManutencoes = {
-                    TipoManutencao.ELETRICA.getDescricao(),
-                    TipoManutencao.ESTRUTURAL.getDescricao(),
-                    TipoManutencao.LIMPEZA.getDescricao()};
+    public static void chamaManut() {
+        Object[] selectManutencoes = {
+                TipoManutencao.ELETRICA.getDescricao(),
+                TipoManutencao.ESTRUTURAL.getDescricao(),
+                TipoManutencao.LIMPEZA.getDescricao()};
 
-            String initialSelectionManut = (String) selectManutencoes[0];
-            Object selecManut = JOptionPane.showInputDialog(null, "Selecione o tipo de manutenção realizada",
-                    "Manutenções", JOptionPane.QUESTION_MESSAGE, null, selectManutencoes, initialSelectionManut);
+        String initialSelectionManut = (String) selectManutencoes[0];
+        Object selecManut = JOptionPane.showInputDialog(null, "Selecione o tipo de manutenção realizada",
+                "Manutenções", JOptionPane.QUESTION_MESSAGE, null, selectManutencoes, initialSelectionManut);
+    }
+
+    /////////////////RELATÓRIOS////////////////////
+    private static void listaCadastros() {
+        String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Serviços", "Manutenção", "Hospedagem", "Voltar"};
+        int menuRelatorios = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                "Menu Relatórios",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuRelatorios, opcoesMenuRelatorios[0]);
+
+        switch (menuRelatorios) {
+            case 0: //Hospedes
+                chamaRelatorioHospede();
+                break;
+            case 1: //Funcionarios
+                chamaRelatorioFuncionario();
+                break;
+            case 2: //Serviços
+                chamaRelatorioServico();
+                break;
+            case 3: //Manutenção
+                chamaRelatorioManutencao();
+                break;
+            case 4: //Hospedagem
+                //chamaRelatorioHospedagem();
+                break;
+            case 5: //Voltar
+                chamaMenuPrincipal();
+                break;
         }
 
-        /////////////////RELATÓRIOS////////////////////
-        private static void listaCadastros () {
-            String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Serviços", "Manutenção", "Hospedagem", "Voltar"};
-            int menuRelatorios = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
-                    "Menu Relatórios",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuRelatorios, opcoesMenuRelatorios[0]);
+    }
 
-            switch (menuRelatorios) {
-                case 0: //Hospedes
-                    chamaRelatorioHospede();
-                    break;
-                case 1: //Funcionarios
-                    chamaRelatorioFuncionario();
-                    break;
-                case 2: //Serviços
-                    chamaRelatorioServico();
-                    break;
-                case 3: //Manutenção
-                    chamaRelatorioManutencao();
-                    break;
-                case 4: //Hospedagem
-                    //chamaRelatorioHospedagem();
-                    break;
-                case 5: //Voltar
-                    chamaMenuPrincipal();
-                    break;
-            }
+    private static void chamaRelatorioHospede() {
+        List<Hospede> hospedes = PessoaDAO.buscaTodosh();
+        RelatorioHospedeForm.emitirRelatorio(hospedes);
+    }
 
-        }
+    private static void chamaRelatorioFuncionario() {
+        List<Funcionario> funcionarios = PessoaDAO.buscaTodosf();
+        RelatorioFuncionarioForm.emitirRelatorio(funcionarios);
+    }
 
-        private static void chamaRelatorioHospede () {
-            List<Hospede> hospedes = PessoaDAO.buscaTodosh();
-            RelatorioHospedeForm.emitirRelatorio(hospedes);
-        }
+    private static void chamaRelatorioServico() {
+        List<Servico> servicos = ServicoDAO.buscaTodos();
+        RelatorioServicoForm.emitirRelatorio(servicos);
+    }
 
-        private static void chamaRelatorioFuncionario () {
-            List<Funcionario> funcionarios = PessoaDAO.buscaTodosf();
-            RelatorioFuncionarioForm.emitirRelatorio(funcionarios);
-        }
+    private static void chamaRelatorioManutencao() {
+        List<Manutencao> manutencaos = ManutencaoDAO.buscaTodos();
+        RelatorioManutencaoForm.emitirRelatorio(manutencaos);
+    }
 
-        private static void chamaRelatorioServico () {
-            List<Servico> servicos = ServicoDAO.buscaTodos();
-            RelatorioServicoForm.emitirRelatorio(servicos);
-        }
-
-        private static void chamaRelatorioManutencao () {
-            List<Manutencao> manutencaos = ManutencaoDAO.buscaTodos();
-            RelatorioManutencaoForm.emitirRelatorio(manutencaos);
-        }
-
-        private static void chamaRelatorioHospedagem () {
-            List<Hospedagem> hospedagems = HospedagemDAO.buscaTodos();
+    private static void chamaRelatorioHospedagem() {
+        List<Hospedagem> hospedagems = HospedagemDAO.buscaTodos();
         //    RelatorioHospedagemForm.emitirRelatorio(hospedagems);
     }
-    }
+}
