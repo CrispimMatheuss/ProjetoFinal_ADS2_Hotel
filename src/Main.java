@@ -2,31 +2,55 @@ import model.*;
 import model.EscolheServico;
 import relatorios.RelatorioHospede;
 import repository.*;
-
 import javax.swing.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.List;
-
+import java.util.*;
+import model.TipoQuarto;
 import repository.OrdemDeServicoDAO;
-
 public class Main {
-
     private static Object PessoaDAODAO;
-
     public static void main(String[] args) {
         exibirMensagemBoasVindas();
+        exibirTelaLogin();
         chamaMenuPrincipal();
     }
-
         private static void exibirMensagemBoasVindas() {
         JOptionPane.showOptionDialog(null, "Bem-vindo ao Hotel",
                 "Mensagem de Boas-vindas", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Entrar"}, "Entrar");
     }
+    private static void exibirTelaLogin() {
+        JTextField usernameField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
 
+        Object[] message = {
+                "Login:", usernameField,
+                "Senha:", passwordField
+        };
+
+        int option = JOptionPane.showConfirmDialog(null, message,
+                "Tela de Login", JOptionPane.OK_CANCEL_OPTION);
+
+        if (option == JOptionPane.OK_OPTION) {
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+
+            if (verificarCredenciais(username, password)) {
+                chamaMenuPrincipal();
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Credenciais inválidas. Tente novamente.", "Erro de login", JOptionPane.ERROR_MESSAGE);
+                exibirTelaLogin();
+            }
+        } else {
+            System.exit(0);
+        }}
+    private static boolean verificarCredenciais(String username, String password) {
+        return username.equals("admin") && password.equals("123456");
+    }
         private static void chamaMenuPrincipal() {
         String[] opcoesMenu = {"Cadastros", "Processos", "Relatorios", "Sair"};
         int opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
@@ -46,10 +70,15 @@ public class Main {
                 listaCadastros();
                 break;
 
-            case 3: //SAIR
-                break;
-        }
-    }
+            case 3: //Sair
+                int opcaoSair = JOptionPane.showOptionDialog(null," Deseja realmente sair ? ",
+                        "Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
+
+                if (opcaoSair == JOptionPane.YES_NO_OPTION){
+                    System.exit(0);
+                }else {
+                    chamaMenuPrincipal();
+                }}}
 
         private static void chamaMenuCadastros() {
         String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Serviço", "Voltar"};
@@ -69,6 +98,9 @@ public class Main {
                 break;
             case 3: //Voltar
                 chamaMenuPrincipal();
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
                 break;
         }
     }
@@ -98,6 +130,10 @@ public class Main {
 
                 case 3: // Voltar
                     chamaMenuPrincipal();
+                    break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
                     break;
             }
         }
@@ -133,7 +169,7 @@ public class Main {
 
         if (selectionHospede != null) {
             Hospede hospedeSelecionado = (Hospede) selectionHospede;
-            PessoaDAO.removerHospede(hospedeSelecionado);
+            HospedagemDAO.removerHospede(hospedeSelecionado);
             JOptionPane.showMessageDialog(null, "Hóspede removido com sucesso!");
         }
     }
@@ -163,6 +199,10 @@ public class Main {
 
                     case 3: // Voltar
                         chamaMenuPrincipal();
+                        break;
+
+                    default:
+                        JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
                         break;
                 }
             }
@@ -229,6 +269,10 @@ public class Main {
                 case 3: // Voltar
                     chamaMenuPrincipal();
                     break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    break;
             }
         }
     }
@@ -285,6 +329,10 @@ public class Main {
                     break;
                 case 4: //Voltar
                     chamaMenuPrincipal();
+                    break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
                     break;
             }
         }
@@ -448,6 +496,10 @@ public class Main {
                     break;
                 case 5: //Voltar
                     chamaMenuPrincipal();
+                    break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
                     break;
             }
 
