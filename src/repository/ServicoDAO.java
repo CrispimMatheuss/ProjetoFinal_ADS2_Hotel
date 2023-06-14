@@ -12,22 +12,14 @@ import java.util.List;
 public class ServicoDAO {
 
     static List<Servico> servicos = new ArrayList<>();
-    private static int codigoAtual = 1;
-
-
-
 
     public static void salvar(Servico servico) {
-        servico.setCodigo(codigoAtual);
+        servico.setCodigo(servicos.size() + 1);
         servicos.add(servico);
-        codigoAtual++;
-//        servico.setCodigo(servicos.size() + 1);
-//        servicos.add(servico);
-//        return servicos;
     }
 
-    public static void removerServico(Servico servicoSelecionado) {
-
+    public static void excluirServico(Servico servico) {
+        servicos.remove(servico);
     }
     public static List<Servico> buscaTodos() {
         if (servicos.isEmpty()) {

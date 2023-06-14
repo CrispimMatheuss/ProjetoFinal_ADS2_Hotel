@@ -249,16 +249,18 @@ public class Main {
             chamaMenuPrincipal();
     }
 
-        private static void removerServico () {
-        Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
-        Object selectionServ = JOptionPane.showInputDialog(null, "Selecione o serviço para remover:",
-                "Menu de cadastros", JOptionPane.DEFAULT_OPTION, null, selectionValuesServico, null);
+    private static void removerServico() {
+        Object[] selectionValuesServico = ServicoDAO.buscaTodos().toArray(new Servico[0]);
+        Object selectionServico = JOptionPane.showInputDialog(null, "Selecione o serviço para remover:",
+                "Remover Serviço", JOptionPane.DEFAULT_OPTION, null, selectionValuesServico, null);
 
-        if (selectionServ != null) {
-            Servico servicoSelecionado = (Servico) selectionServ;
-            ServicoDAO.removerServico(servicoSelecionado);
+        if (selectionServico != null) {
+            Servico servicoSelecionado = (Servico) selectionServico;
+            ServicoDAO.excluirServico(servicoSelecionado);
             JOptionPane.showMessageDialog(null, "Serviço removido com sucesso!");
         }
+
+        chamaMenuPrincipal();
     }
 
     //////////////////////////PROCESSOS
