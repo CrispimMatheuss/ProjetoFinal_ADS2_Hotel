@@ -4,6 +4,7 @@ import model.EscolheServico;
 import model.Funcionario;
 import model.Hospedagem;
 import model.Servico;
+import relatorios.RelatorioServico;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class ServicoDAO {
         servico.setCodigo(servicos.size() + 1);
         servicos.add(servico);
     }
+
 
     public static void excluirServico(Servico servico) {
         servicos.remove(servico);

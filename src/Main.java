@@ -219,9 +219,9 @@ public class Main {
                     cadastroDeServico();
                     break;
 
-                //case 1: Alterar
-                //    alterarCadastro();
-                //    break;
+                case 1: //Alterar
+                    alterarServico();
+                    break;
 
                 case 2: // Excluir
                     removerServico();
@@ -262,19 +262,49 @@ public class Main {
 //        }
 //    }
 
+//    private static void removerServico() {
+//        Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
+//        Object selectionServico = JOptionPane.showInputDialog(null, "Selecione o serviço para remover:",
+//                "Remover Serviço", JOptionPane.DEFAULT_OPTION, null, selectionValuesServico, null);
+//
+//        if (selectionServico != null) {
+//            Servico servicoSelecionado = (Servico) selectionServico;
+//            ServicoDAO.excluirServico(servicoSelecionado);
+//            JOptionPane.showMessageDialog(null, "Serviço removido com sucesso!");
+//        }
+//
+//        chamaMenuPrincipal();
+//    }
+
+
     private static void removerServico() {
-        Object[] selectionValuesServico = ServicoDAO.buscaTodos().toArray(new Servico[0]);
+        Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
         Object selectionServico = JOptionPane.showInputDialog(null, "Selecione o serviço para remover:",
                 "Remover Serviço", JOptionPane.DEFAULT_OPTION, null, selectionValuesServico, null);
 
         if (selectionServico != null) {
-            Servico servicoSelecionado = (Servico) selectionServico;
-            ServicoDAO.excluirServico(servicoSelecionado);
-            JOptionPane.showMessageDialog(null, "Serviço removido com sucesso!");
+            String servicoDescricaoSelecionado = (String) selectionServico;
+
+            Servico servicoSelecionado = null;
+            List<Servico> servicos = ServicoDAO.buscaTodos();
+            for (Servico servico : servicos) {
+                if (servico.getTipo().equals(servicoDescricaoSelecionado)) {
+                    servicoSelecionado = servico;
+                    break;
+                }
+            }
+
+            if (servicoSelecionado != null) {
+                ServicoDAO.excluirServico(servicoSelecionado);
+                JOptionPane.showMessageDialog(null, "Serviço removido com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao encontrar o serviço selecionado!");
+            }
         }
 
         chamaMenuPrincipal();
     }
+
 
     //////////////////////////PROCESSOS
         public static void chamaMenuProcessos () {
@@ -460,7 +490,7 @@ public class Main {
                     //chamaRelatorioHospedagem();
                     break;
                 case 5: //Voltar
-                    chamaMenuPrincipal();
+//                    chamaMenuPrincipal();
                     break;
             }
 
