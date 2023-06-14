@@ -17,6 +17,7 @@ public class Main {
     private static Object PessoaDAODAO;
 
     public static void main(String[] args) {
+        ServicoDAO.buscaTodos();
         exibirMensagemBoasVindas();
         chamaMenuPrincipal();
     }
@@ -248,6 +249,18 @@ public class Main {
             ServicoDAO.salvar(servico);
             chamaMenuPrincipal();
     }
+
+//        private static void removerServico () {
+//        Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
+//        Object selectionServ = JOptionPane.showInputDialog(null, "Selecione o serviço para remover:",
+//                "Menu de cadastros", JOptionPane.DEFAULT_OPTION, null, selectionValuesServico, null);
+//
+//        if (selectionServ != null) {
+//            Servico servicoSelecionado = (Servico) selectionServ;
+//            ServicoDAO.removerServico(servicoSelecionado);
+//            JOptionPane.showMessageDialog(null, "Serviço removido com sucesso!");
+//        }
+//    }
 
     private static void removerServico() {
         Object[] selectionValuesServico = ServicoDAO.buscaTodos().toArray(new Servico[0]);
