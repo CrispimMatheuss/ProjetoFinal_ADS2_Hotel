@@ -31,7 +31,7 @@ public class ServicoDAO {
             servicos.add(new Servico(3, "Almoço", BigDecimal.valueOf(60.00)));
             servicos.add(new Servico(4, "Janta", BigDecimal.valueOf(75.00)));
         }
-        return servicos;
+            return servicos;
     }
 
     public static List<Servico> findServicos() {
