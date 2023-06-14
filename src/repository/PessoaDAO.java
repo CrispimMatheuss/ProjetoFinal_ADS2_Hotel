@@ -20,6 +20,17 @@ public class PessoaDAO {
         return hospedes;
     }
 
+    public static List<Hospede> buscarPorNome(String nome) {
+        buscaTodosh();
+        List<Hospede> hospedeFiltrado = new ArrayList<>();
+        for (Hospede hospede : hospedes) {
+            if (hospede.getNome() == nome) {
+                hospedeFiltrado.add(hospede);
+            }
+        }
+        return hospedeFiltrado;
+    }
+
     static List<Funcionario> funcionarios = new ArrayList<>();
 
     public static void salvar(Funcionario funcionario) {
