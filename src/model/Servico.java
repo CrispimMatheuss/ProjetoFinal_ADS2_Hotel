@@ -23,6 +23,10 @@ public class Servico {
         this.valor = BigDecimal.valueOf(valor);
     }
 
+    public Servico(String tipo, BigDecimal valor) {
+
+    }
+
     public Integer getCodigo() {
         return codigo;
     }
