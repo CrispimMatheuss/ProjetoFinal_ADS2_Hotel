@@ -1,23 +1,21 @@
 import model.*;
-import model.EscolheServico;
-import relatorios.RelatorioHospede;
 import repository.*;
 
 import javax.swing.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-import repository.OrdemDeServicoDAO;
-
 public class Main {
+
 
     private static Object PessoaDAODAO;
 
     public static void main(String[] args) {
+        ServicoDAO.buscaTodos();
         exibirMensagemBoasVindas();
+        exibirTelaLogin();
         chamaMenuPrincipal();
     }
 
@@ -27,7 +25,41 @@ public class Main {
                 JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Entrar"}, "Entrar");
     }
 
-    private static void chamaMenuPrincipal() {
+
+    private static void exibirTelaLogin() {
+        JTextField usernameField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
+
+        Object[] message = {
+                "Login:", usernameField,
+                "Senha:", passwordField
+        };
+
+        int option = JOptionPane.showConfirmDialog(null, message,
+                "Tela de Login", JOptionPane.OK_CANCEL_OPTION);
+
+        if (option == JOptionPane.OK_OPTION) {
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+
+            if (verificarCredenciais(username, password)) {
+                chamaMenuPrincipal();
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Credenciais inválidas. Tente novamente.", "Erro de login", JOptionPane.ERROR_MESSAGE);
+                exibirTelaLogin();
+            }
+        } else {
+            System.exit(0);
+        }
+    }
+
+    private static boolean verificarCredenciais(String username, String password) {
+        return username.equals("admin") && password.equals("123456");
+    }
+
+
+    public static void chamaMenuPrincipal() {
         String[] opcoesMenu = {"Cadastros", "Processos", "Relatorios", "Sair"};
         int opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Principal",
@@ -47,11 +79,18 @@ public class Main {
                 break;
 
             case 3: //SAIR
-                break;
+                int opcaoSair = JOptionPane.showOptionDialog(null, " Deseja realmente sair ? ",
+                        "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+                if (opcaoSair == JOptionPane.YES_NO_OPTION) {
+                    System.exit(0);
+                } else {
+                    chamaMenuPrincipal();
+                }
         }
     }
 
-    private static void chamaMenuCadastros() {
+    public static void chamaMenuCadastros() {
         String[] opcoesMenuCadastro = {"Hóspede", "Funcionário", "Serviço", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Cadastros",
@@ -70,6 +109,10 @@ public class Main {
             case 3: //Voltar
                 chamaMenuPrincipal();
                 break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                break;
         }
     }
 
@@ -77,52 +120,88 @@ public class Main {
     public static void chamaMenuHospede() {
         String[] opcoesMenuHospede = {"Inserir", "Alterar", "Excluir", "Voltar"};
         int opcao = 0;
-        while (opcao != 3) {
-            opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
-                    "Menu de cadastros",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuHospede, opcoesMenuHospede[0]
-            );
+        opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                "Menu de cadastros HOSPEDE",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuHospede, opcoesMenuHospede[0]
+        );
 
-            switch (opcao) {
-                case 0: // Inserir Hospede
-                    cadastroDeHospede();
-                    break;
+        switch (opcao) {
+            case 0: // Inserir Hospede
+                cadastroDeHospede();
+                break;
 
-                //case 1: Alterar Hospede
-                //    alterarCadastro();
-                //    break;
+            case 1: // Alterar Hospede
+                alterarCadastroHospede();
+                break;
 
-                case 2: // Excluir Hospede
-                    removerHospede();
-                    break;
+            case 2: // Excluir Hospede
+                removerHospede();
+                break;
 
-                case 3: // Voltar
-                    chamaMenuPrincipal();
-                    break;
-            }
+            case 3: // Voltar
+                chamaMenuPrincipal();
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                break;
         }
     }
 
     private static void cadastroDeHospede() {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do cliente");
         if (nome == null) {
-            chamaMenuCadastros();
+            //      chamaMenuCadastros();
         }
         String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do cliente");
         if (cpf == null) {
-            chamaMenuCadastros();
+            //      chamaMenuCadastros();
         }
         String celular = JOptionPane.showInputDialog(null, "Digite o celular do cliente");
         if (celular == null) {
-            chamaMenuCadastros();
+            //       chamaMenuCadastros();
         }
         String email = JOptionPane.showInputDialog(null, "Digite o email do cliente");
         if (celular == null) {
-            chamaMenuCadastros();
+            //       chamaMenuCadastros();
         }
 
         Hospede hospede = new Hospede(nome, cpf, celular, email);
         PessoaDAO.salvar(hospede);
+        chamaMenuPrincipal();
+    }
+
+    private static void alterarCadastroHospede() {
+        Object[] selectionValuesHospede = PessoaDAO.findHospedeInArray();
+        String initialSelectionHospede = (String) selectionValuesHospede[0];
+        Object selectionHospede = JOptionPane.showInputDialog(null, "Selecione o código do hóspede",
+                "Hospede", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospede, initialSelectionHospede);
+        List<Hospede> hospedes = PessoaDAO.buscarPorNome((String) selectionHospede);
+        Hospede hospede = hospedes.get(0);
+
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome do cliente", hospede.getNome());
+        if (nome == null) {
+            chamaMenuCadastros();
+        }
+        String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do cliente", hospede.getCpf());
+        if (cpf == null) {
+            chamaMenuCadastros();
+        }
+        String celular = JOptionPane.showInputDialog(null, "Digite o celular do cliente", hospede.getCelular());
+        if (celular == null) {
+            chamaMenuCadastros();
+        }
+        String email = JOptionPane.showInputDialog(null, "Digite o email do cliente", hospede.getEmail());
+        if (celular == null) {
+            chamaMenuCadastros();
+        }
+
+        hospede.setNome(nome);
+        hospede.setCpf(cpf);
+        hospede.setEmail(email);
+        hospede.setCelular(celular);
+        PessoaDAO.salvar(hospede);
+
         chamaMenuPrincipal();
     }
 
@@ -142,29 +221,31 @@ public class Main {
     public static void chamaMenuFuncionario() {
         String[] opcoesMenuFuncionario = {"Inserir", "Alterar", "Excluir", "Voltar"};
         int opcao = 0;
-        while (opcao != 3) {
-            opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
-                    "Menu de cadastros",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuFuncionario, opcoesMenuFuncionario[0]
-            );
+        opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                "Menu de cadastros",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuFuncionario, opcoesMenuFuncionario[0]
+        );
 
-            switch (opcao) {
-                case 0: // Inserir
-                    cadastroDeFuncionario();
-                    break;
+        switch (opcao) {
+            case 0: // Inserir
+                cadastroDeFuncionario();
+                break;
 
-                //case 1: Alterar
-                //    alterarCadastro();
-                //    break;
+            //case 1: Alterar
+            //    alterarCadastro();
+            //    break;
 
-                case 2: // Excluir
-                    removerFuncionario();
-                    break;
+            case 2: // Excluir
+                removerFuncionario();
+                break;
 
-                case 3: // Voltar
-                    chamaMenuPrincipal();
-                    break;
-            }
+            case 3: // Voltar
+                chamaMenuPrincipal();
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                break;
         }
     }
 
@@ -207,29 +288,31 @@ public class Main {
     public static void chamaMenuServico() {
         String[] opcoesMenuServico = {"Inserir", "Alterar", "Excluir", "Voltar"};
         int opcao = 0;
-        while (opcao != 3) {
-            opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
-                    "Menu de cadastros",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuServico, opcoesMenuServico[0]
-            );
+        opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                "Menu de cadastros",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuServico, opcoesMenuServico[0]
+        );
 
-            switch (opcao) {
-                case 0: // Inserir
-                    cadastroDeServico();
-                    break;
+        switch (opcao) {
+            case 0: // Inserir
+                cadastroDeServico();
+                break;
 
-                //case 1: Alterar
-                //    alterarCadastro();
-                //    break;
+            //case 1: Alterar
+            //    alterarCadastro();
+            //    break;
 
-                case 2: // Excluir
-                    removerServico();
-                    break;
+            case 2: // Excluir
+                removerServico();
+                break;
 
-                case 3: // Voltar
-                    chamaMenuPrincipal();
-                    break;
-            }
+            case 3: // Voltar
+                chamaMenuPrincipal();
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                break;
         }
     }
 
@@ -285,6 +368,10 @@ public class Main {
                 break;
             case 4: //Voltar
                 chamaMenuPrincipal();
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
                 break;
         }
     }
@@ -432,6 +519,10 @@ public class Main {
                 break;
             case 5: //Voltar
                 chamaMenuPrincipal();
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
                 break;
         }
 

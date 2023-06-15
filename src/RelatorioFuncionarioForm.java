@@ -1,5 +1,5 @@
-package repository;
-import model.Hospede;
+import model.Funcionario;
+import relatorios.RelatorioFuncionario;
 import relatorios.RelatorioHospede;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.Vector;
 
-public class RelatorioHospedeForm extends JPanel {
+public class RelatorioFuncionarioForm extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,14 +18,14 @@ public class RelatorioHospedeForm extends JPanel {
 
     protected JTable table;
     protected JScrollPane scroller;
-    protected RelatorioHospede tabela;
+    protected RelatorioFuncionario tabela;
 
-    public RelatorioHospedeForm(Vector<Hospede> vetorDados) {
+    public RelatorioFuncionarioForm(Vector<Funcionario> vetorDados) {
         iniciarComponentes(vetorDados);
     }
 
-    public void iniciarComponentes(Vector<Hospede> vetorDados) {
-        tabela = new RelatorioHospede(nomeColunas, vetorDados);
+    public void iniciarComponentes(Vector<Funcionario> vetorDados) {
+        tabela = new RelatorioFuncionario(nomeColunas, vetorDados);
         table = new JTable();
         table.setModel(tabela);
         table.setSurrendersFocusOnKeystroke(true);
@@ -40,7 +40,7 @@ public class RelatorioHospedeForm extends JPanel {
         add(scroller, BorderLayout.CENTER);
     }
 
-    public static void emitirRelatorio(List<Hospede> hospedes) {
+    public static void emitirRelatorio(List<Funcionario> funcionarios) {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             JFrame frame = new JFrame("Relatorio");
@@ -48,15 +48,16 @@ public class RelatorioHospedeForm extends JPanel {
             frame.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent evt) {
                     frame.setVisible(false);
+                    Main.chamaMenuPrincipal();
                 }
 
             });
-            Vector<Hospede> vetorDados = new Vector<Hospede>();
-            for (Hospede hospede : hospedes) {
-                vetorDados.add(hospede);
+            Vector<Funcionario> vetorDados = new Vector<Funcionario>();
+            for (Funcionario funcionario : funcionarios) {
+                vetorDados.add(funcionario);
             }
 
-            frame.getContentPane().add(new RelatorioHospedeForm(vetorDados));
+            frame.getContentPane().add(new RelatorioFuncionarioForm(vetorDados));
             frame.pack();
             frame.setVisible(true);
             frame.setLocationRelativeTo(null);
