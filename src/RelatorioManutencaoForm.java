@@ -1,9 +1,5 @@
-package repository;
-
-import model.Hospede;
-import model.Servico;
-import relatorios.RelatorioHospede;
-import relatorios.RelatorioServico;
+import model.Manutencao;
+import relatorios.RelatorioManutencao;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -13,30 +9,30 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.Vector;
 
-public class RelatorioServicoForm extends JPanel {
+public class RelatorioManutencaoForm extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
     public static final String[] nomeColunas =
-            {"Código", "Tipo", "Valor", ""};
+            {"Nome", "Tipo", "Documento", ""};
 
     protected JTable table;
     protected JScrollPane scroller;
-    protected RelatorioServico tabela;
+    protected RelatorioManutencao tabela;
 
-    public RelatorioServicoForm(Vector<Servico> vetorDados) {
+    public RelatorioManutencaoForm(Vector<Manutencao> vetorDados) {
         iniciarComponentes(vetorDados);
     }
 
-    public void iniciarComponentes(Vector<Servico> vetorDados) {
-        tabela = new RelatorioServico(nomeColunas, vetorDados);
+    public void iniciarComponentes(Vector<Manutencao> vetorDados) {
+        tabela = new RelatorioManutencao(nomeColunas, vetorDados);
         table = new JTable();
         table.setModel(tabela);
         table.setSurrendersFocusOnKeystroke(true);
         scroller = new javax.swing.JScrollPane(table);
         table.setPreferredScrollableViewportSize(new java.awt.Dimension(500, 300));
 
-        TableColumn colunaEscondida = table.getColumnModel().getColumn(RelatorioServico.INDEX_ESCONDIDO);
+        TableColumn colunaEscondida = table.getColumnModel().getColumn(RelatorioManutencao.INDEX_ESCONDIDO);
         colunaEscondida.setMinWidth(2);
         colunaEscondida.setPreferredWidth(2);
         colunaEscondida.setMaxWidth(2);
@@ -44,7 +40,7 @@ public class RelatorioServicoForm extends JPanel {
         add(scroller, BorderLayout.CENTER);
     }
 
-    public static void emitirRelatorio(List<Servico> servicos) {
+    public static void emitirRelatorio(List<Manutencao> manutencaos) {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             JFrame frame = new JFrame("Relatorio");
@@ -52,15 +48,16 @@ public class RelatorioServicoForm extends JPanel {
             frame.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent evt) {
                     frame.setVisible(false);
+                    Main.chamaMenuPrincipal();
                 }
 
             });
-            Vector<Servico> vetorDados = new Vector<Servico>();
-            for (Servico servico : servicos) {
-                vetorDados.add(servico);
+            Vector<Manutencao> vetorDados = new Vector<Manutencao>();
+            for (Manutencao manutencao : manutencaos) {
+                vetorDados.add(manutencao);
             }
 
-            frame.getContentPane().add(new RelatorioServicoForm(vetorDados));
+            frame.getContentPane().add(new RelatorioManutencaoForm(vetorDados));
             frame.pack();
             frame.setVisible(true);
             frame.setLocationRelativeTo(null);

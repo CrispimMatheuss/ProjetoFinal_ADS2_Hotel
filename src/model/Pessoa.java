@@ -44,6 +44,26 @@ public abstract class Pessoa {
         return email;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Pessoa{" +
@@ -57,5 +77,5 @@ public abstract class Pessoa {
 
     public abstract void exibirInformacoes();
 
-    public abstract void setId(int i);
+
 }

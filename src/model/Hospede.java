@@ -23,10 +23,9 @@ public class Hospede extends Pessoa {
 
 
     @Override
-    public void setId(int i) {
-
+    public void setId(Integer id) {
+        super.setId(id);
     }
-
 
     public void fazerCheckIn() {
         // Lógica para realizar o check-in do hóspede

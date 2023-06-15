@@ -32,5 +32,5 @@ public class Funcionario extends Pessoa {
         System.out.println("Salário: " + getSalario());
         System.out.println("Celular: " + getCelular());
         System.out.println("Email: " + getEmail());    }
-    @Override public void setId(int i) {}
+
 }
