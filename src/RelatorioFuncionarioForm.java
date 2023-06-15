@@ -1,11 +1,6 @@
-package repository;
 import model.Funcionario;
-import model.Hospede;
-import model.Manutencao;
 import relatorios.RelatorioFuncionario;
 import relatorios.RelatorioHospede;
-import relatorios.RelatorioManutencao;
-
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
@@ -14,7 +9,7 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.Vector;
 
-public class RelatorioManutencaoForm extends JPanel {
+public class RelatorioFuncionarioForm extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,21 +18,21 @@ public class RelatorioManutencaoForm extends JPanel {
 
     protected JTable table;
     protected JScrollPane scroller;
-    protected RelatorioManutencao tabela;
+    protected RelatorioFuncionario tabela;
 
-    public RelatorioManutencaoForm(Vector<Manutencao> vetorDados) {
+    public RelatorioFuncionarioForm(Vector<Funcionario> vetorDados) {
         iniciarComponentes(vetorDados);
     }
 
-    public void iniciarComponentes(Vector<Manutencao> vetorDados) {
-        tabela = new RelatorioManutencao(nomeColunas, vetorDados);
+    public void iniciarComponentes(Vector<Funcionario> vetorDados) {
+        tabela = new RelatorioFuncionario(nomeColunas, vetorDados);
         table = new JTable();
         table.setModel(tabela);
         table.setSurrendersFocusOnKeystroke(true);
         scroller = new javax.swing.JScrollPane(table);
         table.setPreferredScrollableViewportSize(new java.awt.Dimension(500, 300));
 
-        TableColumn colunaEscondida = table.getColumnModel().getColumn(RelatorioManutencao.INDEX_ESCONDIDO);
+        TableColumn colunaEscondida = table.getColumnModel().getColumn(RelatorioHospede.INDEX_ESCONDIDO);
         colunaEscondida.setMinWidth(2);
         colunaEscondida.setPreferredWidth(2);
         colunaEscondida.setMaxWidth(2);
@@ -45,7 +40,7 @@ public class RelatorioManutencaoForm extends JPanel {
         add(scroller, BorderLayout.CENTER);
     }
 
-    public static void emitirRelatorio(List<Manutencao> manutencaos) {
+    public static void emitirRelatorio(List<Funcionario> funcionarios) {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             JFrame frame = new JFrame("Relatorio");
@@ -53,15 +48,16 @@ public class RelatorioManutencaoForm extends JPanel {
             frame.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent evt) {
                     frame.setVisible(false);
+                    Main.chamaMenuPrincipal();
                 }
 
             });
-            Vector<Manutencao> vetorDados = new Vector<Manutencao>();
-            for (Manutencao manutencao : manutencaos) {
-                vetorDados.add(manutencao);
+            Vector<Funcionario> vetorDados = new Vector<Funcionario>();
+            for (Funcionario funcionario : funcionarios) {
+                vetorDados.add(funcionario);
             }
 
-            frame.getContentPane().add(new RelatorioManutencaoForm(vetorDados));
+            frame.getContentPane().add(new RelatorioFuncionarioForm(vetorDados));
             frame.pack();
             frame.setVisible(true);
             frame.setLocationRelativeTo(null);
@@ -70,4 +66,3 @@ public class RelatorioManutencaoForm extends JPanel {
         }
     }
 }
-

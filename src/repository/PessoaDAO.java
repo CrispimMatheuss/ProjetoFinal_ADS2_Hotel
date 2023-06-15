@@ -12,9 +12,14 @@ public class PessoaDAO {
     static List<Hospede> hospedes = new ArrayList<>();
 
     public static void salvar(Hospede hospede) {
-        hospede.setId(hospedes.size() + 1);
+        if (hospede.getID() == null) {
+            hospede.setId(hospedes.size() + 1);
+        } else {
+            hospedes.remove(hospede.getID() - 1);
+        }
         hospedes.add(hospede);
     }
+
 
     public static List<Hospede> buscaTodosh() {
         return hospedes;
