@@ -51,6 +51,7 @@ public class Hospedagem {
 
     }
 
+
     public Integer getCodigo() {
         return codigo;
     }
@@ -111,14 +112,14 @@ public class Hospedagem {
     @Override
     public String toString() {
         return "Hospedagem{" +
-                "codigo=" + codigo +
-                ", checkin=" + checkin +
-                ", checkout=" + checkout +
-                ", hospede=" + hospede +
-                ", quantidadeDiarias=" + quantidadeDiarias +
-                ", quarto=" + quarto +
-                ", consumo=" + servicos +
-                ", valorTotalHospedagem=" + valorTotalHospedagem +
+                "\ncodigo=" + codigo +
+                ",\n checkin=" + checkin +
+                ",\n checkout=" + checkout +
+                ",\n hospede=" + hospede +
+                ",\n quantidadeDiarias=" + quantidadeDiarias +
+                ",\n quarto=" + quarto +
+                ",\n consumo=" + servicos +
+                ",\n valorTotalHospedagem=" + valorTotalHospedagem +
                 '}';
     }
 }

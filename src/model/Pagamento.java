@@ -8,20 +8,23 @@ public class Pagamento {
     private FormaPagamento formasDePagamento;
     private LocalDateTime dataHora;
     private BigDecimal valorTotal;
-    private BigDecimal descontos;
     private Hospedagem hospedagem;
 
-    public Pagamento(Integer id, FormaPagamento formasDePagamento, LocalDateTime dataHora, BigDecimal valorTotal, BigDecimal descontos, Hospedagem hospedagem) {
+    public Pagamento(Integer id, FormaPagamento formasDePagamento, LocalDateTime dataHora, BigDecimal valorTotal, Hospedagem hospedagem) {
         this.id = id;
         this.formasDePagamento = formasDePagamento;
         this.dataHora = dataHora;
         this.valorTotal = valorTotal;
-        this.descontos = descontos;
         this.hospedagem = hospedagem;
     }
+    public String mensagemPagto(){
+        return  "valor total: "+ valorTotal +
+                "\nforma de pagamento: "+ formasDePagamento+
+                "\ndata: "+ dataHora +
+                "\nhospedagem: " + hospedagem;
 
-    public Pagamento(BigDecimal valorPagamento, FormaPagamento formaPagamento) {
     }
+
     public Integer getId() {
         return id;
     }
@@ -46,12 +49,6 @@ public class Pagamento {
     public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
     }
-    public BigDecimal getDescontos() {
-        return descontos;
-    }
-    public void setDescontos(BigDecimal descontos) {
-        this.descontos = descontos;
-    }
     public Hospedagem getHospedagem() {
         return hospedagem;
     }
@@ -59,5 +56,14 @@ public class Pagamento {
         this.hospedagem = hospedagem;
     }
 
-
+    @Override
+    public String toString() {
+        return "Pagamento{" +
+                "id=" + id +
+                ", formasDePagamento=" + formasDePagamento +
+                ", dataHora=" + dataHora +
+                ", valorTotal=" + valorTotal +
+                ", hospedagem=" + hospedagem +
+                '}';
+    }
 }
