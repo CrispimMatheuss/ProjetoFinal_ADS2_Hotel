@@ -9,9 +9,6 @@ import java.util.List;
 
 public class Main {
 
-
-    private static Object PessoaDAODAO;
-
     public static void main(String[] args) {
         ServicoDAO.buscaTodos();
         exibirMensagemBoasVindas();
@@ -24,7 +21,6 @@ public class Main {
                 "Mensagem de Boas-vindas", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Entrar"}, "Entrar");
     }
-
 
     private static void exibirTelaLogin() {
         JTextField usernameField = new JTextField();
@@ -57,7 +53,6 @@ public class Main {
     private static boolean verificarCredenciais(String username, String password) {
         return username.equals("admin") && password.equals("123456");
     }
-
 
     public static void chamaMenuPrincipal() {
         String[] opcoesMenu = {"Cadastros", "Processos", "Relatorios", "Sair"};
@@ -151,24 +146,24 @@ public class Main {
     private static void cadastroDeHospede() {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do cliente");
         if (nome == null) {
-            //      chamaMenuCadastros();
+         chamaMenuCadastros();
         }
         String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do cliente");
         if (cpf == null) {
-            //      chamaMenuCadastros();
+          chamaMenuCadastros();
         }
         String celular = JOptionPane.showInputDialog(null, "Digite o celular do cliente");
         if (celular == null) {
-            //       chamaMenuCadastros();
+           chamaMenuCadastros();
         }
         String email = JOptionPane.showInputDialog(null, "Digite o email do cliente");
         if (celular == null) {
-            //       chamaMenuCadastros();
+           chamaMenuCadastros();
         }
 
         Hospede hospede = new Hospede(nome, cpf, celular, email);
         PessoaDAO.salvar(hospede);
-        chamaMenuPrincipal();
+        //chamaMenuPrincipal();
     }
 
     private static void alterarCadastroHospede() {
@@ -231,9 +226,9 @@ public class Main {
                 cadastroDeFuncionario();
                 break;
 
-            //case 1: Alterar
-            //    alterarCadastro();
-            //    break;
+            case 1: //Alterar
+                alterarCadastroFuncionario();
+                break;
 
             case 2: // Excluir
                 removerFuncionario();
@@ -271,6 +266,40 @@ public class Main {
         PessoaDAO.salvar(funcionario);
         chamaMenuPrincipal();
     }
+
+    private static void alterarCadastroFuncionario() {
+        Object[] selectionValuesFuncionario = PessoaDAO.findFunciInArray();
+        String initialSelectionFuncionario = (String) selectionValuesFuncionario[0];
+        Object selectionFuncionario = JOptionPane.showInputDialog(null, "Selecione o código do hóspede",
+                "Funcionario", JOptionPane.QUESTION_MESSAGE, null, selectionValuesFuncionario, initialSelectionFuncionario);
+        List<Funcionario> funcionarios = PessoaDAO.buscarPorNomef((String) selectionFuncionario);
+        Funcionario funcionario = funcionarios.get(0);
+
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome do funcionário", funcionario.getNome());
+        if (nome == null) {
+        chamaMenuCadastros();
+        }
+        String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário", funcionario.getCpf());
+        if (cpf == null) {
+        chamaMenuCadastros();
+        }
+        String celular = JOptionPane.showInputDialog(null, "Digite o celular do funcionário", funcionario.getCelular());
+        if (celular == null) {
+        chamaMenuCadastros();
+        }
+        String email = JOptionPane.showInputDialog(null, "Digite o email do funcionário", funcionario.getEmail());
+        if (email == null) {
+        chamaMenuCadastros();
+        }
+
+        funcionario.setNome(nome);
+        funcionario.setCpf(cpf);
+        funcionario.setEmail(email);
+        funcionario.setCelular(celular);
+        PessoaDAO.salvar(funcionario);
+
+        chamaMenuPrincipal();
+}
 
     private static void removerFuncionario() {
         Object[] selectionValuesFuncionario = PessoaDAO.findFunciInArray();
@@ -390,7 +419,7 @@ public class Main {
         List<Quarto> quartos = QuartoDAO.buscaTodos();
         Object[] selectionQuarto = quartos.stream().map(Quarto::getNumQuarto).toArray();
         String initialSelectionQuarto = (String) selectionQuarto[0];
-        Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o hóspede",
+        Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o quarto",
                 "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
         List<Quarto> quartosSelect = QuartoDAO.buscarPorNumQuarto((String) selecQuarto);
 
@@ -409,6 +438,8 @@ public class Main {
         List<Hospede> hospede = PessoaDAO.buscarPorNome((String) selecHospede);
         Hospedagem hospedagem = new Hospedagem(60, dataEntrada, null, hospede.get(0), 0, quartosSelect.get(0));
         HospedagemDAO.salvar(hospedagem);
+
+        chamaMenuProcessos();
     }
 
     public static void chamaCheckOut() {
@@ -418,8 +449,6 @@ public class Main {
         Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
                 "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
         List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
-
-
 
         LocalDate dataSaida = LocalDate.now();
         String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dd/MM/yyyy): ");
@@ -437,8 +466,6 @@ public class Main {
                 "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPagamento, initialSelectionPagamento);
         List<Pagamento> pagamentos = PagamentoDAO.buscarPorCodigo((Integer) selectionPagamento);
 
-
-
         Hospedagem hospedagem = hospedagens.get(0);
         hospedagem.setCheckout(dataSaida);
         LocalDate dataEntrada = hospedagem.getCheckin();
@@ -449,8 +476,6 @@ public class Main {
         HospedagemDAO.salvar(hospedagem);
         JOptionPane.showMessageDialog(null, hospedagem);
 
-
-
         Pagamento pagamento = pagamentos.get(0);
         pagamento.setHospedagem(hospedagem);
         BigDecimal valorPagto = hospedagem.getValorTotalHospedagem();
@@ -460,10 +485,9 @@ public class Main {
         JOptionPane.showMessageDialog(null, pagamento.mensagemPagto());
         chamaMenuPrincipal();
 
-
+        chamaMenuProcessos();
 
     }
-
 
     public static void chamaServicos() {
 
@@ -553,6 +577,6 @@ public class Main {
 
     private static void chamaRelatorioHospedagem() {
         List<Hospedagem> hospedagems = HospedagemDAO.buscaTodos();
-        //    RelatorioHospedagemForm.emitirRelatorio(hospedagems);
+        //RelatorioHospedagemForm.emitirRelatorio(hospedagems);
     }
 }
