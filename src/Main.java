@@ -431,6 +431,12 @@ public class Main {
             return; // Retorna ou executa outra ação de tratamento de erro
         }
 
+        Object[] selectionValuesPagamento = PagamentoDAO.findPagamentosInArray();
+        Integer initialSelectionPagamento = (Integer) selectionValuesPagamento[0];
+        Object selectionPagamento = JOptionPane.showInputDialog(null, "Selecione o código do pagamento",
+                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPagamento, initialSelectionPagamento);
+        List<Pagamento> pagamentos = PagamentoDAO.buscarPorCodigo((Integer) selectionPagamento);
+
 
 
         Hospedagem hospedagem = hospedagens.get(0);
@@ -439,16 +445,24 @@ public class Main {
         long diasDif = Math.toIntExact(ChronoUnit.DAYS.between(dataSaida, dataEntrada));
         Integer diasDifInt = Math.toIntExact(diasDif);
         hospedagem.setQuantidadeDiarias(diasDifInt);
+        hospedagem.setValorTotalHospedagem(hospedagem.calculaValorTotalHospedagem());
         HospedagemDAO.salvar(hospedagem);
         JOptionPane.showMessageDialog(null, hospedagem);
+
+
+
+        Pagamento pagamento = pagamentos.get(0);
+        pagamento.setHospedagem(hospedagem);
+        BigDecimal valorPagto = hospedagem.getValorTotalHospedagem();
+        pagamento.setValorTotal(valorPagto);
+        PagamentoDAO.salvar(pagamento);
+        JOptionPane.showMessageDialog(null, "pagamento aprovado!");
+        JOptionPane.showMessageDialog(null, pagamento.mensagemPagto());
         chamaMenuPrincipal();
 
 
 
-
-
-
-  }
+    }
 
 
     public static void chamaServicos() {
