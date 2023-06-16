@@ -20,7 +20,6 @@ public class PessoaDAO {
         hospedes.add(hospede);
     }
 
-
     public static List<Hospede> buscaTodosh() {
         return hospedes;
     }
@@ -36,16 +35,6 @@ public class PessoaDAO {
         return hospedeFiltrado;
     }
 
-    static List<Funcionario> funcionarios = new ArrayList<>();
-
-    public static void salvar(Funcionario funcionario) {
-        funcionarios.add(funcionario);
-    }
-
-    public static List<Funcionario> buscaTodosf() {
-        return funcionarios;
-    }
-
     public static Object[] findHospedeInArray() {
         List<Hospede> hospedes = buscaTodosh();
         List<String> hospedeDesc = new ArrayList<>();
@@ -53,8 +42,15 @@ public class PessoaDAO {
         for (Hospede hospede : hospedes) {
             hospedeDesc.add(hospede.getNome());
         }
-
         return hospedeDesc.toArray();
+    }
+
+    public static void removerHospede(Hospede hospedeSelecionado) {}
+
+    static List<Funcionario> funcionarios = new ArrayList<>();
+
+    public static void salvar(Funcionario funcionario) {
+        funcionarios.add(funcionario);
     }
 
     public static Object[] findFunciInArray() {
@@ -68,11 +64,20 @@ public class PessoaDAO {
         return funciDesc.toArray();
     }
 
-    public static void removerHospede(Hospede hospedeSelecionado) {
-
+    public static List<Funcionario> buscaTodosf() {
+        return funcionarios;
     }
 
-    public static void removerFuncionario(Funcionario funcionarioSelecionado) {
-
+    public static List<Funcionario> buscarPorNomef(String nome) {
+        buscaTodosf();
+        List<Funcionario> funcionarioFiltrado = new ArrayList<>();
+        for (Funcionario funcionario : funcionarios) {
+            if (funcionario.getNome() == nome) {
+                funcionarioFiltrado.add(funcionario);
+            }
+        }
+        return funcionarioFiltrado;
     }
+
+    public static void removerFuncionario(Funcionario funcionarioSelecionado) {}
 }
