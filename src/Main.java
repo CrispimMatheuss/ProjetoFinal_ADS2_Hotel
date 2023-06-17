@@ -146,19 +146,19 @@ public class Main {
     private static void cadastroDeHospede() {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do cliente");
         if (nome == null) {
-         chamaMenuCadastros();
+            chamaMenuCadastros();
         }
         String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do cliente");
         if (cpf == null) {
-          chamaMenuCadastros();
+            chamaMenuCadastros();
         }
         String celular = JOptionPane.showInputDialog(null, "Digite o celular do cliente");
         if (celular == null) {
-           chamaMenuCadastros();
+            chamaMenuCadastros();
         }
         String email = JOptionPane.showInputDialog(null, "Digite o email do cliente");
         if (celular == null) {
-           chamaMenuCadastros();
+            chamaMenuCadastros();
         }
 
         EscolheClassificacao[] classificacoes = EscolheClassificacao.values();
@@ -173,18 +173,18 @@ public class Main {
         if (option != JOptionPane.CLOSED_OPTION) {
             EscolheClassificacao classificacaoSelecionada = classificacoes[option];
             Hospede hospede = new Hospede(nome, cpf, celular, email, classificacaoSelecionada);
-            PessoaDAO.salvar(hospede);
+            HospedeDAO.salvar(hospede);
         } else {
             chamaMenuCadastros();
         }
     }
 
     private static void alterarCadastroHospede() {
-        Object[] selectionValuesHospede = PessoaDAO.findHospedeInArray();
+        Object[] selectionValuesHospede = HospedeDAO.findHospedeInArray();
         String initialSelectionHospede = (String) selectionValuesHospede[0];
         Object selectionHospede = JOptionPane.showInputDialog(null, "Selecione o código do hóspede",
                 "Hospede", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospede, initialSelectionHospede);
-        List<Hospede> hospedes = PessoaDAO.buscarPorNome((String) selectionHospede);
+        List<Hospede> hospedes = HospedeDAO.buscarPorNome((String) selectionHospede);
         Hospede hospede = hospedes.get(0);
 
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do cliente", hospede.getNome());
@@ -208,40 +208,23 @@ public class Main {
         hospede.setCpf(cpf);
         hospede.setEmail(email);
         hospede.setCelular(celular);
-        PessoaDAO.salvar(hospede);
+        HospedeDAO.salvar(hospede);
 
         chamaMenuPrincipal();
     }
 
     private static void removerHospede() {
-        Object[] selectionValuesHospede = PessoaDAO.findHospedeInArray();
+        Object[] selectionValuesHospede = HospedeDAO.findHospedeInArray();
         Object selectionHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede para remover:",
                 "Remover Hóspede", JOptionPane.DEFAULT_OPTION, null, selectionValuesHospede, null);
 
         if (selectionHospede != null) {
             Hospede hospedeSelecionado = (Hospede) selectionHospede;
-            PessoaDAO.removerHospede(hospedeSelecionado);
+            HospedeDAO.removerHospede(hospedeSelecionado);
             JOptionPane.showMessageDialog(null, "Hóspede removido com sucesso!");
         }
     }
-    private static void hospedesCadastrados() {
-        StringBuilder mensagem = new StringBuilder();
-        mensagem.append("Lista de Hóspedes:\n\n");
 
-        List<Hospede> hospedes = HospedeDAO.todosHospedes();
-
-        if (hospedes.isEmpty()) {
-            mensagem.append("Nenhum hóspede cadastrado.");
-        } else {
-            for (Hospede hospede : hospedes) {
-                mensagem.append("Nome: ").append(hospede.getNome()).append("\n\n");
-                mensagem.append("Cpf: ").append(hospede.getCpf()).append("\n\n");
-                mensagem.append("Celular").append(hospede.getCelular()).append("\n");
-                mensagem.append("Email: ").append(hospede.getEmail()).append("\n");
-            }
-        }
-        JOptionPane.showMessageDialog(null, mensagem.toString(), "Lista de Hóspedes", JOptionPane.INFORMATION_MESSAGE);
-    }
     /////////////////////////////FUNCIONARIO
     public static void chamaMenuFuncionario() {
         String[] opcoesMenuFuncionario = {"Inserir", "Alterar", "Excluir", "Voltar"};
@@ -304,91 +287,56 @@ public class Main {
         }
 
         Funcionario funcionario = new Funcionario(nome, cpf, celular, email, cargo, salario);
-        PessoaDAO.salvar(funcionario);
+        FuncionarioDAO.salvar(funcionario);
         chamaMenuPrincipal();
     }
 
     private static void alterarCadastroFuncionario() {
-        Object[] selectionValuesFuncionario = PessoaDAO.findFunciInArray();
+        Object[] selectionValuesFuncionario = FuncionarioDAO.findFunciInArray();
         String initialSelectionFuncionario = (String) selectionValuesFuncionario[0];
         Object selectionFuncionario = JOptionPane.showInputDialog(null, "Selecione o código do hóspede",
                 "Funcionario", JOptionPane.QUESTION_MESSAGE, null, selectionValuesFuncionario, initialSelectionFuncionario);
-        List<Funcionario> funcionarios = PessoaDAO.buscarPorNomef((String) selectionFuncionario);
+        List<Funcionario> funcionarios = FuncionarioDAO.buscarPorNomef((String) selectionFuncionario);
         Funcionario funcionario = funcionarios.get(0);
 
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do funcionário", funcionario.getNome());
         if (nome == null) {
-        chamaMenuCadastros();
+            chamaMenuCadastros();
         }
         String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário", funcionario.getCpf());
         if (cpf == null) {
-        chamaMenuCadastros();
+            chamaMenuCadastros();
         }
         String celular = JOptionPane.showInputDialog(null, "Digite o celular do funcionário", funcionario.getCelular());
         if (celular == null) {
-        chamaMenuCadastros();
+            chamaMenuCadastros();
         }
         String email = JOptionPane.showInputDialog(null, "Digite o email do funcionário", funcionario.getEmail());
         if (email == null) {
-        chamaMenuCadastros();
+            chamaMenuCadastros();
         }
 
         funcionario.setNome(nome);
         funcionario.setCpf(cpf);
         funcionario.setEmail(email);
         funcionario.setCelular(celular);
-        PessoaDAO.salvar(funcionario);
+        FuncionarioDAO.salvar(funcionario);
 
         chamaMenuPrincipal();
-}
+    }
 
     private static void removerFuncionario() {
-        Object[] selectionValuesFuncionario = PessoaDAO.findFunciInArray();
+        Object[] selectionValuesFuncionario = FuncionarioDAO.findFunciInArray();
         Object selectionFunci = JOptionPane.showInputDialog(null, "Selecione o funcionário para remover:",
                 "Menu de cadastros", JOptionPane.DEFAULT_OPTION, null, selectionValuesFuncionario, null);
 
         if (selectionFunci != null) {
             Funcionario funcionarioSelecionado = (Funcionario) selectionFunci;
-            PessoaDAO.removerFuncionario(funcionarioSelecionado);
+            FuncionarioDAO.removerFuncionario(funcionarioSelecionado);
             JOptionPane.showMessageDialog(null, "Funcionário removido com sucesso!");
         }
     }
-    //////////////////////////QUARTO
-    private static void quartosCadastrados() {
-        StringBuilder mensagem = new StringBuilder();
-        mensagem.append("Lista de Quarto:\n\n");
 
-        List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
-        if (quartos.isEmpty()) {
-            mensagem.append("Nenhum hóspede cadastrado.");
-        } else {
-            for (Quarto quarto : quartos) {
-                mensagem.append("Nome: ").append(quarto.getNumQuarto()).append("\n\n");
-                mensagem.append("Email: ").append(quarto.getTipoQuarto()).append("\n");
-                mensagem.append("Celular: ").append(quarto.getLimitePessoas()).append("\n");
-                mensagem.append("Disponibilidade do Quarto: ").append(quarto.getDisponibilidade()).append("\n");
-                mensagem.append("Valor da Diária: ").append(quarto.getValor()).append("\n");
-            }
-        }
-        JOptionPane.showMessageDialog(null, mensagem.toString(), "Lista de Hóspedes", JOptionPane.INFORMATION_MESSAGE);
-    }
-    private static void funcionariosCadastrados() {
-        StringBuilder mensagem = new StringBuilder();
-        mensagem.append("Lista de Funcionarios:\n\n");
-
-        List<Funcionario> funcionarios = FuncionarioDAO.todosFuncionarios();
-        if (funcionarios.isEmpty()) {
-            mensagem.append("Nenhum funcionarios cadastrado.");
-        } else {
-            for (Funcionario funcionario : funcionarios) {
-                mensagem.append("Nome: ").append(funcionario.getNome()).append("\n\n");
-                mensagem.append("Cpf").append(funcionario.getCpf()).append("\n");
-                mensagem.append("Celular").append(funcionario.getCelular()).append("\n");
-                mensagem.append("Email: ").append(funcionario.getEmail()).append("\n");
-            }
-        }
-        JOptionPane.showMessageDialog(null, mensagem.toString(), "Lista de Hóspedes", JOptionPane.INFORMATION_MESSAGE);
-    }
     /////////////////////////////////SERVIÇO
     public static void chamaMenuServico() {
         String[] opcoesMenuServico = {"Inserir", "Alterar", "Excluir", "Voltar"};
@@ -524,7 +472,7 @@ public class Main {
                 "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
         List<Quarto> quartosSelect = QuartoDAO.buscarPorNumQuarto((String) selecQuarto);
 
-        List<Hospede> hospedes = PessoaDAO.buscaTodosh();
+        List<Hospede> hospedes = HospedeDAO.buscaTodosh();
 
         if (hospedes.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nenhum hóspede cadastrado!");
@@ -536,7 +484,7 @@ public class Main {
         Object selecHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede",
                 "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionHospede, initialSelectionHospede);
 
-        List<Hospede> hospede = PessoaDAO.buscarPorNome((String) selecHospede);
+        List<Hospede> hospede = HospedeDAO.buscarPorNome((String) selecHospede);
         Hospedagem hospedagem = new Hospedagem(60, dataEntrada, null, hospede.get(0), 0, quartosSelect.get(0));
         HospedagemDAO.salvar(hospedagem);
 
@@ -657,12 +605,12 @@ public class Main {
     }
 
     private static void chamaRelatorioHospede() {
-        List<Hospede> hospedes = PessoaDAO.buscaTodosh();
+        List<Hospede> hospedes = HospedeDAO.buscaTodosh();
         RelatorioHospedeForm.emitirRelatorio(hospedes);
     }
 
     private static void chamaRelatorioFuncionario() {
-        List<Funcionario> funcionarios = PessoaDAO.buscaTodosf();
+        List<Funcionario> funcionarios = FuncionarioDAO.buscaTodosf();
         RelatorioFuncionarioForm.emitirRelatorio(funcionarios);
     }
 
