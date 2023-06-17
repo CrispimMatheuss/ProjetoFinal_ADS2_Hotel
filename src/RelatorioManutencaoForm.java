@@ -1,11 +1,16 @@
+import model.Funcionario;
 import model.Manutencao;
+import model.OrdemDeServico;
 import relatorios.RelatorioManutencao;
+import repository.StatusManutencao;
+import repository.TipoManutencao;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Vector;
 
@@ -14,7 +19,7 @@ public class RelatorioManutencaoForm extends JPanel {
     private static final long serialVersionUID = 1L;
 
     public static final String[] nomeColunas =
-            {"Nome", "Tipo", "Documento", ""};
+            {"Código", "Funcionario", "Data","Descrição","Ordem de Serviço","Tipo","Status", ""};
 
     protected JTable table;
     protected JScrollPane scroller;

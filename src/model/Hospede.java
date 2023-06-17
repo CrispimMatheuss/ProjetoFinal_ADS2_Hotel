@@ -7,6 +7,10 @@ public class Hospede extends Pessoa {
         super(id, nome, cpf, celular, email);
     }
 
+    public Hospede( String nome, String cpf, String celular, String email) {
+        super(nome, cpf, celular, email);
+    }
+
     public Hospede(String nome, String cpf, String celular, String email, EscolheClassificacao classificacao) {
         super(nome, cpf, celular, email);
         this.classificacao = classificacao;

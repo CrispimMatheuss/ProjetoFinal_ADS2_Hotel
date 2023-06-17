@@ -8,11 +8,14 @@ import java.util.Vector;
 public class RelatorioManutencao extends AbstractTableModel{
 
     private static final long serialVersionUID = 1L;
-
-    public static final int INDEX_NOME = 0;
-    public static final int INDEX_CLASSIFICACAO = 1;
-    public static final int INDEX_DOCUMENTO = 2;
-    public static final int INDEX_ESCONDIDO = 3;
+    public static final int INDEX_CODIGO = 0;
+    public static final int INDEX_FUNCIONARIO = 1;
+    public static final int INDEX_DATA = 2;
+    public static final int INDEX_DESCRICAO = 3;
+    public static final int INDEX_ORDEMDESERVICO = 4;
+    public static final int INDEX_TIPO = 5;
+    public static final int INDEX_STATUS = 6;
+    public static final int INDEX_ESCONDIDO = 7;
 
     protected String[] nomeColunas;
     protected Vector<Manutencao> vetorDados;
@@ -40,12 +43,20 @@ public class RelatorioManutencao extends AbstractTableModel{
     public Object getValueAt(int linha, int coluna) {
         Manutencao registroManut = (Manutencao) vetorDados.get(linha);
         switch (coluna) {
-            case INDEX_NOME:
+            case INDEX_CODIGO:
+                return registroManut.getID();
+            case INDEX_FUNCIONARIO:
+                return registroManut.getFuncionario();
+            case INDEX_DATA:
                 return registroManut.getData();
-            case INDEX_CLASSIFICACAO:
+            case INDEX_DESCRICAO:
                 return registroManut.getDescricao();
-            case INDEX_DOCUMENTO:
+            case INDEX_ORDEMDESERVICO:
+                return registroManut.getOS();
+            case INDEX_TIPO:
                 return registroManut.getTipoManutencao();
+            case INDEX_STATUS:
+                return registroManut.getStatus();
             default:
                 return new Object();
         }

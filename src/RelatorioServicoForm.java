@@ -24,6 +24,7 @@ public class RelatorioServicoForm extends JPanel {
         iniciarComponentes(vetorDados);
     }
 
+
     public void iniciarComponentes(Vector<Servico> vetorDados) {
         tabela = new RelatorioServico(nomeColunas, vetorDados);
         table = new JTable();

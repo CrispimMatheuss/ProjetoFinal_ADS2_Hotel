@@ -1,7 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-
 public abstract class Pessoa {
     private Integer id;
     private String nome;
@@ -18,6 +16,13 @@ public abstract class Pessoa {
     }
 
     public Pessoa(String nome, String cpf, String celular, String email) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.celular = celular;
+        this.email = email;
+    }
+
+    public Pessoa(String nome, String cpf, String celular, String email, String cargo) {
         this.nome = nome;
         this.cpf = cpf;
         this.celular = celular;
@@ -74,6 +79,8 @@ public abstract class Pessoa {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+
 
     public abstract void exibirInformacoes();
 

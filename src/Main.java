@@ -10,6 +10,9 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+        HospedagemDAO.buscaTodos();
+        FuncionarioDAO.todosFuncionarios();
+        ManutencaoDAO.buscaTodos();
         ServicoDAO.buscaTodos();
         exibirMensagemBoasVindas();
         exibirTelaLogin();
@@ -288,7 +291,7 @@ public class Main {
 
         Funcionario funcionario = new Funcionario(nome, cpf, celular, email, cargo, salario);
         FuncionarioDAO.salvar(funcionario);
-        chamaMenuPrincipal();
+//        chamaMenuPrincipal();
     }
 
     private static void alterarCadastroFuncionario() {
@@ -436,7 +439,7 @@ public class Main {
                 chamaCheckin();
                 break;
             case 1: //Checkout
-                //chamaCheckOut();
+                chamaCheckOut();
                 break;
             case 2: //Cadastra consumos na hospedagem
                 chamaServicos();
@@ -491,52 +494,52 @@ public class Main {
         chamaMenuProcessos();
     }
 
-//    public static void chamaCheckOut() {
-//
-//        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
-//        Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
-//        Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
-//                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
-//        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
-//
-//        LocalDate dataSaida = LocalDate.now();
-//        String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dd/MM/yyyy): ");
-//
-//        try {
-//            dataSaida = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-//        } catch (DateTimeParseException e) {
-//            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
-//            return; // Retorna ou executa outra ação de tratamento de erro
-//        }
-//
-//        Object[] selectionValuesPagamento = PagamentoDAO.findPagamentosInArray();
-//        Integer initialSelectionPagamento = (Integer) selectionValuesPagamento[0];
-//        Object selectionPagamento = JOptionPane.showInputDialog(null, "Selecione o código do pagamento",
-//                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPagamento, initialSelectionPagamento);
-//        List<Pagamento> pagamentos = PagamentoDAO.buscarPorCodigo((Integer) selectionPagamento);
-//
-//        Hospedagem hospedagem = hospedagens.get(0);
-//        hospedagem.setCheckout(dataSaida);
-//        LocalDate dataEntrada = hospedagem.getCheckin();
-//        long diasDif = Math.toIntExact(ChronoUnit.DAYS.between(dataSaida, dataEntrada));
-//        Integer diasDifInt = Math.toIntExact(diasDif);
-//        hospedagem.setQuantidadeDiarias(diasDifInt);
-//        hospedagem.setValorTotalHospedagem(hospedagem.calculaValorTotalHospedagem());
-//        HospedagemDAO.salvar(hospedagem);
-//        JOptionPane.showMessageDialog(null, hospedagem);
-//
-//        Pagamento pagamento = pagamentos.get(0);
-//        pagamento.setHospedagem(hospedagem);
-//        BigDecimal valorPagto = hospedagem.getValorTotalHospedagem();
-//        pagamento.setValorTotal(valorPagto);
-//        PagamentoDAO.salvar(pagamento);
-//        JOptionPane.showMessageDialog(null, "pagamento aprovado!");
-//        JOptionPane.showMessageDialog(null, pagamento.mensagemPagto());
-//        chamaMenuPrincipal();
-//
-//        chamaMenuProcessos();
-//
-//    }
+    public static void chamaCheckOut() {
+
+        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
+        Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
+        Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
+                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
+        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
+
+        LocalDate dataSaida = LocalDate.now();
+        String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dd/MM/yyyy): ");
+
+        try {
+            dataSaida = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+            return; // Retorna ou executa outra ação de tratamento de erro
+        }
+
+        Object[] selectionValuesPagamento = PagamentoDAO.findPagamentosInArray();
+        Integer initialSelectionPagamento = (Integer) selectionValuesPagamento[0];
+        Object selectionPagamento = JOptionPane.showInputDialog(null, "Selecione o código do pagamento",
+                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPagamento, initialSelectionPagamento);
+        List<Pagamento> pagamentos = PagamentoDAO.buscarPorCodigo((Integer) selectionPagamento);
+
+        Hospedagem hospedagem = hospedagens.get(0);
+        hospedagem.setCheckout(dataSaida);
+        LocalDate dataEntrada = hospedagem.getCheckin();
+        long diasDif = Math.toIntExact(ChronoUnit.DAYS.between(dataSaida, dataEntrada));
+        Integer diasDifInt = Math.toIntExact(diasDif);
+        hospedagem.setQuantidadeDiarias(diasDifInt);
+        hospedagem.setValorTotalHospedagem(hospedagem.calculaValorTotalHospedagem());
+        HospedagemDAO.salvar(hospedagem);
+        JOptionPane.showMessageDialog(null, hospedagem);
+
+        Pagamento pagamento = pagamentos.get(0);
+        pagamento.setHospedagem(hospedagem);
+        BigDecimal valorPagto = hospedagem.getValorTotalHospedagem();
+        pagamento.setValorTotal(valorPagto);
+        PagamentoDAO.salvar(pagamento);
+        JOptionPane.showMessageDialog(null, "pagamento aprovado!");
+        JOptionPane.showMessageDialog(null, pagamento.mensagemPagto());
+        chamaMenuPrincipal();
+
+        chamaMenuProcessos();
+
+    }
 
     public static void chamaServicos() {
 
@@ -572,7 +575,7 @@ public class Main {
 
     /////////////////RELATÓRIOS////////////////////
     private static void listaCadastros() {
-        String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Serviços", "Manutenção", "Hospedagem", "Voltar"};
+        String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Serviços", "Manutenção", "Hospedagem","Quartos", "Voltar"};
         int menuRelatorios = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Relatórios",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuRelatorios, opcoesMenuRelatorios[0]);
@@ -591,9 +594,12 @@ public class Main {
                 chamaRelatorioManutencao();
                 break;
             case 4: //Hospedagem
-                //chamaRelatorioHospedagem();
+                chamaRelatorioHospedagem();
                 break;
-            case 5: //Voltar
+                case 5: //Quarto
+                chamaRelatorioQuarto();
+                break;
+            case 6: //Voltar
                 chamaMenuPrincipal();
                 break;
 
@@ -610,7 +616,7 @@ public class Main {
     }
 
     private static void chamaRelatorioFuncionario() {
-        List<Funcionario> funcionarios = FuncionarioDAO.buscaTodosf();
+        List<Funcionario> funcionarios = FuncionarioDAO.todosFuncionarios();
         RelatorioFuncionarioForm.emitirRelatorio(funcionarios);
     }
 
@@ -623,9 +629,13 @@ public class Main {
         List<Manutencao> manutencaos = ManutencaoDAO.buscaTodos();
         RelatorioManutencaoForm.emitirRelatorio(manutencaos);
     }
+    private static void chamaRelatorioQuarto() {
+        List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
+        RelatorioQuartoForm.emitirRelatorio(quartos);
+    }
 
-//    private static void chamaRelatorioHospedagem() {
-//        List<Hospedagem> hospedagems = HospedagemDAO.buscaTodos();
-//        //RelatorioHospedagemForm.emitirRelatorio(hospedagems);
-//    }
+    private static void chamaRelatorioHospedagem() {
+        List<Hospedagem> hospedagens = HospedagemDAO.buscaTodos();
+        RelatorioHospedagemForm.emitirRelatorio(hospedagens);
+    }
 }

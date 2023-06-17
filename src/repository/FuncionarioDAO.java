@@ -7,12 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 public class FuncionarioDAO {
 
-//    static List<Funcionario> funcionarios = new ArrayList<>();
+    static List<Funcionario> funcionarios = new ArrayList<>();
+
+//    public static void salvar(Funcionario funcionario) {
+//        funcionarios.add(funcionario);
+//    }
 
     public static void salvar(Funcionario funcionario) {
+        if (funcionario.getID() == null) {
+            funcionario.setId(funcionarios.size() + 1);
+        } else {
+            funcionarios.remove(funcionario.getID() - 1);
+        }
         funcionarios.add(funcionario);
     }
-
     public static Object[] findFunciInArray() {
         List<Funcionario> funcionarios2 = buscaTodosf();
         List<String> funciDesc = new ArrayList<>();
@@ -41,7 +49,7 @@ public class FuncionarioDAO {
 
     public static void removerFuncionario(Funcionario funcionarioSelecionado) {}
 
-    private static List<Funcionario> funcionarios;
+//    private static List<Funcionario> funcionarios;
     public static List<Funcionario> todosFuncionarios() {
         if (funcionarios.isEmpty()) {
             funcionarios.add(new Funcionario(1, "Maria Silva","987.654.321-09", "+55 11 98765-4321", "marisilva@gmail.com", "Recepção", BigDecimal.valueOf(1200.00)));

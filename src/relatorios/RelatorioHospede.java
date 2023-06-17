@@ -8,10 +8,13 @@ import java.util.Vector;
 
         private static final long serialVersionUID = 1L;
 
-        public static final int INDEX_NOME = 0;
-        public static final int INDEX_CLASSIFICACAO = 1;
-        public static final int INDEX_DOCUMENTO = 2;
-        public static final int INDEX_ESCONDIDO = 3;
+        public static final int INDEX_CODIGO = 0;
+        public static final int INDEX_NOME = 1;
+        public static final int INDEX_CPF = 2;
+        public static final int INDEX_CELULAR = 3;
+        public static final int INDEX_EMAIL = 4;
+
+        public static final int INDEX_ESCONDIDO = 5;
 
         protected String[] nomeColunas;
         protected Vector<Hospede> vetorDados;
@@ -39,12 +42,16 @@ import java.util.Vector;
         public Object getValueAt(int linha, int coluna) {
             Hospede registroPessoa = (Hospede) vetorDados.get(linha);
             switch (coluna) {
+                case INDEX_CODIGO:
+                    return registroPessoa.getID();
                 case INDEX_NOME:
                     return registroPessoa.getNome();
-                case INDEX_CLASSIFICACAO:
-                    return registroPessoa.getClassificacao();
-                case INDEX_DOCUMENTO:
+                case INDEX_CPF:
                     return registroPessoa.getCpf();
+                case INDEX_CELULAR:
+                    return registroPessoa.getCelular();
+                case INDEX_EMAIL:
+                    return registroPessoa.getEmail();
                 default:
                     return new Object();
             }

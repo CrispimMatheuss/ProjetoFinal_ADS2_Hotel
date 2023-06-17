@@ -18,14 +18,11 @@ public class Servico {
         this.valor = valor;
     }
 
-    public Servico(String tipo, Double valor) {
-        this.tipo = tipo;
-        this.valor = BigDecimal.valueOf(valor);
-    }
-
     public Servico(String tipo, BigDecimal valor) {
-
+        this.tipo = tipo;
+        this.valor = valor;
     }
+
 
     public Integer getCodigo() {
         return codigo;
