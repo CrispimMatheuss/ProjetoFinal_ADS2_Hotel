@@ -47,6 +47,14 @@ public class Servico {
         this.codigo = codigo;
     }
 
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
     @Override
     public String toString() {
         return "Servico{" +
