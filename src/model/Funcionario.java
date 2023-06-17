@@ -1,28 +1,37 @@
 package model;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 public class Funcionario extends Pessoa {
     private String cargo;
     private BigDecimal salario;
-    public Funcionario(Integer i, String nome, LocalDate dataNascimento, String cpf, String celular, String email) {
-        super(i, nome,  cpf, celular, email);
+
+    public Funcionario(Integer id, String nome, String cpf, String celular, String email, String cargo, BigDecimal salario) {
+        super(id, nome, cpf, celular, email);
+        this.cargo = cargo;
+        this.salario = salario;
     }
-    public Funcionario(Integer i, String nome, String cpf, String celular, String email) {
-        super(i, nome, cpf, celular, email);
-    }
-    public Funcionario(String nome, String cpf, String celular, String email) {
+
+    public Funcionario(String nome, String cpf, String celular, String email, String cargo, BigDecimal salario) {
         super(nome, cpf, celular, email);
+        this.cargo = cargo;
+        this.salario = salario;
     }
-    public String getCargo() { return cargo; }
+
+    public String getCargo() {
+        return cargo;
+    }
+
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+
     public BigDecimal getSalario() {
         return salario;
     }
+
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
     }
+
     @Override
     public void exibirInformacoes() {
         System.out.println("Informações do Funcionário:");
@@ -32,5 +41,4 @@ public class Funcionario extends Pessoa {
         System.out.println("Salário: " + getSalario());
         System.out.println("Celular: " + getCelular());
         System.out.println("Email: " + getEmail());    }
-
-}
+    }
