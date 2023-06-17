@@ -14,7 +14,7 @@ public class RelatorioFuncionarioForm extends JPanel {
     private static final long serialVersionUID = 1L;
 
     public static final String[] nomeColunas =
-            {"Nome", "Tipo", "Documento", ""};
+            {"Código", "Nome","CPF","Celular","Email", "Cargo", ""};
 
     protected JTable table;
     protected JScrollPane scroller;
