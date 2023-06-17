@@ -14,8 +14,9 @@ public class RelatorioFuncionario extends AbstractTableModel{
     public static final int INDEX_CELULAR = 3;
     public static final int INDEX_EMAIL = 4;
     public static final int INDEX_CARGO = 5;
+    public static final int INDEX_SALARIO = 6;
 
-    public static final int INDEX_ESCONDIDO = 6;
+    public static final int INDEX_ESCONDIDO = 7;
 
     protected String[] nomeColunas;
     protected Vector<Funcionario> vetorDados;
@@ -55,6 +56,8 @@ public class RelatorioFuncionario extends AbstractTableModel{
                 return registroPessoa.getEmail();
             case INDEX_CARGO:
                 return registroPessoa.getCargo();
+            case INDEX_SALARIO:
+                return registroPessoa.getSalario();
             default:
                 return new Object();
         }
