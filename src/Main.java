@@ -224,7 +224,24 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Hóspede removido com sucesso!");
         }
     }
+    private static void hospedesCadastrados() {
+        StringBuilder mensagem = new StringBuilder();
+        mensagem.append("Lista de Hóspedes:\n\n");
 
+        List<Hospede> hospedes = HospedeDAO.todosHospedes();
+
+        if (hospedes.isEmpty()) {
+            mensagem.append("Nenhum hóspede cadastrado.");
+        } else {
+            for (Hospede hospede : hospedes) {
+                mensagem.append("Nome: ").append(hospede.getNome()).append("\n\n");
+                mensagem.append("Cpf: ").append(hospede.getCpf()).append("\n\n");
+                mensagem.append("Celular").append(hospede.getCelular()).append("\n");
+                mensagem.append("Email: ").append(hospede.getEmail()).append("\n");
+            }
+        }
+        JOptionPane.showMessageDialog(null, mensagem.toString(), "Lista de Hóspedes", JOptionPane.INFORMATION_MESSAGE);
+    }
     /////////////////////////////FUNCIONARIO
     public static void chamaMenuFuncionario() {
         String[] opcoesMenuFuncionario = {"Inserir", "Alterar", "Excluir", "Voltar"};
@@ -336,7 +353,42 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Funcionário removido com sucesso!");
         }
     }
+    //////////////////////////QUARTO
+    private static void quartosCadastrados() {
+        StringBuilder mensagem = new StringBuilder();
+        mensagem.append("Lista de Quarto:\n\n");
 
+        List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
+        if (quartos.isEmpty()) {
+            mensagem.append("Nenhum hóspede cadastrado.");
+        } else {
+            for (Quarto quarto : quartos) {
+                mensagem.append("Nome: ").append(quarto.getNumQuarto()).append("\n\n");
+                mensagem.append("Email: ").append(quarto.getTipoQuarto()).append("\n");
+                mensagem.append("Celular: ").append(quarto.getLimitePessoas()).append("\n");
+                mensagem.append("Disponibilidade do Quarto: ").append(quarto.getDisponibilidade()).append("\n");
+                mensagem.append("Valor da Diária: ").append(quarto.getValor()).append("\n");
+            }
+        }
+        JOptionPane.showMessageDialog(null, mensagem.toString(), "Lista de Hóspedes", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private static void funcionariosCadastrados() {
+        StringBuilder mensagem = new StringBuilder();
+        mensagem.append("Lista de Funcionarios:\n\n");
+
+        List<Funcionario> funcionarios = FuncionarioDAO.todosFuncionarios();
+        if (funcionarios.isEmpty()) {
+            mensagem.append("Nenhum funcionarios cadastrado.");
+        } else {
+            for (Funcionario funcionario : funcionarios) {
+                mensagem.append("Nome: ").append(funcionario.getNome()).append("\n\n");
+                mensagem.append("Cpf").append(funcionario.getCpf()).append("\n");
+                mensagem.append("Celular").append(funcionario.getCelular()).append("\n");
+                mensagem.append("Email: ").append(funcionario.getEmail()).append("\n");
+            }
+        }
+        JOptionPane.showMessageDialog(null, mensagem.toString(), "Lista de Hóspedes", JOptionPane.INFORMATION_MESSAGE);
+    }
     /////////////////////////////////SERVIÇO
     public static void chamaMenuServico() {
         String[] opcoesMenuServico = {"Inserir", "Alterar", "Excluir", "Voltar"};
@@ -465,7 +517,7 @@ public class Main {
             chamaCheckin();
         }
 
-        List<Quarto> quartos = QuartoDAO.buscaTodos();
+        List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
         Object[] selectionQuarto = quartos.stream().map(Quarto::getNumQuarto).toArray();
         String initialSelectionQuarto = (String) selectionQuarto[0];
         Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o quarto",

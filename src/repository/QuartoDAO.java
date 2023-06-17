@@ -13,18 +13,21 @@ public class QuartoDAO {
         QuartoDAO.quartos.add(quartos);
     }
 
-    public static List<Quarto> buscaTodos() {
+    public static List<Quarto> buscaTodosQuarto() {
 
         if (quartos.isEmpty()) {
-            quartos.add(new Quarto(10, TipoQuarto.BLACK_VIP, BigDecimal.valueOf(100), "107", DisponibilidadeQuarto.DISPONIVEL, 2));
+            quartos.add(new Quarto(40, TipoQuarto.VIP, BigDecimal.valueOf(100), "201", DisponibilidadeQuarto.DISPONIVEL, 3));
+            quartos.add(new Quarto(20, TipoQuarto.MASTER_VIP, BigDecimal.valueOf(100), "301", DisponibilidadeQuarto.DISPONIVEL, 4));
+            quartos.add(new Quarto(50, TipoQuarto.STAR_VIP, BigDecimal.valueOf(100), "401", DisponibilidadeQuarto.DISPONIVEL, 5));
+            quartos.add(new Quarto(10, TipoQuarto.BLACK_VIP, BigDecimal.valueOf(100), "501", DisponibilidadeQuarto.DISPONIVEL, 6));
+            quartos.add(new Quarto(30, TipoQuarto.BLACK_VIP, BigDecimal.valueOf(100), "502", DisponibilidadeQuarto.DISPONIVEL, 6));
         }
-
 
         return quartos;
     }
 
     public static List<Quarto> buscarPorNumQuarto(String numQuarto) {
-        buscaTodos();
+        buscaTodosQuarto();
         List<Quarto> filtrados = new ArrayList<>();
         for (Quarto quarto : quartos) {
             if (quarto.getNumQuarto().equals(numQuarto)) {
