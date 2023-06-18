@@ -567,16 +567,28 @@ public class Main {
         List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
 
         LocalDate dataSaida = LocalDate.now();
-        String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dd/MM/yyyy): ");
+        String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dia/mês/ano): ");
+
+
+        Hospedagem hospedagem = hospedagens.get(0);
+
+        LocalDate dataCheckin = hospedagem.getCheckin();
 
         try {
             dataSaida = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
         } catch (DateTimeParseException e) {
             JOptionPane.showMessageDialog(null, "Formato de data inválido!");
-            return; // Retorna ou executa outra ação de tratamento de erro
+
+            return;
+        }
+        if (dataSaida.isBefore(dataCheckin)) {
+
+            JOptionPane.showMessageDialog(null, "A data de saída não pode ser anterior à data de check-in!");
+
+            return;
         }
 
-        Hospedagem hospedagem = hospedagens.get(0);
         hospedagem.setCheckout(dataSaida);
         LocalDate dataEntrada = hospedagem.getCheckin();
         long diasDif = Math.toIntExact(ChronoUnit.DAYS.between(dataEntrada, dataSaida));
@@ -590,6 +602,8 @@ public class Main {
 
         JOptionPane.showMessageDialog(null, hospedagem);
 
+        JOptionPane.showMessageDialog(null, "selecione a forma de pagamento");
+
         LocalDateTime dataHoraPagto = LocalDateTime.now();
 
         FormaPagamento[] formaPagamentos = FormaPagamento.values();
@@ -597,6 +611,7 @@ public class Main {
         for (int i = 0; i < formaPagamentos.length; i++) {
             formasPagtoNomes[i] = formaPagamentos[i].getDescricao();
         }
+
 
         int option = JOptionPane.showOptionDialog(null, "Selecione a forma de pagamento", "Formas de Pagamento",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, formasPagtoNomes, formasPagtoNomes[0]);
@@ -607,10 +622,12 @@ public class Main {
             Pagamento pagamento = new Pagamento(formaPagtoSelecionada,dataHoraPagto,hospedagem.getValorTotalHospedagem(),hospedagem);
 
             PagamentoDAO.salvar(pagamento);
-            JOptionPane.showMessageDialog(null, "pagamento aprovado!");
+            JOptionPane.showMessageDialog(null, "processando pagamento...");
             JOptionPane.showMessageDialog(null, pagamento.mensagemPagto());
+            JOptionPane.showMessageDialog(null, "pagamento aprovado!");
 
-            chamaMenuPrincipal();
+
+
 
             chamaMenuProcessos();
 
