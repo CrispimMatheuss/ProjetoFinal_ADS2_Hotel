@@ -312,12 +312,10 @@ public class Main {
         }
     }
 
-
-
     private static void alterarCadastroFuncionario() {
         Object[] selectionValuesFuncionario = FuncionarioDAO.findFunciInArray();
         String initialSelectionFuncionario = (String) selectionValuesFuncionario[0];
-        Object selectionFuncionario = JOptionPane.showInputDialog(null, "Selecione o código do hóspede",
+        Object selectionFuncionario = JOptionPane.showInputDialog(null, "Selecione o código do funcionário",
                 "Funcionario", JOptionPane.QUESTION_MESSAGE, null, selectionValuesFuncionario, initialSelectionFuncionario);
         List<Funcionario> funcionarios = FuncionarioDAO.buscarPorNomef((String) selectionFuncionario);
         Funcionario funcionario = funcionarios.get(0);
@@ -325,29 +323,36 @@ public class Main {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do funcionário", funcionario.getNome());
         if (nome == null) {
             chamaMenuCadastros();
+            return;
         }
-        String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do funcionário", funcionario.getCpf());
+        String cpf = JOptionPane.showInputDialog(null, "Digite o CPF do funcionário", funcionario.getCpf());
         if (cpf == null) {
             chamaMenuCadastros();
+            return;
         }
         String celular = JOptionPane.showInputDialog(null, "Digite o celular do funcionário", funcionario.getCelular());
         if (celular == null) {
             chamaMenuCadastros();
+            return;
         }
         String email = JOptionPane.showInputDialog(null, "Digite o email do funcionário", funcionario.getEmail());
         if (email == null) {
             chamaMenuCadastros();
+            return;
         }
 
         String cargo = JOptionPane.showInputDialog(null, "Digite o cargo do funcionário", funcionario.getCargo());
         if (cargo == null) {
             chamaMenuCadastros();
+            return;
         }
 
         String input = JOptionPane.showInputDialog(null, "Digite o salário do funcionário", funcionario.getSalario());
-        BigDecimal salario = new BigDecimal(input);
-        if (salario == null) {
+        BigDecimal salario = BigDecimal.ZERO;
+        if (!tryParseBigDecimal(input, salario)) {
+            System.out.println("Valor inválido para o salário. Verifique o formato.");
             chamaMenuCadastros();
+            return;
         }
 
         funcionario.setNome(nome);
@@ -359,6 +364,15 @@ public class Main {
         FuncionarioDAO.salvar(funcionario);
 
         chamaMenuPrincipal();
+    }
+
+    private static boolean tryParseBigDecimal2(String input, BigDecimal output) {
+        try {
+            output = new BigDecimal(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private static void removerFuncionario() {
