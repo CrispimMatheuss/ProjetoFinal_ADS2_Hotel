@@ -9,6 +9,18 @@ import java.util.List;
 public class QuartoDAO {
     static List<Quarto> quartos = new ArrayList<>();
 
+    public static Object[] findquartosInArray() {
+        buscaTodosQuarto();
+        List<Quarto> quartos= buscaTodosQuarto();
+        List<Integer> quartoCodigo = new ArrayList<>();
+
+        for (Quarto quarto : quartos) {
+            quartoCodigo.add(quarto.getId());
+        }
+
+        return quartoCodigo.toArray();
+    }
+
     public static void salvar(Quarto quartos) {
         QuartoDAO.quartos.add(quartos);
     }
@@ -36,4 +48,5 @@ public class QuartoDAO {
         }
         return filtrados;
     }
+
 }
