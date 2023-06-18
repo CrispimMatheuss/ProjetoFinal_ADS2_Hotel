@@ -119,16 +119,17 @@ public class Hospedagem {
 
     @Override
     public String toString() {
-        return "Hospedagem{" +
-                "\ncodigo=" + codigo +
-                ",\n checkin=" + checkin +
-                ",\n checkout=" + checkout +
-                ",\n hospede=" + hospede +
-                ",\n quantidadeDiarias=" + quantidadeDiarias +
-                ",\n quarto=" + quarto +
-                ",\n consumo=" + servicos +
-                ",\n valorTotalHospedagem=" + valorTotalHospedagem +
-                '}';
+        return "Hospedagem" +
+                "\ncodigo : " + codigo +
+                ",\n checkin : " + checkin +
+                ",\n checkout : " + checkout +
+                ",\n hospede : " + hospede +
+                ",\n quantidadeDiarias : " + quantidadeDiarias +
+                ",\n quarto : " + quarto +
+                ",\n consumo : " + calculaValorConsumo() +
+                ",\n valorTotalHospedagem : " + valorTotalHospedagem +
+                " "
+                ;
     }
 }
 

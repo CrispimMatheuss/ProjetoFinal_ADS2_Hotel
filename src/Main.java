@@ -514,71 +514,51 @@ public class Main {
             return; // Retorna ou executa outra ação de tratamento de erro
         }
 
-     //   Object[] selectionValuesPagamento = PagamentoDAO.findPagamentosInArray();
-      //  Integer initialSelectionPagamento = (Integer) selectionValuesPagamento[0];
-      //  Object selectionPagamento = JOptionPane.showInputDialog(null, "Selecione o código do pagamento",
-        //        "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPagamento, initialSelectionPagamento);
-       // List<Pagamento> pagamentos = PagamentoDAO.buscarPorCodigo((Integer) selectionPagamento);
-
-        Integer idPagto = 0;
-        Integer inputData1 = Integer.valueOf(JOptionPane.showInputDialog(null, "insira o id do pagamento "));
-
-        try {
-            idPagto =  inputData1 ;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "apenas numeros inteiros!");
-            return; // Retorna ou executa outra ação de tratamento de erro
-        }
-
-        LocalDateTime dataHoraPagto = LocalDateTime.now();
-
-        Object[] selectionFormaPagto = {
-                FormaPagamento.DINHEIRO.getDescricao(),
-                FormaPagamento.PIX.getDescricao(),
-                FormaPagamento.CARTAO_CREDITO.getDescricao(),
-                FormaPagamento.CARTAO_DEBITO.getDescricao()
-        };
-        Object initialSelectionForma =  selectionFormaPagto[0]; // valor inicial, o primeiro selecionado
-        Object selectionForma = JOptionPane.showInputDialog(null, "Selecione a forma de pagamento",
-                "Hotel", JOptionPane.QUESTION_MESSAGE, null, selectionFormaPagto, initialSelectionForma);
-
-        if (selectionForma == null) {
-            JOptionPane.showMessageDialog(null, "Seleção de forma de pagamento cancelada!");
-            return; // Retorna ou executa outra ação de tratamento de erro
-        }
-
-        FormaPagamento formaPagamento = (FormaPagamento) selectionForma;
-
-
-
         Hospedagem hospedagem = hospedagens.get(0);
         hospedagem.setCheckout(dataSaida);
         LocalDate dataEntrada = hospedagem.getCheckin();
-        long diasDif = Math.toIntExact(ChronoUnit.DAYS.between(dataSaida, dataEntrada));
+        long diasDif = Math.toIntExact(ChronoUnit.DAYS.between(dataEntrada, dataSaida));
         Integer diasDifInt = Math.toIntExact(diasDif);
         hospedagem.setQuantidadeDiarias(diasDifInt);
         hospedagem.calculaValorConsumo();
         hospedagem.setValorTotalHospedagem(hospedagem.calculaValorTotalHospedagem());
         HospedagemDAO.salvar(hospedagem);
+
+        JOptionPane.showMessageDialog(null, "o valor total da hospedagem é: "+hospedagem.getValorTotalHospedagem()+" reais");
+
         JOptionPane.showMessageDialog(null, hospedagem);
 
-        Pagamento  pagamento = null;
-        pagamento.setId(idPagto);
-        pagamento.setDataHora(dataHoraPagto);
-        pagamento.setFormasDePagamento(formaPagamento);
-        BigDecimal valorPagto = hospedagem.getValorTotalHospedagem();
-        pagamento.setValorTotal(valorPagto);
-        pagamento.setHospedagem(hospedagem);
-        PagamentoDAO.salvar(pagamento);
-        JOptionPane.showMessageDialog(null, "pagamento aprovado!");
-        JOptionPane.showMessageDialog(null, pagamento.mensagemPagto());
 
-        chamaMenuPrincipal();
+        LocalDateTime dataHoraPagto = LocalDateTime.now();
 
-        chamaMenuProcessos();
+        FormaPagamento[] formaPagamentos = FormaPagamento.values();
+        String[] formasPagtoNomes = new String[formaPagamentos.length];
+        for (int i = 0; i < formaPagamentos.length; i++) {
+            formasPagtoNomes[i] = formaPagamentos[i].getDescricao();
+        }
 
-    }
+        int option = JOptionPane.showOptionDialog(null, "Selecione a forma de pagamento", "Formas de Pagamento",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, formasPagtoNomes, formasPagtoNomes[0]);
 
+        if (option != JOptionPane.CLOSED_OPTION) {
+            FormaPagamento formaPagtoSelecionada = formaPagamentos[option];
+
+
+
+
+
+            Pagamento pagamento = new Pagamento(formaPagtoSelecionada,dataHoraPagto,hospedagem.getValorTotalHospedagem(),hospedagem);
+
+            PagamentoDAO.salvar(pagamento);
+            JOptionPane.showMessageDialog(null, "pagamento aprovado!");
+            JOptionPane.showMessageDialog(null, pagamento.mensagemPagto());
+
+            chamaMenuPrincipal();
+
+            chamaMenuProcessos();
+
+        }
+       }
     public static void chamaServicos() {
 
         Object[] selectionValuesHospedagem = ServicoDAO.findServicosInArray();

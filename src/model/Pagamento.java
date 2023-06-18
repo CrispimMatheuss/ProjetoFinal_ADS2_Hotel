@@ -4,21 +4,24 @@ import javax.swing.JOptionPane;
 import java.time.LocalDateTime;
 
 public class Pagamento {
+    private static Integer proximoId = 1;
     private Integer id;
     private FormaPagamento formasDePagamento;
     private LocalDateTime dataHora;
     private BigDecimal valorTotal;
     private Hospedagem hospedagem;
 
-    public Pagamento(Integer id, FormaPagamento formasDePagamento, LocalDateTime dataHora, BigDecimal valorTotal, Hospedagem hospedagem) {
-        this.id = id;
+    public Pagamento(FormaPagamento formasDePagamento, LocalDateTime dataHora, BigDecimal valorTotal, Hospedagem hospedagem) {
+        this.id = proximoId;
+        proximoId ++;
         this.formasDePagamento = formasDePagamento;
         this.dataHora = dataHora;
         this.valorTotal = valorTotal;
         this.hospedagem = hospedagem;
     }
     public String mensagemPagto(){
-        return  "valor total: "+ valorTotal +
+        return  "codigo : "+ id +
+                "\nvalor total: "+ valorTotal +
                 "\nforma de pagamento: "+ formasDePagamento+
                 "\ndata: "+ dataHora +
                 "\nhospedagem: " + hospedagem;

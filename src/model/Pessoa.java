@@ -71,12 +71,12 @@ public abstract class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" +
-                "ID=" + id +
-                ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", celular='" + celular + '\'' +
-                ", email='" + email + '\'' +
+        return "" +
+                "  \nID : " + id +
+                ", \nnome : " + nome + '\'' +
+                ", \ncpf : " + cpf + '\'' +
+                ", \ncelular : " + celular + '\'' +
+                ", \nemail : " + email + '\'' +
                 '}';
     }
 

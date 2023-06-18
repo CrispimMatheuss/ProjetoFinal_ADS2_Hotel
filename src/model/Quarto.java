@@ -78,13 +78,13 @@ public class Quarto {
     }
     @Override
     public String toString() {
-        return "Quarto{" +
-                "id=" + id +
-                ", tipoQuarto=" + tipoQuarto +
-                ", valor=" + valor +
-                ", numQuarto=" + numQuarto +
-                ", disponibilidade=" + disponibilidade +
-                ", limitePessoas=" + limitePessoas +
+        return  "" +
+                "  \nid : " + id +
+                ", \ntipoQuarto : " + tipoQuarto +
+                ", \nvalor : " + valor +
+                ", \nnumQuarto : " + numQuarto +
+                ", \ndisponibilidade : " + disponibilidade +
+                ", \nlimitePessoas : " + limitePessoas +
                 '}';
     }
 }
