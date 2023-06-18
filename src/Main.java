@@ -1,5 +1,7 @@
 import model.*;
 import repository.*;
+
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import javax.swing.*;
 import java.math.BigDecimal;
@@ -512,11 +514,42 @@ public class Main {
             return; // Retorna ou executa outra ação de tratamento de erro
         }
 
-        Object[] selectionValuesPagamento = PagamentoDAO.findPagamentosInArray();
-        Integer initialSelectionPagamento = (Integer) selectionValuesPagamento[0];
-        Object selectionPagamento = JOptionPane.showInputDialog(null, "Selecione o código do pagamento",
-                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPagamento, initialSelectionPagamento);
-        List<Pagamento> pagamentos = PagamentoDAO.buscarPorCodigo((Integer) selectionPagamento);
+     //   Object[] selectionValuesPagamento = PagamentoDAO.findPagamentosInArray();
+      //  Integer initialSelectionPagamento = (Integer) selectionValuesPagamento[0];
+      //  Object selectionPagamento = JOptionPane.showInputDialog(null, "Selecione o código do pagamento",
+        //        "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPagamento, initialSelectionPagamento);
+       // List<Pagamento> pagamentos = PagamentoDAO.buscarPorCodigo((Integer) selectionPagamento);
+
+        Integer idPagto = 0;
+        Integer inputData1 = Integer.valueOf(JOptionPane.showInputDialog(null, "insira o id do pagamento "));
+
+        try {
+            idPagto =  inputData1 ;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "apenas numeros inteiros!");
+            return; // Retorna ou executa outra ação de tratamento de erro
+        }
+
+        LocalDateTime dataHoraPagto = LocalDateTime.now();
+
+        Object[] selectionFormaPagto = {
+                FormaPagamento.DINHEIRO.getDescricao(),
+                FormaPagamento.PIX.getDescricao(),
+                FormaPagamento.CARTAO_CREDITO.getDescricao(),
+                FormaPagamento.CARTAO_DEBITO.getDescricao()
+        };
+        Object initialSelectionForma =  selectionFormaPagto[0]; // valor inicial, o primeiro selecionado
+        Object selectionForma = JOptionPane.showInputDialog(null, "Selecione a forma de pagamento",
+                "Hotel", JOptionPane.QUESTION_MESSAGE, null, selectionFormaPagto, initialSelectionForma);
+
+        if (selectionForma == null) {
+            JOptionPane.showMessageDialog(null, "Seleção de forma de pagamento cancelada!");
+            return; // Retorna ou executa outra ação de tratamento de erro
+        }
+
+        FormaPagamento formaPagamento = (FormaPagamento) selectionForma;
+
+
 
         Hospedagem hospedagem = hospedagens.get(0);
         hospedagem.setCheckout(dataSaida);
@@ -524,17 +557,22 @@ public class Main {
         long diasDif = Math.toIntExact(ChronoUnit.DAYS.between(dataSaida, dataEntrada));
         Integer diasDifInt = Math.toIntExact(diasDif);
         hospedagem.setQuantidadeDiarias(diasDifInt);
+        hospedagem.calculaValorConsumo();
         hospedagem.setValorTotalHospedagem(hospedagem.calculaValorTotalHospedagem());
         HospedagemDAO.salvar(hospedagem);
         JOptionPane.showMessageDialog(null, hospedagem);
 
-        Pagamento pagamento = pagamentos.get(0);
-        pagamento.setHospedagem(hospedagem);
+        Pagamento  pagamento = null;
+        pagamento.setId(idPagto);
+        pagamento.setDataHora(dataHoraPagto);
+        pagamento.setFormasDePagamento(formaPagamento);
         BigDecimal valorPagto = hospedagem.getValorTotalHospedagem();
         pagamento.setValorTotal(valorPagto);
+        pagamento.setHospedagem(hospedagem);
         PagamentoDAO.salvar(pagamento);
         JOptionPane.showMessageDialog(null, "pagamento aprovado!");
         JOptionPane.showMessageDialog(null, pagamento.mensagemPagto());
+
         chamaMenuPrincipal();
 
         chamaMenuProcessos();
