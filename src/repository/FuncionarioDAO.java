@@ -9,10 +9,6 @@ public class FuncionarioDAO {
 
     static List<Funcionario> funcionarios = new ArrayList<>();
 
-//    public static void salvar(Funcionario funcionario) {
-//        funcionarios.add(funcionario);
-//    }
-
     public static void salvar(Funcionario funcionario) {
         if (funcionario.getID() == null) {
             funcionario.setId(funcionarios.size() + 1);
@@ -40,12 +36,13 @@ public class FuncionarioDAO {
         buscaTodosf();
         List<Funcionario> funcionarioFiltrado = new ArrayList<>();
         for (Funcionario funcionario : funcionarios) {
-            if (funcionario.getNome() == nome) {
+            if (funcionario.getNome().equals(nome)) {
                 funcionarioFiltrado.add(funcionario);
             }
         }
         return funcionarioFiltrado;
     }
+
 
     public static void removerFuncionario(Funcionario funcionarioSelecionado) {}
 
