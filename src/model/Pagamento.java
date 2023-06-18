@@ -20,7 +20,8 @@ public class Pagamento {
         this.hospedagem = hospedagem;
     }
     public String mensagemPagto(){
-        return  "codigo : "+ id +
+        return  "Pagamento : "+
+                "\ncodigo : "+ id +
                 "\nvalor total: "+ valorTotal +
                 "\nforma de pagamento: "+ formasDePagamento+
                 "\ndata: "+ dataHora +
