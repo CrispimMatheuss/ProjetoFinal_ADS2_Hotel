@@ -23,15 +23,15 @@ public class PagamentoDAO {
 
     public static List<Pagamento> buscaTodos() {
         if (pagamentos.isEmpty()) {
-            pagamentos.add(new Pagamento(1,FormaPagamento.DINHEIRO, LocalDateTime.now(),null,null));
+            pagamentos.add(new Pagamento(FormaPagamento.DINHEIRO, LocalDateTime.now(),null,null));
 
-            pagamentos.add(new Pagamento(2,FormaPagamento.CARTAO_DEBITO,LocalDateTime.now(),null,null));
+            pagamentos.add(new Pagamento(FormaPagamento.CARTAO_DEBITO,LocalDateTime.now(),null,null));
 
-            pagamentos.add(new Pagamento(3,FormaPagamento.CARTAO_CREDITO,LocalDateTime.now(),null,null));
+            pagamentos.add(new Pagamento(FormaPagamento.CARTAO_CREDITO,LocalDateTime.now(),null,null));
 
-            pagamentos.add(new Pagamento(4,FormaPagamento.PIX,LocalDateTime.now(),null,null));
+            pagamentos.add(new Pagamento(FormaPagamento.PIX,LocalDateTime.now(),null,null));
 
-            pagamentos.add(new Pagamento(5,FormaPagamento.DINHEIRO,LocalDateTime.now(),null,null));
+            pagamentos.add(new Pagamento(FormaPagamento.DINHEIRO,LocalDateTime.now(),null,null));
         }
         return pagamentos;
     }

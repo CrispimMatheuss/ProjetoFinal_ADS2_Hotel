@@ -1,5 +1,7 @@
 import model.*;
 import repository.*;
+
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import javax.swing.*;
 import java.math.BigDecimal;
@@ -512,35 +514,51 @@ public class Main {
             return; // Retorna ou executa outra ação de tratamento de erro
         }
 
-        Object[] selectionValuesPagamento = PagamentoDAO.findPagamentosInArray();
-        Integer initialSelectionPagamento = (Integer) selectionValuesPagamento[0];
-        Object selectionPagamento = JOptionPane.showInputDialog(null, "Selecione o código do pagamento",
-                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPagamento, initialSelectionPagamento);
-        List<Pagamento> pagamentos = PagamentoDAO.buscarPorCodigo((Integer) selectionPagamento);
-
         Hospedagem hospedagem = hospedagens.get(0);
         hospedagem.setCheckout(dataSaida);
         LocalDate dataEntrada = hospedagem.getCheckin();
-        long diasDif = Math.toIntExact(ChronoUnit.DAYS.between(dataSaida, dataEntrada));
+        long diasDif = Math.toIntExact(ChronoUnit.DAYS.between(dataEntrada, dataSaida));
         Integer diasDifInt = Math.toIntExact(diasDif);
         hospedagem.setQuantidadeDiarias(diasDifInt);
+        hospedagem.calculaValorConsumo();
         hospedagem.setValorTotalHospedagem(hospedagem.calculaValorTotalHospedagem());
         HospedagemDAO.salvar(hospedagem);
+
+        JOptionPane.showMessageDialog(null, "o valor total da hospedagem é: "+hospedagem.getValorTotalHospedagem()+" reais");
+
         JOptionPane.showMessageDialog(null, hospedagem);
 
-        Pagamento pagamento = pagamentos.get(0);
-        pagamento.setHospedagem(hospedagem);
-        BigDecimal valorPagto = hospedagem.getValorTotalHospedagem();
-        pagamento.setValorTotal(valorPagto);
-        PagamentoDAO.salvar(pagamento);
-        JOptionPane.showMessageDialog(null, "pagamento aprovado!");
-        JOptionPane.showMessageDialog(null, pagamento.mensagemPagto());
-        chamaMenuPrincipal();
 
-        chamaMenuProcessos();
+        LocalDateTime dataHoraPagto = LocalDateTime.now();
 
-    }
+        FormaPagamento[] formaPagamentos = FormaPagamento.values();
+        String[] formasPagtoNomes = new String[formaPagamentos.length];
+        for (int i = 0; i < formaPagamentos.length; i++) {
+            formasPagtoNomes[i] = formaPagamentos[i].getDescricao();
+        }
 
+        int option = JOptionPane.showOptionDialog(null, "Selecione a forma de pagamento", "Formas de Pagamento",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, formasPagtoNomes, formasPagtoNomes[0]);
+
+        if (option != JOptionPane.CLOSED_OPTION) {
+            FormaPagamento formaPagtoSelecionada = formaPagamentos[option];
+
+
+
+
+
+            Pagamento pagamento = new Pagamento(formaPagtoSelecionada,dataHoraPagto,hospedagem.getValorTotalHospedagem(),hospedagem);
+
+            PagamentoDAO.salvar(pagamento);
+            JOptionPane.showMessageDialog(null, "pagamento aprovado!");
+            JOptionPane.showMessageDialog(null, pagamento.mensagemPagto());
+
+            chamaMenuPrincipal();
+
+            chamaMenuProcessos();
+
+        }
+       }
     public static void chamaServicos() {
 
         Object[] selectionValuesHospedagem = ServicoDAO.findServicosInArray();
