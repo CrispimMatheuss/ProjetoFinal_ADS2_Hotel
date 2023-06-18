@@ -11,6 +11,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+        QuartoDAO.buscaTodosQuarto();
         HospedagemDAO.buscaTodos();
         FuncionarioDAO.todosFuncionarios();
         ManutencaoDAO.buscaTodos();
@@ -538,8 +539,13 @@ public class Main {
     }
 
     public static void chamaServicos() {
+        Object[] selectionValuesQuarto = QuartoDAO.findquartosInArray();
+        Integer initialSelectionQuarto= (Integer) selectionValuesQuarto[0];
+        Object selectionQuarto = JOptionPane.showInputDialog(null, "Selecione o número do quarto",
+                "Quarto", JOptionPane.QUESTION_MESSAGE, null, selectionValuesQuarto, initialSelectionQuarto);
+        List<Quarto> quartos = QuartoDAO.buscarPorNumQuarto(String.valueOf((Integer) selectionQuarto));
 
-        Object[] selectionValuesHospedagem = ServicoDAO.findServicosInArray();
+        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
         Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
         Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
                 "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
@@ -551,6 +557,7 @@ public class Main {
                 "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesServico, initialSelectionServico);
         List<Servico> servicos = ServicoDAO.buscarPorTipo((String) selectionServico);
 
+//        Quarto quarto = quartos.get(0);
         Hospedagem hospedagem = hospedagens.get(0);
         hospedagem.addServico(servicos.get(0));
         HospedagemDAO.salvar(hospedagem);
