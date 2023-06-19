@@ -422,15 +422,26 @@ public class Main {
         if (tipo == null) {
             cadastroDeServico();
         }
+//        String input = JOptionPane.showInputDialog(null, "Digite o valor do Serviço");
+//        BigDecimal valor = new BigDecimal(input);
+
         String input = JOptionPane.showInputDialog(null, "Digite o valor do Serviço");
-        BigDecimal valor = new BigDecimal(input);
-        if (valor == null) {
+        BigDecimal valor = null;
+
+        try {
+            valor = new BigDecimal(input);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Digite um valor válido!");
             cadastroDeServico();
         }
+//        if (valor == null) {
+//            cadastroDeServico();
+//        }
         Servico servico = new Servico(tipo, valor);
         ServicoDAO.salvar(servico);
         chamaMenuPrincipal();
     }
+
 
     private static void alterarCadastroServico() {
         Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
@@ -561,7 +572,7 @@ public class Main {
         Hospedagem hospedagem = hospedagens.get(0);
         hospedagem.addServico(servicos.get(0));
         HospedagemDAO.salvar(hospedagem);
-        JOptionPane.showMessageDialog(null, hospedagem);
+        JOptionPane.showMessageDialog(null,"Serviço " + initialSelectionServico + " adicionado na hospedagem " + initialSelectionHospedagem + " no quarto " + initialSelectionQuarto + " com sucesso!");
         chamaMenuPrincipal();
     }
 
