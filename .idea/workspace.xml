@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dda354c-3e1e-4d9a-9b05-6fbdb91b4ed0" name="Changes" comment="Alterações no main - Criação de relatórios">
-      <change afterPath="$PROJECT_DIR$/src/repository/FuncionarioDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/repository/HospedeDAO.java" afterDir="false" />
+    <list default="true" id="7dda354c-3e1e-4d9a-9b05-6fbdb91b4ed0" name="Changes" comment="criação das classes HospedeDAO, FuncionarioDAO, colocados nelas e na classe QuartoDAO 5 cadastros de hospedes, funcionarios e quartos, 3 metodos (hospede,funcionario e quarto)ja criados no main ja feito para ainda serem puxados nos relatorios...">
+      <change afterPath="$PROJECT_DIR$/src/repository/TelaLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repository/QuartoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/QuartoDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +128,21 @@
       <option name="presentableId" value="Default" />
       <updated>1686610009320</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="criação das classes HospedeDAO, FuncionarioDAO, colocados nelas e na classe QuartoDAO 5 cadastros de hospedes, funcionarios e quartos, 3 metodos (hospede,funcionario e quarto)ja criados no main ja feito para ainda serem puxados nos relatorios...">
+      <created>1687031712130</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1687031712131</updated>
+    </task>
+    <task id="LOCAL-00007" summary="criação das classes HospedeDAO, FuncionarioDAO, colocados nelas e na classe QuartoDAO 5 cadastros de hospedes, funcionarios e quartos, 3 metodos (hospede,funcionario e quarto)ja criados no main ja feito para ainda serem puxados nos relatorios...">
+      <created>1687031783533</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1687031783533</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,14 +160,15 @@
     <MESSAGE value="Alterações no main" />
     <MESSAGE value="Alterações no main - Seleção de hóspede e quarto" />
     <MESSAGE value="Alterações no main - Criação de relatórios" />
-    <option name="LAST_COMMIT_MESSAGE" value="Alterações no main - Criação de relatórios" />
+    <MESSAGE value="criação das classes HospedeDAO, FuncionarioDAO, colocados nelas e na classe QuartoDAO 5 cadastros de hospedes, funcionarios e quartos, 3 metodos (hospede,funcionario e quarto)ja criados no main ja feito para ainda serem puxados nos relatorios..." />
+    <option name="LAST_COMMIT_MESSAGE" value="criação das classes HospedeDAO, FuncionarioDAO, colocados nelas e na classe QuartoDAO 5 cadastros de hospedes, funcionarios e quartos, 3 metodos (hospede,funcionario e quarto)ja criados no main ja feito para ainda serem puxados nos relatorios..." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/relatorios/RelatorioFuncionario.java</url>
-          <line>28</line>
+          <line>33</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
