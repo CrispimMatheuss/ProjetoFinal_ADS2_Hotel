@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static repository.TelaLogin.exibirTelaLogin;
@@ -15,6 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
         QuartoDAO.buscaTodosQuarto();
+        HospedeDAO.buscaTodosh();
         HospedagemDAO.buscaTodos();
         FuncionarioDAO.todosFuncionarios();
         ManutencaoDAO.buscaTodosManutencao();
@@ -516,38 +518,68 @@ public class Main {
                 "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionHospede, initialSelectionHospede);
 
         List<Hospede> hospede = HospedeDAO.buscarPorNome((String) selecHospede);
-        Hospedagem hospedagem = new Hospedagem(60, dataEntrada, null, hospede.get(0), 0, quartosSelect.get(0));
+        Quarto quarto = quartosSelect.get(0);
+        Hospedagem hospedagem = new Hospedagem(dataEntrada,  hospede.get(0),  quarto);
         HospedagemDAO.salvar(hospedagem);
 
-        chamaMenuProcessos();
+    chamaMenuProcessos();
     }
 
     public static void chamaServicos() {
         Object[] selectionValuesQuarto = QuartoDAO.findquartosInArray();
-        Integer initialSelectionQuarto= (Integer) selectionValuesQuarto[0];
+        Integer initialSelectionQuarto = (Integer) selectionValuesQuarto[0];
         Object selectionQuarto = JOptionPane.showInputDialog(null, "Selecione o número do quarto",
                 "Quarto", JOptionPane.QUESTION_MESSAGE, null, selectionValuesQuarto, initialSelectionQuarto);
         List<Quarto> quartos = QuartoDAO.buscarPorNumQuarto(String.valueOf((Integer) selectionQuarto));
 
-        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
-        Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
-        Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
-                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
-        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
+        Quarto quarto = quartos.get(0);
+
+        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo(quarto.getNumQuarto());
+
+        List<Integer> selectionValuesHospedagem = new ArrayList<>();
+        for (Hospedagem hospedagem : hospedagens) {
+            if (hospedagem.getCheckout() == null) {
+                selectionValuesHospedagem.add(hospedagem.getCodigo());
+            }
+        }
+
+        if (selectionValuesHospedagem.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhuma hospedagem disponível para o quarto selecionado.");
+            chamaMenuPrincipal();
+            return;
+        }
+
+        Integer initialSelectionHospedagem = selectionValuesHospedagem.get(0);
+        Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem",
+                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem.toArray(), initialSelectionHospedagem);
+
+        Hospedagem hospedagem = null;
+        for (Hospedagem h : hospedagens) {
+            if (h.getCodigo().equals(selectionHospedagem)) {
+                hospedagem = h;
+                break;
+            }
+        }
 
         Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
         String initialSelectionServico = (String) selectionValuesServico[0];
-        Object selectionServico = JOptionPane.showInputDialog(null, "Selecione a descricao da Serviço?",
-                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesServico, initialSelectionServico);
+        Object selectionServico = JOptionPane.showInputDialog(null, "Selecione a descrição do serviço",
+                "Serviço", JOptionPane.QUESTION_MESSAGE, null, selectionValuesServico, initialSelectionServico);
         List<Servico> servicos = ServicoDAO.buscarPorTipo((String) selectionServico);
 
-//        Quarto quarto = quartos.get(0);
-        Hospedagem hospedagem = hospedagens.get(0);
-        hospedagem.addServico(servicos.get(0));
+        Servico servico = servicos.get(0);
+
+        hospedagem.addServico(servico); // Adiciona o serviço à lista de serviços da hospedagem
+
+        // Salvar a hospedagem atualizada no banco de dados
         HospedagemDAO.salvar(hospedagem);
-        JOptionPane.showMessageDialog(null,"Serviço " + initialSelectionServico + " adicionado na hospedagem " + initialSelectionHospedagem + " no quarto " + initialSelectionQuarto + " com sucesso!");
+
+        JOptionPane.showMessageDialog(null, "Serviço " + initialSelectionServico + " adicionado na hospedagem " +
+                selectionHospedagem + " no quarto " + selectionQuarto + " com sucesso!");
+
         chamaMenuPrincipal();
     }
+
 
     public static void chamaCheckOut() {
 
@@ -555,7 +587,7 @@ public class Main {
         Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
         Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem",
                 "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
-        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
+        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo(String.valueOf((Integer) selectionHospedagem));
 
         LocalDate dataSaida = LocalDate.now();
         String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dia/mês/ano): ");
@@ -634,6 +666,7 @@ public class Main {
         String initialSelectionManut = (String) selectManutencoes[0];
         Object selecManut = JOptionPane.showInputDialog(null, "Selecione o tipo de manutenção realizada",
                 "Manutenções", JOptionPane.QUESTION_MESSAGE, null, selectManutencoes, initialSelectionManut);
+        chamaMenuPrincipal();
     }
 
     /////////////////RELATÓRIOS////////////////////

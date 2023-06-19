@@ -26,6 +26,12 @@ public class Hospedagem {
 
     }
 
+    public Hospedagem(LocalDate checkin, Hospede hospede, Quarto quarto) {
+        this.checkin = checkin;
+        this.hospede = hospede;
+        this.quarto = quarto;
+    }
+
     public BigDecimal calculaValorConsumo() {
         BigDecimal valCons = BigDecimal.ZERO;
         for (Servico servico : this.servicos) {
