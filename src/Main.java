@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import static repository.TelaLogin.exibirTelaLogin;
+import static repository.TelaLogin.verificarCredenciais;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -27,37 +30,7 @@ public class Main {
                 JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Entrar"}, "Entrar");
     }
 
-    private static void exibirTelaLogin() {
-        JTextField usernameField = new JTextField();
-        JPasswordField passwordField = new JPasswordField();
 
-        Object[] message = {
-                "Login:", usernameField, //admin
-                "Senha:", passwordField //123456
-        };
-
-        int option = JOptionPane.showConfirmDialog(null, message,
-                "Tela de Login", JOptionPane.OK_CANCEL_OPTION);
-
-        if (option == JOptionPane.OK_OPTION) {
-            String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
-
-            if (verificarCredenciais(username, password)) {
-                chamaMenuPrincipal();
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Credenciais inválidas. Tente novamente.", "Erro de login", JOptionPane.ERROR_MESSAGE);
-                exibirTelaLogin();
-            }
-        } else {
-            System.exit(0);
-        }
-    }
-
-    private static boolean verificarCredenciais(String username, String password) {
-        return username.equals("admin") && password.equals("123456");
-    }
 
     public static void chamaMenuPrincipal() {
         String[] opcoesMenu = {"Cadastros", "Processos", "Relatorios", "Sair"};
