@@ -14,7 +14,7 @@ public class Main {
         QuartoDAO.buscaTodosQuarto();
         HospedagemDAO.buscaTodos();
         FuncionarioDAO.todosFuncionarios();
-        ManutencaoDAO.buscaTodos();
+        ManutencaoDAO.buscaTodosManutencao();
         ServicoDAO.buscaTodos();
         exibirMensagemBoasVindas();
         exibirTelaLogin();
