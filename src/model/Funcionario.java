@@ -16,6 +16,10 @@ public class Funcionario extends Pessoa {
         this.salario = salario;
     }
 
+    public Funcionario(String nome, String cpf, String celular, String email) {
+        super(nome, cpf, celular, email);
+    }
+
     public String getCargo() {
         return cargo;
     }

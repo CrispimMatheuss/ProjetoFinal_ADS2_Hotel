@@ -12,13 +12,13 @@ public class QuartoDAO {
     public static Object[] findquartosInArray() {
         buscaTodosQuarto();
         List<Quarto> quartos= buscaTodosQuarto();
-        List<Integer> quartoCodigo = new ArrayList<>();
+        List<Integer> quartoNumero = new ArrayList<>();
 
         for (Quarto quarto : quartos) {
-            quartoCodigo.add(quarto.getId());
+            quartoNumero.add(Integer.valueOf(quarto.getNumQuarto()));
         }
 
-        return quartoCodigo.toArray();
+        return quartoNumero.toArray();
     }
 
     public static void salvar(Quarto quartos) {
