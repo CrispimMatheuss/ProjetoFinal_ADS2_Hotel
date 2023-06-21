@@ -73,4 +73,3 @@ public class RelatorioFuncionario extends AbstractTableModel{
         return nomeColunas.length;
     }
 }
-

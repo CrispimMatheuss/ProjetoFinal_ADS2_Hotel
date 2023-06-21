@@ -1,4 +1,5 @@
 import model.*;
+
 import repository.*;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -19,7 +20,7 @@ public class Main {
         HospedeDAO.buscaTodosh();
         HospedagemDAO.buscaTodos();
         FuncionarioDAO.todosFuncionarios();
-        ManutencaoDAO.buscaTodosManutencao();
+//        ManutencaoDAO.buscaTodosManutencao();
         ServicoDAO.buscaTodos();
         exibirMensagemBoasVindas();
         exibirTelaLogin();
@@ -475,10 +476,10 @@ public class Main {
             case 2: //Checkout
                 chamaCheckOut();
                 break;
-            case 3: //Manutenções (no chamaMenuCadastros precisa ter a opção de cadastrar ordem de serviço para na chamaManut selecionar qual a ordem relacionada)
-                chamaManut();
-                break;
-            case 4: //Voltar
+//            case 3: //Manutenções (no chamaMenuCadastros precisa ter a opção de cadastrar ordem de serviço para na chamaManut selecionar qual a ordem relacionada)
+//                chamaManut();
+//                break;
+            case 3: //Voltar
                 chamaMenuPrincipal();
                 break;
             default:
@@ -658,21 +659,21 @@ public class Main {
         }
        }
 
-    public static void chamaManut() {
-        Object[] selectManutencoes = {
-                TipoManutencao.ELETRICA.getDescricao(),
-                TipoManutencao.ESTRUTURAL.getDescricao(),
-                TipoManutencao.LIMPEZA.getDescricao()};
-
-        String initialSelectionManut = (String) selectManutencoes[0];
-        Object selecManut = JOptionPane.showInputDialog(null, "Selecione o tipo de manutenção realizada",
-                "Manutenções", JOptionPane.QUESTION_MESSAGE, null, selectManutencoes, initialSelectionManut);
-        chamaMenuPrincipal();
-    }
+//    public static void chamaManut() {
+//        Object[] selectManutencoes = {
+//                TipoManutencao.ELETRICA.getDescricao(),
+//                TipoManutencao.ESTRUTURAL.getDescricao(),
+//                TipoManutencao.LIMPEZA.getDescricao()};
+//
+//        String initialSelectionManut = (String) selectManutencoes[0];
+//        Object selecManut = JOptionPane.showInputDialog(null, "Selecione o tipo de manutenção realizada",
+//                "Manutenções", JOptionPane.QUESTION_MESSAGE, null, selectManutencoes, initialSelectionManut);
+//        chamaMenuPrincipal();
+//    }
 
     /////////////////RELATÓRIOS////////////////////
     private static void listaCadastros() {
-        String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Serviços", "Manutenções", "Hospedagens", "Quartos", "Voltar"};
+        String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Serviços", "Hospedagens", "Quartos", "Voltar"};
         int menuRelatorios = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Relatórios",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuRelatorios, opcoesMenuRelatorios[0]);
@@ -687,16 +688,16 @@ public class Main {
             case 2: //Serviços
                 chamaRelatorioServico();
                 break;
-            case 3: //Manutenção
-                chamaRelatorioManutencao();
-                break;
-            case 4: //Hospedagem
+//            case 3: //Manutenção
+//                chamaRelatorioManutencao();
+//                break;
+            case 3: //Hospedagem
                 chamaRelatorioHospedagem();
                 break;
-                case 5: //Quarto
+            case 4: //Quarto
                 chamaRelatorioQuarto();
                 break;
-            case 6: //Voltar
+            case 5: //Voltar
                 chamaMenuPrincipal();
                 break;
             default:
@@ -717,10 +718,12 @@ public class Main {
         List<Servico> servicos = ServicoDAO.buscaTodos();
         RelatorioServicoForm.emitirRelatorio(servicos);
     }
-    private static void chamaRelatorioManutencao() {
-        List<Manutencao> manutencaos = ManutencaoDAO.buscaTodos();
-        RelatorioManutencaoForm.emitirRelatorio(manutencaos);
-    }
+
+//    private static void chamaRelatorioManutencao() {
+//        List<Manutencao> manutencaos = ManutencaoDAO.buscaTodos();
+//        RelatorioManutencaoForm.emitirRelatorio(manutencaos);
+//    }
+
     private static void chamaRelatorioQuarto() {
         List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
         RelatorioQuartoForm.emitirRelatorio(quartos);

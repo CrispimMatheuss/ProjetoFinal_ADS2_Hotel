@@ -1,10 +1,11 @@
 package repository;
-import model.*;
+
+import model.Funcionario;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 public class FuncionarioDAO {
 
     static List<Funcionario> funcionarios = new ArrayList<>();
@@ -17,6 +18,7 @@ public class FuncionarioDAO {
         }
         funcionarios.add(funcionario);
     }
+
     public static Object[] findFunciInArray() {
         List<Funcionario> funcionarios2 = buscaTodosf();
         List<String> funciDesc = new ArrayList<>();
@@ -29,7 +31,7 @@ public class FuncionarioDAO {
     }
 
     public static List<Funcionario> buscaTodosf() {
-        return funcionarios;
+        return new ArrayList<>(funcionarios);
     }
 
     public static List<Funcionario> buscarPorNomef(String nome) {
@@ -43,10 +45,10 @@ public class FuncionarioDAO {
         return funcionarioFiltrado;
     }
 
+    public static void removerFuncionario(Funcionario funcionarioSelecionado) {
+        // Implementação para remover um funcionário
+    }
 
-    public static void removerFuncionario(Funcionario funcionarioSelecionado) {}
-
-//    private static List<Funcionario> funcionarios;
     public static List<Funcionario> todosFuncionarios() {
         if (funcionarios.isEmpty()) {
             funcionarios.add(new Funcionario(1, "Maria Silva","987.654.321-09", "+55 11 98765-4321", "marisilva@gmail.com", "Recepção", BigDecimal.valueOf(1200.00)));
@@ -55,6 +57,6 @@ public class FuncionarioDAO {
             funcionarios.add(new Funcionario(4, "Pedro Rodrigues","999.888.777-66", "+55 31 87654-3210", "pedrorodrigues@gmail.com", "Recepção", BigDecimal.valueOf(1200.00)));
             funcionarios.add(new Funcionario(5, "Sofia Almeida","444.333.222-11", "+55 82 94567-8901", "sofiaalmeida@gmail.com", "Recepção", BigDecimal.valueOf(1200.00)));
         }
-        return funcionarios;
+        return new ArrayList<>(funcionarios);
     }
 }

@@ -1,5 +1,7 @@
 package model;
+
 import java.math.BigDecimal;
+
 public class Funcionario extends Pessoa {
     private String cargo;
     private BigDecimal salario;
@@ -44,5 +46,6 @@ public class Funcionario extends Pessoa {
         System.out.println("Cargo: " + getCargo());
         System.out.println("Salário: " + getSalario());
         System.out.println("Celular: " + getCelular());
-        System.out.println("Email: " + getEmail());    }
+        System.out.println("Email: " + getEmail());
     }
+}
