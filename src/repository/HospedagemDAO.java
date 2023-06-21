@@ -68,10 +68,10 @@ public class HospedagemDAO {
     }
 
 
-    public static List<Hospedagem> buscarPorCodigo(String codigo) {
+    public static List<Hospedagem> buscarPorCodigo(Integer codigo) {
         List<Hospedagem> hospedagemFiltradas = new ArrayList<>();
         for (Hospedagem hospedagem : hospedagens) {
-            if (hospedagem.getCodigo() == Integer.parseInt(codigo)) {
+            if (hospedagem.getCodigo() == Integer.parseInt(String.valueOf(codigo))) {
                 hospedagemFiltradas.add(hospedagem);
             }
         }

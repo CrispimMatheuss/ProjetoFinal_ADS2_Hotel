@@ -569,58 +569,32 @@ public class Main {
 
     public static void chamaServicos() {
         Object[] selectionValuesQuarto = QuartoDAO.findquartosInArray();
-        Integer initialSelectionQuarto = (Integer) selectionValuesQuarto[0];
+        Integer initialSelectionQuarto= (Integer) selectionValuesQuarto[0];
         Object selectionQuarto = JOptionPane.showInputDialog(null, "Selecione o número do quarto",
                 "Quarto", JOptionPane.QUESTION_MESSAGE, null, selectionValuesQuarto, initialSelectionQuarto);
         List<Quarto> quartos = QuartoDAO.buscarPorNumQuarto(String.valueOf((Integer) selectionQuarto));
 
-        Quarto quarto = quartos.get(0);
-
-        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo(quarto.getNumQuarto());
-
-        List<Integer> selectionValuesHospedagem = new ArrayList<>();
-        for (Hospedagem hospedagem : hospedagens) {
-            if (hospedagem.getCheckout() == null) {
-                selectionValuesHospedagem.add(hospedagem.getCodigo());
-            }
-        }
-
-        if (selectionValuesHospedagem.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nenhuma hospedagem disponível para o quarto selecionado.");
-            chamaMenuPrincipal();
-            return;
-        }
-
-        Integer initialSelectionHospedagem = selectionValuesHospedagem.get(0);
-        Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem",
-                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem.toArray(), initialSelectionHospedagem);
-
-        Hospedagem hospedagem = null;
-        for (Hospedagem h : hospedagens) {
-            if (h.getCodigo().equals(selectionHospedagem)) {
-                hospedagem = h;
-                break;
-            }
-        }
+        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
+        Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
+        Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
+                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
+        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
 
         Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
         String initialSelectionServico = (String) selectionValuesServico[0];
-        Object selectionServico = JOptionPane.showInputDialog(null, "Selecione a descrição do serviço",
-                "Serviço", JOptionPane.QUESTION_MESSAGE, null, selectionValuesServico, initialSelectionServico);
+        Object selectionServico = JOptionPane.showInputDialog(null, "Selecione a descricao da Serviço?",
+                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesServico, initialSelectionServico);
         List<Servico> servicos = ServicoDAO.buscarPorTipo((String) selectionServico);
 
-        Servico servico = servicos.get(0);
-
-        hospedagem.addServico(servico); // Adiciona o serviço à lista de serviços da hospedagem
-
-        // Salvar a hospedagem atualizada no banco de dados
+//        Quarto quarto = quartos.get(0);
+        Hospedagem hospedagem = hospedagens.get(0);
+        hospedagem.addServico(servicos.get(0));
         HospedagemDAO.salvar(hospedagem);
-
-        JOptionPane.showMessageDialog(null, "Serviço " + servico.getTipo() + " adicionado na hospedagem " +
-                selectionHospedagem + " no quarto " + selectionQuarto + " com sucesso!");
-
+        JOptionPane.showMessageDialog(null, hospedagem);
         chamaMenuPrincipal();
     }
+
+
 
 
     public static void chamaCheckOut() {
@@ -640,7 +614,7 @@ public class Main {
             return; // O usuário cancelou a seleção
         }
 
-        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo(String.valueOf((Integer) selectionHospedagem));
+        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo((Integer) selectionHospedagem);
 
         if (hospedagens.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Hospedagem não encontrada!");
