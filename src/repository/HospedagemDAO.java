@@ -68,16 +68,15 @@ public class HospedagemDAO {
     }
 
 
-    public static List<Hospedagem> buscarPorCodigo(String numeroQuarto) {
+    public static List<Hospedagem> buscarPorCodigo(String codigo) {
         List<Hospedagem> hospedagemFiltradas = new ArrayList<>();
         for (Hospedagem hospedagem : hospedagens) {
-            if (hospedagem.getQuarto().getNumQuarto().equals(numeroQuarto)) {
+            if (hospedagem.getQuarto().getNumQuarto().equals(codigo)) {
                 hospedagemFiltradas.add(hospedagem);
             }
         }
         return hospedagemFiltradas;
     }
-
 
     public static void removerHospede(Hospede hospedeSelecionado) {
 

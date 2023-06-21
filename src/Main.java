@@ -2,6 +2,7 @@ import model.*;
 
 import repository.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import javax.swing.*;
 import java.math.BigDecimal;
@@ -461,7 +462,7 @@ public class Main {
 
     //////////////////////////PROCESSOS
     public static void chamaMenuProcessos() {
-        String[] opcoesMenuProcessos = {"Check-in", "Consumos", "Check-out", "Manutenções", "Voltar"};
+        String[] opcoesMenuProcessos = {"Check-in", "Consumos", "Check-out", "Voltar"};
         int menuProcessos = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Processos",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuProcessos, opcoesMenuProcessos[0]);
@@ -489,41 +490,81 @@ public class Main {
     }
 
     public static void chamaCheckin() {
-        LocalDate dataEntrada = LocalDate.now();
-        String inputData = JOptionPane.showInputDialog(null, "Data de entrada (formato: dd/MM/yyyy): ");
+        boolean continua = true;
 
-        try {
-            dataEntrada = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+        while (continua == true) {
+
+
+            List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
+            Object[] selectionQuarto = quartos.stream().map(Quarto::getNumQuarto).toArray();
+            String initialSelectionQuarto = (String) selectionQuarto[0];
+
+            Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o quarto",
+                    "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
+
+            if (selecQuarto == null) {
+                JOptionPane.showMessageDialog(null, "Operação de check-in cancelada.");
+                chamaMenuPrincipal();
+                return; // Encerrar o método atual
+            }
+
+            List<Quarto> quartosSelect = QuartoDAO.buscarPorNumQuarto((String) selecQuarto);
+
+            List<Hospede> hospedes = HospedeDAO.buscaTodosh();
+
+            if (hospedes.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Nenhum hóspede cadastrado!");
+                chamaMenuPrincipal();
+            }
+
+            Object[] selectionHospede = hospedes.stream().map(Hospede::getNome).toArray();
+            String initialSelectionHospede = (String) selectionHospede[0];
+
+            Object selecHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede",
+                    "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionHospede, initialSelectionHospede);
+
+            if (selecHospede == null) {
+                JOptionPane.showMessageDialog(null, "Operação de check-in cancelada.");
+                chamaMenuPrincipal();
+
+            }
+
+            LocalDate dataEntrada = LocalDate.now();
+            String inputData = JOptionPane.showInputDialog(null, "Data de entrada (formato: dd/MM/yyyy): ");
+
+            if (inputData == null) {
+                JOptionPane.showMessageDialog(null, "Operação de check-in cancelada.");
+                chamaMenuPrincipal();
+                return;
+            }
+
+
+            try {
+                dataEntrada = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+                chamaCheckin();
+                continue;
+            }
+
+            List<Hospede> hospede = HospedeDAO.buscarPorNome((String) selecHospede);
+            Quarto quarto = quartosSelect.get(0);
+            Hospedagem hospedagem = new Hospedagem(dataEntrada, hospede.get(0), quarto);
+            HospedagemDAO.salvar(hospedagem);
+            continua = false;
+
+        }
+
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar outro check-in?", "Continuar", JOptionPane.YES_NO_OPTION);
+        if (resposta == JOptionPane.YES_OPTION){
             chamaCheckin();
         }
 
-        List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
-        Object[] selectionQuarto = quartos.stream().map(Quarto::getNumQuarto).toArray();
-        String initialSelectionQuarto = (String) selectionQuarto[0];
-        Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o quarto",
-                "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
-        List<Quarto> quartosSelect = QuartoDAO.buscarPorNumQuarto((String) selecQuarto);
-
-        List<Hospede> hospedes = HospedeDAO.buscaTodosh();
-
-        if (hospedes.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nenhum hóspede cadastrado!");
-            chamaMenuPrincipal();
+        if (resposta == JOptionPane.NO_OPTION) {
+            chamaMenuProcessos();
         }
 
-        Object[] selectionHospede = hospedes.stream().map(Hospede::getNome).toArray();
-        String initialSelectionHospede = (String) selectionHospede[0];
-        Object selecHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede",
-                "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionHospede, initialSelectionHospede);
 
-        List<Hospede> hospede = HospedeDAO.buscarPorNome((String) selecHospede);
-        Quarto quarto = quartosSelect.get(0);
-        Hospedagem hospedagem = new Hospedagem(dataEntrada,  hospede.get(0),  quarto);
-        HospedagemDAO.salvar(hospedagem);
-
-    chamaMenuProcessos();
     }
 
     public static void chamaServicos() {
@@ -575,7 +616,7 @@ public class Main {
         // Salvar a hospedagem atualizada no banco de dados
         HospedagemDAO.salvar(hospedagem);
 
-        JOptionPane.showMessageDialog(null, "Serviço " + initialSelectionServico + " adicionado na hospedagem " +
+        JOptionPane.showMessageDialog(null, "Serviço " + servico.getTipo() + " adicionado na hospedagem " +
                 selectionHospedagem + " no quarto " + selectionQuarto + " com sucesso!");
 
         chamaMenuPrincipal();
@@ -583,60 +624,66 @@ public class Main {
 
 
     public static void chamaCheckOut() {
-
         Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
-        Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
-        Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem",
-                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
-        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo(String.valueOf((Integer) selectionHospedagem));
 
-        LocalDate dataSaida = LocalDate.now();
-        String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dia/mês/ano): ");
-
-
-        Hospedagem hospedagem = hospedagens.get(0);
-
-        LocalDate dataCheckin = hospedagem.getCheckin();
-
-        try {
-            dataSaida = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
-
+        if (selectionValuesHospedagem.length == 0) {
+            JOptionPane.showMessageDialog(null, "Nenhuma hospedagem encontrada!");
             return;
         }
+
+        Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
+
+        Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem",
+                "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
+
+        if (selectionHospedagem == null) {
+            return; // O usuário cancelou a seleção
+        }
+
+        List<Hospedagem> hospedagens = HospedagemDAO.buscarPorCodigo(String.valueOf((Integer) selectionHospedagem));
+
+        if (hospedagens.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Hospedagem não encontrada!");
+            return;
+        }
+
+        Hospedagem hospedagem = hospedagens.get(0);
+        LocalDate dataCheckin = hospedagem.getCheckin();
+
+        String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dia/mês/ano): ");
+
+        LocalDate dataSaida;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            dataSaida = LocalDate.parse(inputData, formatter);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+            return;
+        }
+
         if (dataSaida.isBefore(dataCheckin)) {
-
             JOptionPane.showMessageDialog(null, "A data de saída não pode ser anterior à data de check-in!");
-
             return;
         }
 
         hospedagem.setCheckout(dataSaida);
-        LocalDate dataEntrada = hospedagem.getCheckin();
-        long diasDif = Math.toIntExact(ChronoUnit.DAYS.between(dataEntrada, dataSaida));
-        Integer diasDifInt = Math.toIntExact(diasDif);
+        long diasDif = ChronoUnit.DAYS.between(dataCheckin, dataSaida);
+        int diasDifInt = Math.toIntExact(diasDif);
         hospedagem.setQuantidadeDiarias(diasDifInt);
         hospedagem.calculaValorConsumo();
         hospedagem.setValorTotalHospedagem(hospedagem.calculaValorTotalHospedagem());
         HospedagemDAO.salvar(hospedagem);
 
-        JOptionPane.showMessageDialog(null, "o valor total da hospedagem é: "+hospedagem.getValorTotalHospedagem()+" reais");
-
+        JOptionPane.showMessageDialog(null, "O valor total da hospedagem é: " + hospedagem.getValorTotalHospedagem() + " reais");
         JOptionPane.showMessageDialog(null, hospedagem);
-
-        JOptionPane.showMessageDialog(null, "selecione a forma de pagamento");
+        JOptionPane.showMessageDialog(null, "Selecione a forma de pagamento");
 
         LocalDateTime dataHoraPagto = LocalDateTime.now();
-
-
         FormaPagamento[] formaPagamentos = FormaPagamento.values();
         String[] formasPagtoNomes = new String[formaPagamentos.length];
         for (int i = 0; i < formaPagamentos.length; i++) {
             formasPagtoNomes[i] = formaPagamentos[i].getDescricao();
         }
-
 
         int option = JOptionPane.showOptionDialog(null, "Selecione a forma de pagamento", "Formas de Pagamento",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, formasPagtoNomes, formasPagtoNomes[0]);
@@ -644,20 +691,19 @@ public class Main {
         if (option != JOptionPane.CLOSED_OPTION) {
             FormaPagamento formaPagtoSelecionada = formaPagamentos[option];
 
-            Pagamento pagamento = new Pagamento(formaPagtoSelecionada,dataHoraPagto,hospedagem.getValorTotalHospedagem(),hospedagem);
-
+            Pagamento pagamento = new Pagamento(formaPagtoSelecionada, dataHoraPagto, hospedagem.getValorTotalHospedagem(), hospedagem);
             PagamentoDAO.salvar(pagamento);
-            JOptionPane.showMessageDialog(null, "processando pagamento...");
+
+            JOptionPane.showMessageDialog(null, "Processando pagamento...");
             JOptionPane.showMessageDialog(null, pagamento.mensagemPagto());
-            JOptionPane.showMessageDialog(null, "pagamento aprovado!");
-
-
-
+            JOptionPane.showMessageDialog(null, "Pagamento aprovado!");
 
             chamaMenuProcessos();
-
         }
-       }
+    }
+
+
+
 
 //    public static void chamaManut() {
 //        Object[] selectManutencoes = {

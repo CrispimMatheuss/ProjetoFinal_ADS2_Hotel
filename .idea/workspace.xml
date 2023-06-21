@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dda354c-3e1e-4d9a-9b05-6fbdb91b4ed0" name="Changes" comment="Ajustes no main para adição do consumo na hospedagem">
+    <list default="true" id="7dda354c-3e1e-4d9a-9b05-6fbdb91b4ed0" name="Changes" comment="exclusão da manutenção">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RelatorioFuncionarioForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RelatorioFuncionarioForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Funcionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Funcionario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Manutencao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Manutencao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/OrdemDeServico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/OrdemDeServico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/relatorios/RelatorioFuncionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/relatorios/RelatorioFuncionario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repository/FuncionarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/FuncionarioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repository/HospedagemDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/HospedagemDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687218929711</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="exclusão da manutenção">
+      <created>1687384851609</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1687384851609</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -173,7 +175,8 @@
     <MESSAGE value="Alterações no main - Criação de relatórios" />
     <MESSAGE value="criação das classes HospedeDAO, FuncionarioDAO, colocados nelas e na classe QuartoDAO 5 cadastros de hospedes, funcionarios e quartos, 3 metodos (hospede,funcionario e quarto)ja criados no main ja feito para ainda serem puxados nos relatorios..." />
     <MESSAGE value="Ajustes no main para adição do consumo na hospedagem" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajustes no main para adição do consumo na hospedagem" />
+    <MESSAGE value="exclusão da manutenção" />
+    <option name="LAST_COMMIT_MESSAGE" value="exclusão da manutenção" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
