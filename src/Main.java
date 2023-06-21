@@ -488,41 +488,81 @@ public class Main {
     }
 
     public static void chamaCheckin() {
-        LocalDate dataEntrada = LocalDate.now();
-        String inputData = JOptionPane.showInputDialog(null, "Data de entrada (formato: dd/MM/yyyy): ");
+        boolean continua = true;
 
-        try {
-            dataEntrada = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
-            chamaCheckin();
-        }
+        while (continua == true) {
 
-        List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
-        Object[] selectionQuarto = quartos.stream().map(Quarto::getNumQuarto).toArray();
-        String initialSelectionQuarto = (String) selectionQuarto[0];
-        Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o quarto",
-                "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
-        List<Quarto> quartosSelect = QuartoDAO.buscarPorNumQuarto((String) selecQuarto);
 
-        List<Hospede> hospedes = HospedeDAO.buscaTodosh();
+                List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
+                Object[] selectionQuarto = quartos.stream().map(Quarto::getNumQuarto).toArray();
+                String initialSelectionQuarto = (String) selectionQuarto[0];
 
-        if (hospedes.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nenhum hóspede cadastrado!");
-            chamaMenuPrincipal();
-        }
+                Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o quarto",
+                        "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
 
-        Object[] selectionHospede = hospedes.stream().map(Hospede::getNome).toArray();
-        String initialSelectionHospede = (String) selectionHospede[0];
-        Object selecHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede",
-                "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionHospede, initialSelectionHospede);
+            if (selecQuarto == null) {
+                JOptionPane.showMessageDialog(null, "Operação de check-in cancelada.");
+                chamaMenuPrincipal();
+                return; // Encerrar o método atual
+            }
 
-        List<Hospede> hospede = HospedeDAO.buscarPorNome((String) selecHospede);
-        Quarto quarto = quartosSelect.get(0);
-        Hospedagem hospedagem = new Hospedagem(dataEntrada,  hospede.get(0),  quarto);
-        HospedagemDAO.salvar(hospedagem);
+                List<Quarto> quartosSelect = QuartoDAO.buscarPorNumQuarto((String) selecQuarto);
 
-    chamaMenuProcessos();
+                List<Hospede> hospedes = HospedeDAO.buscaTodosh();
+
+                if (hospedes.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Nenhum hóspede cadastrado!");
+                    chamaMenuPrincipal();
+                }
+
+                Object[] selectionHospede = hospedes.stream().map(Hospede::getNome).toArray();
+                String initialSelectionHospede = (String) selectionHospede[0];
+
+                Object selecHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede",
+                        "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionHospede, initialSelectionHospede);
+
+            if (selecHospede == null) {
+                JOptionPane.showMessageDialog(null, "Operação de check-in cancelada.");
+                chamaMenuPrincipal();
+
+            }
+
+            LocalDate dataEntrada = LocalDate.now();
+            String inputData = JOptionPane.showInputDialog(null, "Data de entrada (formato: dd/MM/yyyy): ");
+
+            if (inputData == null) {
+                JOptionPane.showMessageDialog(null, "Operação de check-in cancelada.");
+                chamaMenuPrincipal();
+                return;
+            }
+
+
+            try {
+                dataEntrada = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+                chamaCheckin();
+                continue;
+            }
+
+                List<Hospede> hospede = HospedeDAO.buscarPorNome((String) selecHospede);
+                Quarto quarto = quartosSelect.get(0);
+                Hospedagem hospedagem = new Hospedagem(dataEntrada, hospede.get(0), quarto);
+                HospedagemDAO.salvar(hospedagem);
+                continua = false;
+
+            }
+
+                int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar outro check-in?", "Continuar", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION){
+                chamaCheckin();
+            }
+
+            if (resposta == JOptionPane.NO_OPTION) {
+                chamaMenuProcessos();
+            }
+
+
     }
 
     public static void chamaServicos() {

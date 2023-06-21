@@ -53,4 +53,15 @@ public class HospedeDAO {
 
     public static void removerHospede(Hospede hospedeSelecionado) {}
 
+    public static List<Hospede> buscarPorId(Integer id) {
+        buscaTodosh();
+        List<Hospede> hospedeFiltrado = new ArrayList<>();
+        for (Hospede hospede : hospedes) {
+            if (hospede.getID() == id) {
+                hospedeFiltrado.add(hospede);
+            }
+        }
+        return hospedeFiltrado;
+    }
+
 }
