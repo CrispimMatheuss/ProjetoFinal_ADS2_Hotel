@@ -597,6 +597,7 @@ public class Main {
 
         LocalDateTime dataHoraPagto = LocalDateTime.now();
 
+
         FormaPagamento[] formaPagamentos = FormaPagamento.values();
         String[] formasPagtoNomes = new String[formaPagamentos.length];
         for (int i = 0; i < formaPagamentos.length; i++) {
