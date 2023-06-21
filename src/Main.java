@@ -595,6 +595,8 @@ public class Main {
     }
 
 
+
+
     public static void chamaCheckOut() {
         Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
 
