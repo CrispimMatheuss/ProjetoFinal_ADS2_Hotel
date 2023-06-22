@@ -71,3 +71,12 @@ public class Pagamento {
                 '}';
     }
 }
+
+
+/*//        TableColumn colunaEscondida = table.getColumnModel().getColumn(RelatorioHospede.INDEX_ESCONDIDO);
+//        colunaEscondida.setMinWidth(2);
+//        colunaEscondida.setPreferredWidth(2);
+//        colunaEscondida.setMaxWidth(2);
+        setLayout(new BorderLayout());
+        add(scroller, BorderLayout.CENTER);
+    }*/

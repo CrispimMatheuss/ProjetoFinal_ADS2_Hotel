@@ -14,7 +14,7 @@ public class RelatorioFuncionarioForm extends JPanel {
     private static final long serialVersionUID = 1L;
 
     public static final String[] nomeColunas =
-            {"Código", "Nome","CPF","Celular","Email", "Cargo","Salário", ""};
+            {"Código", "Nome","CPF","Celular","Email", "Cargo","Salário"};
 
     protected JTable table;
     protected JScrollPane scroller;
@@ -32,10 +32,10 @@ public class RelatorioFuncionarioForm extends JPanel {
         scroller = new javax.swing.JScrollPane(table);
         table.setPreferredScrollableViewportSize(new java.awt.Dimension(500, 300));
 
-        TableColumn colunaEscondida = table.getColumnModel().getColumn(RelatorioHospede.INDEX_ESCONDIDO);
-        colunaEscondida.setMinWidth(2);
-        colunaEscondida.setPreferredWidth(2);
-        colunaEscondida.setMaxWidth(2);
+//        TableColumn colunaEscondida = table.getColumnModel().getColumn(RelatorioHospede.INDEX_ESCONDIDO);
+//        colunaEscondida.setMinWidth(2);
+//        colunaEscondida.setPreferredWidth(2);
+//        colunaEscondida.setMaxWidth(2);
         setLayout(new BorderLayout());
         add(scroller, BorderLayout.CENTER);
     }
