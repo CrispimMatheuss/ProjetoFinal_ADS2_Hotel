@@ -462,7 +462,7 @@ public class Main {
 
     //////////////////////////PROCESSOS
     public static void chamaMenuProcessos() {
-        String[] opcoesMenuProcessos = {"Check-in", "Consumos", "Check-out", "Voltar"};
+        String[] opcoesMenuProcessos = {"Check-in", "Consumos", "Check-out", "Manutenções", "Voltar"};
         int menuProcessos = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Processos",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuProcessos, opcoesMenuProcessos[0]);
@@ -477,10 +477,39 @@ public class Main {
             case 2: //Checkout
                 chamaCheckOut();
                 break;
-//            case 3: //Manutenções (no chamaMenuCadastros precisa ter a opção de cadastrar ordem de serviço para na chamaManut selecionar qual a ordem relacionada)
-//                chamaManut();
-//                break;
-            case 3: //Voltar
+            case 3: //Manutenções
+                chamaMenuManutencoes();
+                break;
+            case 4: //Voltar
+                chamaMenuPrincipal();
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                break;
+        }
+    }
+
+    public static void chamaMenuManutencoes() {
+        String[] opcoesMenuFuncionario = {"Cadastrar", "Alterar", "Excluir", "Concluir", "Voltar"};
+        int opcao = 0;
+        opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                "Menu de cadastros",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuFuncionario, opcoesMenuFuncionario[0]
+        );
+
+        switch (opcao) {
+            case 0: // Inserir
+                cadastrarManut();
+                break;
+            case 1: //Alterar
+                alterarCadManutencao();
+                break;
+            case 2: // Excluir
+                excluirCadManutencao();
+                break;
+            case 3: // Concluir
+                concluirManutencao();
+            case 4: // Voltar
                 chamaMenuPrincipal();
                 break;
             default:
@@ -678,24 +707,187 @@ public class Main {
         }
     }
 
+    public static void cadastrarManut() {
 
+        List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
+        Object[] selectionQuarto = quartos.stream().map(Quarto::getNumQuarto).toArray();
+        List<Funcionario> funcionarios = FuncionarioDAO.buscaTodosf();
+        Object[] selectionFuncionario = funcionarios.stream().map(Funcionario::getNome).toArray();
+        String initialSelectionQuarto = (String) selectionQuarto[0];
+        String initialSelectionFuncionario = (String) selectionFuncionario[0];
+        String empresaResponsavel = null;
+        String nomeFuncionario = null;
 
+        boolean continua = true;
 
-//    public static void chamaManut() {
-//        Object[] selectManutencoes = {
-//                TipoManutencao.ELETRICA.getDescricao(),
-//                TipoManutencao.ESTRUTURAL.getDescricao(),
-//                TipoManutencao.LIMPEZA.getDescricao()};
-//
-//        String initialSelectionManut = (String) selectManutencoes[0];
-//        Object selecManut = JOptionPane.showInputDialog(null, "Selecione o tipo de manutenção realizada",
-//                "Manutenções", JOptionPane.QUESTION_MESSAGE, null, selectManutencoes, initialSelectionManut);
-//        chamaMenuPrincipal();
-//    }
+        while (continua == true) {
+            TipoManutencao[] tipoManutencao = TipoManutencao.values();
+            String[] tipoManutencaoNomes = new String[tipoManutencao.length];
+            for (int i = 0; i < tipoManutencao.length; i++) {
+                tipoManutencaoNomes[i] = tipoManutencao[i].getDescricao();
+            }
+
+            int idTipoManutencao = JOptionPane.showOptionDialog(null, "Selectione o tipo de manutenção", "Tipo de Manutenção",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, tipoManutencaoNomes, tipoManutencaoNomes[0]);
+
+            Object selecQuarto = JOptionPane.showInputDialog(null, "Selecione o quarto",
+                    "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
+
+            if (selecQuarto == null) {
+                JOptionPane.showMessageDialog(null, "Cadastro de manutenções cancelada.");
+                chamaMenuPrincipal();
+                return;
+            }
+
+            String quartoSelecionado = (String) selecQuarto;
+
+            List<Quarto> quartosSelect = QuartoDAO.buscarPorNumQuarto((String) selecQuarto);
+
+            String[] opcoesManutencao = {"Mão de obra própria", "Empresa terceirizada"};
+            int opcao = 0;
+
+            opcao = JOptionPane.showOptionDialog(null, "Quem realizará a manutenção?",
+                    "Menu de cadastros",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesManutencao, opcoesManutencao[0]
+            );
+
+            if (opcao == 0) {
+
+                Object selecFuncionario = JOptionPane.showInputDialog(null,
+                        "Selecione o funcionário resposável pela manutenção",
+                        "Manutenção", JOptionPane.QUESTION_MESSAGE, null, selectionFuncionario, initialSelectionFuncionario);
+
+                if (selecFuncionario == null) {
+                    JOptionPane.showMessageDialog(null, "Cadastro de manutenções cancelada.");
+                    chamaMenuPrincipal();
+                    return;
+                }
+                List<Funcionario> funcSelect = FuncionarioDAO.buscarPorNomef((String) selecFuncionario);
+
+                nomeFuncionario = (String) selecFuncionario;
+            } else {
+                empresaResponsavel = JOptionPane.showInputDialog(null, "Informe a empresa responsável pela manutenção:");
+            }
+
+            String descricaoManutencao = JOptionPane.showInputDialog(null, "Informe os detalhes da manutenção:");
+            LocalDate dataCadastro = LocalDate.now();
+
+            if (opcao == 0) {
+                Manutencao manutencao = new Manutencao(idTipoManutencao, quartoSelecionado, descricaoManutencao, dataCadastro, nomeFuncionario);
+                ManutencaooDAO manutencaooDAO = ManutencaooDAO.getInstance();
+                manutencaooDAO.gravarManutencao(manutencao);
+            } else {
+                Manutencao manutencao = new Manutencao(idTipoManutencao, quartoSelecionado, empresaResponsavel, descricaoManutencao, dataCadastro);
+                ManutencaooDAO manutencaooDAO = ManutencaooDAO.getInstance();
+                manutencaooDAO.gravarManutencao(manutencao);
+            }
+
+            int opcaoCad = JOptionPane.showConfirmDialog(null, "Deseja cadastrar outra manutenção?", "Cadastro de Manutenção", JOptionPane.YES_NO_OPTION);
+            if (opcaoCad != JOptionPane.YES_OPTION) {
+                chamaMenuManutencoes();
+                continua = false;
+            }
+        }
+    }
+
+    private static void alterarCadManutencao(){
+        Object[] selectionValuesManutencao = ManutencaooDAO.findManutInArray();
+        Integer initialSelectionManut = (Integer) selectionValuesManutencao[0];
+
+        Object selectionManut = JOptionPane.showInputDialog(null, "Selecione o código da manutenção",
+                "Quarto", JOptionPane.QUESTION_MESSAGE, null, selectionValuesManutencao, initialSelectionManut);
+        List<Manutencao> manutencoes = ManutencaooDAO.buscarPorCodigo((Integer) selectionManut);
+        Manutencao alteraManutencao = manutencoes.get(0);
+
+        List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
+        Object[] selectionQuarto = quartos.stream().map(Quarto::getNumQuarto).toArray();
+        List<Funcionario> funcionarios = FuncionarioDAO.buscaTodosf();
+        Object[] selectionFuncionario = funcionarios.stream().map(Funcionario::getNome).toArray();
+        String initialSelectionQuarto = (String) selectionQuarto[0];
+        String initialSelectionFuncionario = (String) selectionFuncionario[0];
+        String empresaResponsavel = null;
+        String nomeFuncionario = null;
+
+        TipoManutencao[] tipoManutencao = TipoManutencao.values();
+        String[] tipoManutencaoNomes = new String[tipoManutencao.length];
+        for (int i = 0; i < tipoManutencao.length; i++) {
+            tipoManutencaoNomes[i] = tipoManutencao[i].getDescricao();
+        }
+
+        int idTipoManutencao = JOptionPane.showOptionDialog(null, "Selectione o tipo de manutenção", "Tipo de Manutenção",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, tipoManutencaoNomes, tipoManutencaoNomes[0]);
+
+        String[] opcoesManutencao = {"Mão de obra própria", "Empresa terceirizada"};
+        int opcao = 0;
+
+        opcao = JOptionPane.showOptionDialog(null, "Quem realizará a manutenção?",
+                "Menu de cadastros",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesManutencao, opcoesManutencao[0]
+        );
+
+        if (opcao == 0) {
+
+            Object selecFuncionario = JOptionPane.showInputDialog(null,
+                    "Selecione o funcionário resposável pela manutenção",
+                    "Manutenção", JOptionPane.QUESTION_MESSAGE, null, selectionFuncionario, initialSelectionFuncionario);
+
+            if (selecFuncionario == null) {
+                JOptionPane.showMessageDialog(null, "Cadastro de manutenções cancelada.");
+                chamaMenuPrincipal();
+                return;
+            }
+            List<Funcionario> funcSelect = FuncionarioDAO.buscarPorNomef((String) selecFuncionario);
+            nomeFuncionario = (String) selecFuncionario;
+        } else {
+            empresaResponsavel = JOptionPane.showInputDialog(null, "Informe a empresa responsável pela manutenção:");
+        }
+
+        String descricaoManutencao = JOptionPane.showInputDialog(null, "Informe os detalhes da manutenção:");
+
+        alteraManutencao.setTipoManutencao(idTipoManutencao);
+        if (opcao == 0){
+            alteraManutencao.setEmpresaTerceira("");
+            alteraManutencao.setFuncionario(nomeFuncionario);
+        } else {
+            alteraManutencao.setFuncionario(null);
+            alteraManutencao.setEmpresaTerceira(empresaResponsavel);
+        }
+        alteraManutencao.setDescricaoManutencao(descricaoManutencao);
+        chamaMenuManutencoes();
+    }
+
+    private static void excluirCadManutencao() {
+        Object[] selectionValuesManut = ManutencaooDAO.findManutInArray();
+        Object selectionManutencao = JOptionPane.showInputDialog(null, "Selecione a manutenção que deseja excluir:",
+                "Excluir Manutenção", JOptionPane.DEFAULT_OPTION, null, selectionValuesManut, null);
+
+        if (selectionManutencao != null) {
+            Manutencao manutencaoSelecionada = (Manutencao) selectionManutencao;
+            ManutencaooDAO.excluirManutencao(manutencaoSelecionada);
+            JOptionPane.showMessageDialog(null, "Manutenção excluida com sucesso!");
+        }
+    }
+
+    private static void concluirManutencao(){
+        Object[] selectionValuesManutencao = ManutencaooDAO.findManutInArray();
+        Integer initialSelectionManut = (Integer) selectionValuesManutencao[0];
+
+        Object selectionManut = JOptionPane.showInputDialog(null, "Selecione o código da manutenção",
+                "Quarto", JOptionPane.QUESTION_MESSAGE, null, selectionValuesManutencao, initialSelectionManut);
+        List<Manutencao> manutencoes = ManutencaooDAO.buscarPorCodigo((Integer) selectionManut);
+        Manutencao alteraManutencao = manutencoes.get(0);
+
+        LocalDate dataConclusao = LocalDate.now();
+
+        JOptionPane.showMessageDialog(null, "Manutenção concluída com sucesso!");
+
+        alteraManutencao.setDataConclusao(dataConclusao);
+
+    }
 
     /////////////////RELATÓRIOS////////////////////
     private static void listaCadastros() {
-        String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Serviços", "Hospedagens", "Quartos", "Voltar"};
+        String[] opcoesMenuRelatorios = {"Hóspedes", "Funcionários", "Serviços", "Manutenções", "Hospedagens", "Quartos", "Voltar"};
         int menuRelatorios = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Relatórios",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuRelatorios, opcoesMenuRelatorios[0]);
@@ -710,16 +902,16 @@ public class Main {
             case 2: //Serviços
                 chamaRelatorioServico();
                 break;
-//            case 3: //Manutenção
-//                chamaRelatorioManutencao();
-//                break;
-            case 3: //Hospedagem
+            case 3: //Manutenção
+                chamaRelatorioManutencao();
+                break;
+            case 4: //Hospedagem
                 chamaRelatorioHospedagem();
                 break;
-            case 4: //Quarto
+            case 5: //Quarto
                 chamaRelatorioQuarto();
                 break;
-            case 5: //Voltar
+            case 6: //Voltar
                 chamaMenuPrincipal();
                 break;
             default:
@@ -741,10 +933,10 @@ public class Main {
         RelatorioServicoForm.emitirRelatorio(servicos);
     }
 
-//    private static void chamaRelatorioManutencao() {
-//        List<Manutencao> manutencaos = ManutencaoDAO.buscaTodos();
-//        RelatorioManutencaoForm.emitirRelatorio(manutencaos);
-//    }
+    private static void chamaRelatorioManutencao() {
+        List<Manutencao> manutencaos = ManutencaooDAO.buscaTodos();
+        RelatorioManutencaoForm.emitirRelatorio(manutencaos);
+    }
 
     private static void chamaRelatorioQuarto() {
         List<Quarto> quartos = QuartoDAO.buscaTodosQuarto();
