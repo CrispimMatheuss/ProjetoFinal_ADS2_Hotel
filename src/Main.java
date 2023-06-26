@@ -676,15 +676,18 @@ public class Main {
         Hospedagem hospedagem = hospedagens.get(0);
         LocalDate dataCheckin = hospedagem.getCheckin();
 
-        String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dia/mês/ano): ");
+        LocalDate dataSaida = null;
+        boolean dataValida = false;
 
-        LocalDate dataSaida;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            dataSaida = LocalDate.parse(inputData, formatter);
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
-            return;
+        while (!dataValida){
+            try {
+                String inputData = JOptionPane.showInputDialog(null, "Data de saída (formato: dia/mês/ano): ");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                dataSaida = LocalDate.parse(inputData, formatter);
+                dataValida = true;
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+            }
         }
 
         if (dataSaida.isBefore(dataCheckin)) {
@@ -805,7 +808,7 @@ public class Main {
                 manutencaooDAO.gravarManutencao(manutencao);
             }
 
-            int opcaoCad = JOptionPane.showConfirmDialog(null, "Deseja cadastrar outra manutenção?", "Cadastro de Manutenção", JOptionPane.YES_NO_OPTION);
+            int opcaoCad = JOptionPane.showConfirmDialog(null, "Manutenção cadastrada com sucesso! Deseja cadastrar outra manutenção?", "Cadastro de Manutenção", JOptionPane.YES_NO_OPTION);
             if (opcaoCad != JOptionPane.YES_OPTION) {
                 chamaMenuManutencoes();
                 continua = false;
@@ -880,7 +883,7 @@ public class Main {
     }
 
     private static void excluirCadManutencao() {
-        Object[] selectionValuesManut = ManutencaooDAO.findManutInArray();
+        Object[] selectionValuesManut = ManutencaooDAO.buscaTodos().toArray(new Manutencao[0]);
         Object selectionManutencao = JOptionPane.showInputDialog(null, "Selecione a manutenção que deseja excluir:",
                 "Excluir Manutenção", JOptionPane.DEFAULT_OPTION, null, selectionValuesManut, null);
 
