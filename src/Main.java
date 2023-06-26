@@ -21,7 +21,6 @@ public class Main {
         HospedeDAO.buscaTodosh();
         HospedagemDAO.buscaTodos();
         FuncionarioDAO.todosFuncionarios();
-//        ManutencaoDAO.buscaTodosManutencao();
         ServicoDAO.buscaTodos();
         exibirMensagemBoasVindas();
         exibirTelaLogin();
@@ -155,6 +154,7 @@ public class Main {
         }
         Hospede hospede = new Hospede(nome, cpf, celular, email, classificacaoSelecionada);
         HospedeDAO.salvar(hospede);
+        JOptionPane.showMessageDialog(null, "Hóspede cadastrado com sucesso!");
         chamaMenuPrincipal();
     }
 
@@ -188,6 +188,8 @@ public class Main {
         hospede.setEmail(email);
         hospede.setCelular(celular);
         HospedeDAO.salvar(hospede);
+
+        JOptionPane.showMessageDialog(null, "Cadastro de hóspede alterado com sucesso!");
 
         chamaMenuPrincipal();
     }
@@ -278,6 +280,9 @@ public class Main {
 
         Funcionario funcionario = new Funcionario(nome, cpf, celular, email, cargo, salario);
         FuncionarioDAO.salvar(funcionario);
+
+        JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
+
         chamaMenuPrincipal();
     }
 
@@ -340,6 +345,8 @@ public class Main {
         funcionario.setCargo(cargo);
         funcionario.setSalario(salario);
         FuncionarioDAO.salvar(funcionario);
+
+        JOptionPane.showMessageDialog(null, "Cadastro de funcionário alterado com sucesso!");
 
         chamaMenuPrincipal();
     }
@@ -416,6 +423,9 @@ public class Main {
 //        }
         Servico servico = new Servico(tipo, valor);
         ServicoDAO.salvar(servico);
+
+        JOptionPane.showMessageDialog(null, "Serviço cadastrado com sucesso!");
+
         chamaMenuPrincipal();
     }
 
@@ -456,6 +466,8 @@ public class Main {
             ServicoDAO.excluirServico(servicoSelecionado);
             JOptionPane.showMessageDialog(null, "Serviço removido com sucesso!");
         }
+
+        JOptionPane.showMessageDialog(null, "Cadastro de serviço alterado com sucesso!");
 
         chamaMenuPrincipal();
     }
@@ -567,20 +579,28 @@ public class Main {
                 return;
             }
 
-
             try {
                 dataEntrada = LocalDate.parse(inputData, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+                if (dataEntrada.isBefore(LocalDate.now())) {
+                    JOptionPane.showMessageDialog(null, "Não é possível cadastrar hospedagens com data anterior a " + LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "!");
+                    chamaCheckin();
+                    continue;
+                }
             } catch (DateTimeParseException e) {
-                JOptionPane.showMessageDialog(null, "Formato de data inválido!");
+                JOptionPane.showMessageDialog(null, "Formato de data inválido! Use o formato dd/MM/yyyy.");
                 chamaCheckin();
                 continue;
             }
+
 
             List<Hospede> hospede = HospedeDAO.buscarPorNome((String) selecHospede);
             Quarto quarto = quartosSelect.get(0);
             Hospedagem hospedagem = new Hospedagem(dataEntrada, hospede.get(0), quarto);
             HospedagemDAO.salvar(hospedagem);
             continua = false;
+
+            JOptionPane.showMessageDialog(null, "Check-in realizado com sucesso! O código da sua hospesdagem é " +hospedagem.getCodigo());
 
         }
 
@@ -611,7 +631,7 @@ public class Main {
 
         Object[] selectionValuesServico = ServicoDAO.findServicosInArray();
         String initialSelectionServico = (String) selectionValuesServico[0];
-        Object selectionServico = JOptionPane.showInputDialog(null, "Selecione a descricao da Serviço?",
+        Object selectionServico = JOptionPane.showInputDialog(null, "Selecione a descrição do serviço",
                 "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesServico, initialSelectionServico);
         List<Servico> servicos = ServicoDAO.buscarPorTipo((String) selectionServico);
 
@@ -620,6 +640,9 @@ public class Main {
         hospedagem.addServico(servicos.get(0));
         HospedagemDAO.salvar(hospedagem);
         JOptionPane.showMessageDialog(null, hospedagem);
+
+        JOptionPane.showMessageDialog(null, "Consumo adicionado a hospedagem" + hospedagem.getCodigo() + " com sucesso!");
+
         chamaMenuPrincipal();
     }
 
