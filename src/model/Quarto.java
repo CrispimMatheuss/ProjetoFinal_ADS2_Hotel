@@ -76,15 +76,14 @@ public class Quarto {
     public void setLimitePessoas(Integer limitePessoas) {
         this.limitePessoas = limitePessoas;
     }
+
     @Override
     public String toString() {
         return  "" +
-                "  \nid : " + id +
-                ", \ntipoQuarto : " + tipoQuarto +
-                ", \nvalor : " + valor +
-                ", \nnumQuarto : " + numQuarto +
-                ", \ndisponibilidade : " + disponibilidade +
-                ", \nlimitePessoas : " + limitePessoas +
-                '}';
+                "\nTipo de quarto : " + tipoQuarto +
+                "\nValor da diária : " + valor +
+                "\nNumero do quarto : " + numQuarto +
+                "\nLimite de pessoas : " + limitePessoas +
+                " ";
     }
 }

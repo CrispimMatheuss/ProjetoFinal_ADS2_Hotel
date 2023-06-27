@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import model.Servico;
 
 public class Hospedagem {
     private Integer codigo;
@@ -14,7 +17,6 @@ public class Hospedagem {
     private Quarto quarto;
     private List<Servico> servicos = new ArrayList<>();
     private BigDecimal valorTotalHospedagem;
-
 
     public Hospedagem(Integer codigo, LocalDate checkin, LocalDate checkout, Hospede hospede, Integer quantidadeDiarias, Quarto quarto) {
         this.codigo = codigo;
@@ -125,6 +127,10 @@ public class Hospedagem {
 
     @Override
     public String toString() {
+        String consumoString = servicos.stream()
+                .map(consumo -> consumo.getTipo() + ": " + consumo.getValor())
+                .collect(Collectors.joining(", "));
+
         return "Hospedagem" +
                 "\nCódigo: " + codigo +
                 "\nCheck-in: " + checkin +
@@ -132,10 +138,12 @@ public class Hospedagem {
                 "\n\nHóspede: " + hospede +
                 "\n\nQuantidade de diárias: " + quantidadeDiarias +
                 "\n\nQuarto: " + quarto +
-                "\n\nConsumo: " + calculaValorConsumo() +
+                "\n\nConsumos: " + consumoString +
+                "\n\nValor total de consumo: " + calculaValorConsumo() +
                 "\n\nValor total da hospedagem: " + valorTotalHospedagem +
                 " ";
     }
+
 }
 
 
