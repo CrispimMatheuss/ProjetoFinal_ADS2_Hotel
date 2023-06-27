@@ -617,13 +617,19 @@ public class Main {
     }
 
     public static void chamaServicos() {
-        Object[] selectionValuesQuarto = QuartoDAO.findquartosInArray();
-        Integer initialSelectionQuarto= (Integer) selectionValuesQuarto[0];
-        Object selectionQuarto = JOptionPane.showInputDialog(null, "Selecione o número do quarto",
-                "Quarto", JOptionPane.QUESTION_MESSAGE, null, selectionValuesQuarto, initialSelectionQuarto);
-        List<Quarto> quartos = QuartoDAO.buscarPorNumQuarto(String.valueOf((Integer) selectionQuarto));
+//        Object[] selectionValuesQuarto = QuartoDAO.findquartosInArray();
+//        Integer initialSelectionQuarto= (Integer) selectionValuesQuarto[0];
+//        Object selectionQuarto = JOptionPane.showInputDialog(null, "Selecione o número do quarto",
+//                "Quarto", JOptionPane.QUESTION_MESSAGE, null, selectionValuesQuarto, initialSelectionQuarto);
+//        List<Quarto> quartos = QuartoDAO.buscarPorNumQuarto(String.valueOf((Integer) selectionQuarto));
 
-        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
+        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensDisponivelInArray();
+
+        if (selectionValuesHospedagem.length == 0) {
+            JOptionPane.showMessageDialog(null, "Nenhuma hospedagem encontrada!");
+            chamaMenuProcessos();
+        }
+
         Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
         Object selectionHospedagem = JOptionPane.showInputDialog(null, "Selecione o código da hospedagem?",
                 "Hospedagem", JOptionPane.QUESTION_MESSAGE, null, selectionValuesHospedagem, initialSelectionHospedagem);
@@ -654,7 +660,7 @@ public class Main {
 
         if (selectionValuesHospedagem.length == 0) {
             JOptionPane.showMessageDialog(null, "Nenhuma hospedagem encontrada!");
-            return;
+            chamaMenuProcessos();
         }
 
         Integer initialSelectionHospedagem = (Integer) selectionValuesHospedagem[0];
