@@ -43,6 +43,19 @@ public class HospedagemDAO {
         return hospedagemCodigo.toArray();
     }
 
+    public static Object[] findhospedagensDisponivelInArray() {
+        List<Hospedagem> hospedagens = buscaTodos();
+        List<Integer> hospedagemCodigo = new ArrayList<>();
+
+        for (Hospedagem hospedagem : hospedagens) {
+            if (hospedagem.getCheckout() == null) {
+                hospedagemCodigo.add(hospedagem.getCodigo());
+            }
+        }
+
+        return hospedagemCodigo.toArray();
+    }
+
 
     public static List<Hospedagem> buscarPorCodigo(Integer codigo) {
         List<Hospedagem> hospedagemFiltradas = new ArrayList<>();
