@@ -544,7 +544,7 @@ public class Main {
                     "Check-in", JOptionPane.QUESTION_MESSAGE, null, selectionQuarto, initialSelectionQuarto);
 
             if (selecQuarto == null) {
-                JOptionPane.showMessageDialog(null, "Operação de check-in cancelada.");
+                JOptionPane.showMessageDialog(null, "Operação de check-out cancelada.");
                 chamaMenuPrincipal();
                 return; // Encerrar o método atual
             }
@@ -650,7 +650,7 @@ public class Main {
 
 
     public static void chamaCheckOut() {
-        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensInArray();
+        Object[] selectionValuesHospedagem = HospedagemDAO.findhospedagensDisponivelInArray();
 
         if (selectionValuesHospedagem.length == 0) {
             JOptionPane.showMessageDialog(null, "Nenhuma hospedagem encontrada!");
