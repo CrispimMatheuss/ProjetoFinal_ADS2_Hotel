@@ -20,16 +20,6 @@ public class Quarto {
         this.limitePessoas = limitePessoas;
     }
 
-    //logica do exibir informacoes
-//    public void exibirInformacoes() {
-//        System.out.println("Informações detalhadas do quarto:");
-//        System.out.println("ID: " + getId());
-//        System.out.println("Tipo: " + getTipo());
-//        System.out.println("Valor: " + getValor());
-//        System.out.println("Disponibilidade: " + (isDisponibilidade() ? "Disponível" : "Indisponível"));
-//        System.out.println("Limite de pessoas: " + getLimitePessoas());
-//    }
-
     public DisponibilidadeQuarto getDisponibilidade() {
         return disponibilidade;
     }
