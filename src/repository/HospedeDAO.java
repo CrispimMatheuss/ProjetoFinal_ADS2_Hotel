@@ -51,6 +51,6 @@ public class HospedeDAO {
         return hospedeDesc.toArray();
     }
 
-    public static void removerHospede(Hospede hospedeSelecionado) {}
+    public static void removerHospede(Hospede hospede) {hospedes.remove(hospede);}
 
 }

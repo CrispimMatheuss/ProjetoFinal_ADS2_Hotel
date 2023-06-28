@@ -1,6 +1,7 @@
 package repository;
 
 import model.Funcionario;
+import model.Hospede;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -45,9 +46,7 @@ public class FuncionarioDAO {
         return funcionarioFiltrado;
     }
 
-    public static void removerFuncionario(Funcionario funcionarioSelecionado) {
-        // Implementação para remover um funcionário
-    }
+    public static void removerFuncionario(Funcionario funcionario) {funcionarios.remove(funcionario);}
 
     public static List<Funcionario> todosFuncionarios() {
         if (funcionarios.isEmpty()) {
