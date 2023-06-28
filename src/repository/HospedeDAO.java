@@ -21,11 +21,11 @@ public class HospedeDAO {
 
     public static List<Hospede> buscaTodosh() {
         if (hospedes.isEmpty()) {
-            hospedes.add(new Hospede(10, "Manoel Gomes", "095.547.142-27", "(48) 9780-9850", "manoelgomes@gmail.com"));
-            hospedes.add(new Hospede(20, "Ednaldo Pereira", "110.741.248-07", "(49) 9842-5874", "ednaldopereira@hotmail.com"));
-            hospedes.add(new Hospede(30, "Anderson Silva", "075.124.159-35", "(51) 9750-4750", "andersonsilva@gmail.com"));
-            hospedes.add(new Hospede(40, "Gustavo Kunst", "075.124.159-35", "(51) 9750-4750", "gustavoknust@gmail.com"));
-            hospedes.add(new Hospede(50, "Rogério Skynet", "075.124.159-35", "(51) 9750-4750", "rogerioskylab@gmail.com"));
+            hospedes.add(new Hospede(1, "Manoel Gomes", "095.547.142-27", "(48) 9780-9850", "manoelgomes@gmail.com"));
+            hospedes.add(new Hospede(2, "Ednaldo Pereira", "110.741.248-07", "(49) 9842-5874", "ednaldopereira@hotmail.com"));
+            hospedes.add(new Hospede(3, "Anderson Silva", "075.124.159-35", "(51) 9750-4750", "andersonsilva@gmail.com"));
+            hospedes.add(new Hospede(4, "Gustavo Kunst", "075.124.159-35", "(51) 9750-4750", "gustavoknust@gmail.com"));
+            hospedes.add(new Hospede(5, "Rogério Skynet", "075.124.159-35", "(51) 9750-4750", "rogerioskylab@gmail.com"));
         }
         return hospedes;
     }
