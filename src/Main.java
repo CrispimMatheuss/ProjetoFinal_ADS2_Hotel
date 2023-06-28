@@ -195,7 +195,7 @@ public class Main {
     }
 
     private static void removerHospede() {
-        Object[] selectionValuesHospede = HospedeDAO.findHospedeInArray();
+        Object[] selectionValuesHospede = HospedeDAO.buscaTodosh().toArray(new Hospede[0]);
         Object selectionHospede = JOptionPane.showInputDialog(null, "Selecione o hóspede que deseja remover:",
                 "Remover Hóspede", JOptionPane.DEFAULT_OPTION, null, selectionValuesHospede, null);
 
@@ -203,6 +203,7 @@ public class Main {
             Hospede hospedeSelecionado = (Hospede) selectionHospede;
             HospedeDAO.removerHospede(hospedeSelecionado);
             JOptionPane.showMessageDialog(null, "Hóspede removido com sucesso!");
+            chamaMenuPrincipal();
         }
     }
 
@@ -361,7 +362,7 @@ public class Main {
     }
 
     private static void removerFuncionario() {
-        Object[] selectionValuesFuncionario = FuncionarioDAO.findFunciInArray();
+        Object[] selectionValuesFuncionario = FuncionarioDAO.todosFuncionarios().toArray(new Funcionario[0]);
         Object selectionFunci = JOptionPane.showInputDialog(null, "Selecione o funcionário que deseja remover:",
                 "Menu de cadastros", JOptionPane.DEFAULT_OPTION, null, selectionValuesFuncionario, null);
 
@@ -370,6 +371,7 @@ public class Main {
             FuncionarioDAO.removerFuncionario(funcionarioSelecionado);
             JOptionPane.showMessageDialog(null, "Funcionário removido com sucesso!");
         }
+        chamaMenuPrincipal();
     }
 
     /////////////////////////////////SERVIÇO
